@@ -184,12 +184,13 @@ LOGGING = {
 }
 
 # --- Configurações de SSO ---
-CLIENT_ID = 'WBLaGrnKqUBn7wNNUFmrykhC3gbnkJF1WZivRzLW'
-CLIENT_SECRET = 'iD63EmTIUz48gxnnoMrWZGgndpIZDJMOrMtiVfBKKXsWumWdsDLTPyrRAKV89k9bFtpQgsGHLgOnSGGPhIW0qAfrG4Tm06CU3ZA6yxWew3I6mhdmc4fpYGzNzPPr2qX7'
+# --- Configurações de SSO ---
+CLIENT_ID = 'Rydkgbhth89QREqnegm1WESvzUjhw3Yh5dpY0BPr'
+CLIENT_SECRET = 'rcXiNkL3moeY31wBk0mx0OpYqyPJMc8AUrmzBiFfo2NIHtYm9bk4SK5QgC3FEmWqtUzbS3BABKyih6IJisz6OWYFjHOputyTkBOUUObG0J2pOmmPt0IelYmIHH9O1WaN'
 
 # URIs de redirecionamento
-SSO_REDIRECT_URI = 'https://4d663b22079f.ngrok-free.app/sso/callback/'
-SSO_POST_LOGOUT_REDIRECT_URI = 'https://4d663b22079f.ngrok-free.app/logout-success/'
+SSO_REDIRECT_URI = 'https://paymoz.tech/sso/callback/'
+SSO_POST_LOGOUT_REDIRECT_URI = 'https://paymoz.tech/logout-success/'
 
 # Endpoints do provedor de SSO
 SSO_AUTHORIZE_URL = 'https://autenticacao.neuratechmz.tech/oauth/authorize/'
