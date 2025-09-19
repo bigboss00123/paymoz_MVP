@@ -1,0 +1,83 @@
+# Exemplos de Respostas da API de Pagamentos Django
+
+Este arquivo documenta os formatos de resposta JSON que a API retorna, tanto em casos de sucesso quanto em casos de falha.
+
+---
+
+## 1. Resposta de Sucesso
+
+Uma resposta de sucesso ocorre quando o código de resposta da API M-Pesa é `INS-0`. A requisição HTTP terá um status code `200 OK`.
+
+**Exemplo:**
+
+```json
+{
+    "output_ConversationID": "ag_20250802_12345abcdef",
+    "output_TransactionID": "ABCDE12345",
+    "output_ResponseCode": "INS-0",
+    "output_ResponseDesc": "Request processed successfully",
+    "output_ThirdPartyReference": "paymozXYZ123",
+    "mensagem_tratada": "Requisição processada com sucesso"
+}
+```
+
+---
+
+## 2. Respostas de Falha
+
+Uma resposta de falha pode ocorrer por diversos motivos. A requisição HTTP terá um status code de erro (como `400`, `422`, `500`, etc.) e o corpo da resposta conterá o código de erro específico do M-Pesa e a sua tradução no campo `mensagem_tratada`.
+
+**Exemplo 1: Saldo Insuficiente**
+
+- **Código M-Pesa:** `INS-2006`
+- **Status HTTP:** `422` (Unprocessable Entity) ou outro código de erro.
+
+```json
+{
+    "output_ResponseCode": "INS-2006",
+    "output_ResponseDesc": "Insufficient balance",
+    "output_ThirdPartyReference": "paymozABC456",
+    "mensagem_tratada": "Saldo insuficiente"
+}
+```
+
+**Exemplo 2: Transação Cancelada pelo Utilizador**
+
+- **Código M-Pesa:** `INS-5`
+- **Status HTTP:** `401` (Unauthorized) ou outro código de erro.
+
+```json
+{
+    "output_ResponseCode": "INS-5",
+    "output_ResponseDesc": "Transaction cancelled by customer",
+    "output_ThirdPartyReference": "paymozDEF789",
+    "mensagem_tratada": "Transação cancelada pelo cliente"
+}
+```
+
+**Exemplo 3: Chave de API Inválida (Erro de Configuração)**
+
+- **Código M-Pesa:** `INS-2`
+- **Status HTTP:** `401` (Unauthorized) ou outro código de erro.
+
+```json
+{
+    "output_ResponseCode": "INS-2",
+    "output_ResponseDesc": "Invalid API Key",
+    "output_ThirdPartyReference": "paymozGHI012",
+    "mensagem_tratada": "Chave de API inválida"
+}
+```
+
+**Exemplo 4: Falha de Comunicação (Erro Interno do Django)**
+
+- **Ocorre se a API Django não conseguir conectar-se à API Node.js.**
+- **Status HTTP:** `500` (Internal Server Error)
+
+```json
+{
+    "error": "Falha na comunicação com o serviço de pagamento.",
+    "output_ResponseCode": "INS-1",
+    "mensagem_tratada": "Erro interno"
+}
+```

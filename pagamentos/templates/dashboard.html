@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Transações M-Pesa</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; }
+        .card-custom { border: none; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .card-header-custom { border-radius: 15px 15px 0 0; padding: 1.2rem; font-size: 1.2rem; font-weight: bold; }
+        .card-title-custom { font-size: 1rem; color: #6c757d; }
+        .card-text-custom { font-size: 2.2rem; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div id="alert-container"></div>
+        <h1 class="text-center mb-4">Dashboard de Transações</h1>
+
+        <div class="row">
+            <!-- Card Saldo Líquido -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card card-custom text-center">
+                    <div class="card-header-custom bg-success text-white">Saldo Líquido</div>
+                    <div class="card-body">
+                        <h5 class="card-title-custom">Entradas - Saídas</h5>
+                        <p class="card-text-custom text-success">{{ saldo_liquido|default:"0.00" }} MZN</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card Total de Entradas -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card card-custom text-center">
+                    <div class="card-header-custom bg-info text-white">Total de Entradas (C2B)</div>
+                    <div class="card-body">
+                        <h5 class="card-title-custom">Recebimentos</h5>
+                        <p class="card-text-custom text-info">{{ total_entradas|default:"0.00" }} MZN</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card Total de Saídas -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card card-custom text-center">
+                    <div class="card-header-custom bg-warning text-white">Total de Saídas (B2C)</div>
+                    <div class="card-body">
+                        <h5 class="card-title-custom">Pagamentos</h5>
+                        <p class="card-text-custom text-warning">{{ total_saidas|default:"0.00" }} MZN</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card Total de Erros -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card card-custom text-center">
+                    <div class="card-header-custom bg-danger text-white">Total de Falhas</div>
+                    <div class="card-body">
+                        <h5 class="card-title-custom">Transações com erro</h5>
+                        <p class="card-text-custom text-danger">{{ total_erros|default:"0" }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formulário B2C e Últimas Transações -->
+        <div class="row mt-4">
+            <!-- Formulário de Pagamento B2C -->
+            <div class="col-lg-4 mb-4">
+                <div class="card card-custom">
+                    <div class="card-header">
+                        <h3>Novo Pagamento (B2C)</h3>
+                    </div>
+                    <div class="card-body">
+                        <form id="b2c-form">
+                            <div class="mb-3">
+                                <label for="numero_celular" class="form-label">Número do Destinatário</label>
+                                <input type="text" class="form-control" id="numero_celular" placeholder="84xxxxxxx" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="valor" class="form-label">Valor (MZN)</label>
+                                <input type="number" class="form-control" id="valor" step="0.01" placeholder="10.00" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Pagar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabela de Últimas Transações -->
+            <div class="col-lg-8">
+                <div class="card card-custom">
+                    <div class="card-header">
+                        <h3>Últimas Transações ({{ total_transacoes }})</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Tipo</th>
+                                        <th>Celular</th>
+                                        <th>Valor</th>
+                                        <th>Status</th>
+                                        <th>Data</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for transacao in ultimas_transacoes %}
+                                    <tr>
+                                        <td>
+                                            {% if transacao.tipo_transacao == 'C2B' %}
+                                                <span class="badge bg-info">Entrada</span>
+                                            {% elif transacao.tipo_transacao == 'B2C' %}
+                                                <span class="badge bg-warning">Saída</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ transacao.numero_celular }}</td>
+                                        <td>{{ transacao.valor }}</td>
+                                        <td>
+                                            {% if transacao.status == 'SUCESSO' %}
+                                                <span class="badge bg-success">Sucesso</span>
+                                            {% else %}
+                                                <span class="badge bg-danger">Falha</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ transacao.criado_em|date:"d/m/Y H:i" }}</td>
+                                    </tr>
+                                    {% empty %}
+                                    <tr>
+                                        <td colspan="5" class="text-center">Nenhuma transação encontrada.</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="button" class="btn btn-secondary mt-3" data-bs-toggle="modal" data-bs-target="#allTransactionsModal">
+                            Ver Todas as Transações
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Todas as Transações -->
+    <div class="modal fade" id="allTransactionsModal" tabindex="-1" aria-labelledby="allTransactionsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="allTransactionsModalLabel">Todas as Transações</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Tipo</th>
+                                    <th>Celular</th>
+                                    <th>Valor</th>
+                                    <th>Status</th>
+                                    <th>Data</th>
+                                    <th>Erro</th>
+                                </tr>
+                            </thead>
+                            <tbody id="allTransactionsTableBody">
+                                <!-- Transações serão carregadas aqui via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('b2c-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const numero = document.getElementById('numero_celular').value;
+            const valor = parseFloat(document.getElementById('valor').value);
+            const alertContainer = document.getElementById('alert-container');
+
+            fetch('/api/pagamento_b2c/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: JSON.stringify({ numero_celular: numero, valor: valor })
+            })
+            .then(response => response.json().then(data => ({ status: response.status, body: data })))
+            .then(({ status, body }) => {
+                let alertClass = 'alert-danger';
+                let message = `Erro: ${body.erro || JSON.stringify(body)}`;
+
+                if (status >= 200 && status < 300) {
+                    alertClass = 'alert-success';
+                    message = `Sucesso: ${body.output_ConversationID || 'Transação enviada.'}`;
+                }
+                
+                const alertHTML = `<div class="alert ${alertClass} alert-dismissible fade show" role="alert">
+                                     ${message}
+                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                   </div>`;
+                alertContainer.innerHTML = alertHTML;
+
+                if (alertClass === 'alert-success') {
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 3000);
+                }
+            })
+            .catch(error => {
+                const alertHTML = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                     Erro de conexão: ${error}
+                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                   </div>`;
+                alertContainer.innerHTML = alertHTML;
+            });
+        });
+
+        // Função para carregar todas as transações no modal
+        document.getElementById('allTransactionsModal').addEventListener('show.bs.modal', async function () {
+            const tableBody = document.getElementById('allTransactionsTableBody');
+            tableBody.innerHTML = '<tr><td colspan="6" class="text-center">Carregando transações...</td></tr>';
+
+            try {
+                const response = await fetch('/api/all_transactions/');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const transactions = await response.json();
+
+                tableBody.innerHTML = ''; // Limpa o conteúdo de carregamento
+
+                if (transactions.length === 0) {
+                    tableBody.innerHTML = '<tr><td colspan="6" class="text-center">Nenhuma transação encontrada.</td></tr>';
+                    return;
+                }
+
+                transactions.forEach(transacao => {
+                    const row = tableBody.insertRow();
+                    row.insertCell().innerHTML = transacao.tipo_transacao === 'C2B' ? '<span class="badge bg-info">Entrada</span>' : '<span class="badge bg-warning">Saída</span>';
+                    row.insertCell().textContent = transacao.numero_celular;
+                    row.insertCell().textContent = transacao.valor;
+                    row.insertCell().innerHTML = transacao.status === 'SUCESSO' ? '<span class="badge bg-success">Sucesso</span>' : '<span class="badge bg-danger">Falha</span>';
+                    row.insertCell().textContent = transacao.criado_em;
+                    row.insertCell().textContent = transacao.mensagem_erro || '-';
+                });
+
+            } catch (error) {
+                console.error('Erro ao carregar todas as transações:', error);
+                tableBody.innerHTML = `<tr><td colspan="6" class="text-center text-danger">Erro ao carregar transações: ${error.message}</td></tr>`;
+            }
+        });
+
+        // Function to get CSRF token from cookies
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

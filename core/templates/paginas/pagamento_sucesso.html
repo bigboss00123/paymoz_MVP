@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<div class="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+    <div class="w-full max-w-3xl bg-white shadow-xl rounded-lg p-8 mb-8 text-center">
+        <div class="flex flex-col items-center">
+            <h1 class="text-4xl font-extrabold text-green-600 mb-4">
+                <i class="bi bi-check-circle-fill text-green-500 text-5xl mr-3"></i> Pagamento Realizado com Sucesso!
+            </h1>
+            <p class="text-xl text-gray-700 mb-6">A sua transação foi processada com êxito.</p>
+            
+            <div class="text-center mb-6">
+                <p class="text-2xl font-semibold text-gray-800">Produto: {{ session.nome_produto }}</p>
+                <p class="text-2xl font-semibold text-gray-800">Valor: {{ transaction.valor }} MZN</p>
+            </div>
+
+            <!-- Bloco de Ações Pós-Compra -->
+            {% if produto and produto.arquivo_download %}
+            <div class="mt-6 text-center">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-4">Acesse seu produto</h3>
+                <p class="text-lg text-gray-600 mb-6">Clique no botão abaixo para fazer o download.</p>
+                <a href="{{ produto.arquivo_download.url }}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-lg inline-flex items-center transition duration-300 ease-in-out text-xl shadow-lg">
+                    <i class="fas fa-download mr-3"></i> Baixar Arquivo
+                </a>
+                <p class="text-lg text-gray-600 mt-6">Você receberá os detalhes do produto e o link de acesso no seu WhatsApp ou e-mail.</p>
+            </div>
+            {% else %}
+            <div class="mt-6 text-center">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-4">Sua compra foi concluída!</h3>
+                <p class="text-lg text-gray-600 mb-6">Você receberá os detalhes do produto e o link de acesso no seu WhatsApp ou e-mail.</p>
+            </div>
+            {% endif %}
+
+            <p class="text-gray-600 text-sm mt-8"><strong>ID da Transação:</strong> {{ transaction.transaction_id }}</p>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

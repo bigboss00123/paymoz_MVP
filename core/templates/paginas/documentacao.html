@@ -1,0 +1,846 @@
+{% extends 'base.html' %}
+
+{% block title %}Documentação da API - Paymoz{% endblock %}
+
+{% block content %}
+{% include 'portais/header.html' %}
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    'paymoz': {
+                        'primary': '#1e40af',
+                        'secondary': '#3b82f6',
+                        'accent': '#06b6d4',
+                        'success': '#10b981',
+                        'warning': '#f59e0b',
+                        'error': '#ef4444'
+                    }
+                },
+                animation: {
+                    'fade-in': 'fadeIn 0.8s ease-out',
+                    'slide-up': 'slideUp 0.6s ease-out',
+                    'bounce-gentle': 'bounceGentle 2s infinite',
+                    'glow': 'glow 2s ease-in-out infinite alternate',
+                    'float': 'float 3s ease-in-out infinite',
+                    'pulse-slow': 'pulse 3s infinite',
+                    'gradient-shift': 'gradientShift 4s ease-in-out infinite',
+                    'code-typing': 'codeTyping 2s ease-in-out infinite',
+                },
+                keyframes: {
+                    fadeIn: {
+                        '0%': { opacity: '0', transform: 'translateY(30px)' },
+                        '100%': { opacity: '1', transform: 'translateY(0)' }
+                    },
+                    slideUp: {
+                        '0%': { opacity: '0', transform: 'translateY(50px)' },
+                        '100%': { opacity: '1', transform: 'translateY(0)' }
+                    },
+                    bounceGentle: {
+                        '0%, 100%': { transform: 'translateY(0)' },
+                        '50%': { transform: 'translateY(-5px)' }
+                    },
+                    glow: {
+                        '0%': { boxShadow: '0 0 5px rgba(59, 130, 246, 0.5)' },
+                        '100%': { boxShadow: '0 0 20px rgba(59, 130, 246, 0.8)' }
+                    },
+                    float: {
+                        '0%, 100%': { transform: 'translateY(0px)' },
+                        '50%': { transform: 'translateY(-8px)' }
+                    },
+                    gradientShift: {
+                        '0%, 100%': { backgroundPosition: '0% 50%' },
+                        '50%': { backgroundPosition: '100% 50%' }
+                    },
+                    codeTyping: {
+                        '0%, 100%': { opacity: '1' },
+                        '50%': { opacity: '0.7' }
+                    }
+                }
+            }
+        }
+    }
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+
+<style>
+    body {
+        font-family: 'Inter', sans-serif;
+    }
+    
+    .font-mono {
+        font-family: 'JetBrains Mono', monospace;
+    }
+    
+    .glass {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .gradient-text {
+        background: linear-gradient(135deg, #1e40af, #06b6d4, #8b5cf6);
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: gradientShift 4s ease-in-out infinite;
+    }
+    
+    .code-block {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .code-block::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        transition: left 0.5s;
+    }
+    
+    .code-block:hover::before {
+        left: 100%;
+    }
+    
+    .api-card {
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .api-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.1), transparent);
+        transition: left 0.5s;
+    }
+    
+    .api-card:hover::before {
+        left: 100%;
+    }
+    
+    .api-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(30, 64, 175, 0.15);
+    }
+    
+    .tab-button {
+        transition: all 0.3s ease;
+        position: relative;
+    }
+    
+    .tab-button.active {
+        background: linear-gradient(135deg, #1e40af, #06b6d4);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(30, 64, 175, 0.3);
+    }
+    
+    .tab-button:not(.active):hover {
+        background: rgba(30, 64, 175, 0.1);
+        transform: translateY(-1px);
+    }
+    
+    .endpoint-badge {
+        background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+        color: white;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        display: inline-block;
+        margin-right: 8px;
+        box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+    }
+    
+    .floating-element {
+        animation: float 3s ease-in-out infinite;
+    }
+    
+    .stagger-animation > * {
+        animation-delay: calc(var(--stagger) * 200ms);
+    }
+    
+    .hero-bg {
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .hero-bg::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+        animation: float 20s ease-in-out infinite;
+    }
+    
+    .copy-button {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: white;
+        padding: 8px 12px;
+        border-radius: 8px;
+        font-size: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+    }
+    
+    .copy-button:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+    }
+    
+    .status-indicator {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .status-available {
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(34, 197, 94, 0.05));
+        color: #059669;
+        border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    
+    .status-development {
+        background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(99, 102, 241, 0.05));
+        color: #2563eb;
+        border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+    
+    .section-divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(30, 64, 175, 0.3), transparent);
+        margin: 3rem 0;
+    }
+</style>
+
+<main class="antialiased pt-24 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 min-h-screen">
+    <!-- Hero Section -->
+    <section class="hero-bg py-20 relative">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 stagger-animation">
+                <div class="floating-element mb-8" style="--stagger: 0">
+                    <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-paymoz-accent to-paymoz-primary rounded-3xl shadow-2xl">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                </div>
+                
+                <h1 class="text-5xl md:text-6xl font-black text-white mb-6 animate-fade-in" style="--stagger: 1">
+                    Documentação da 
+                    <span class="gradient-text">API</span>
+                </h1>
+                
+                <p class="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto leading-relaxed animate-slide-up" style="--stagger: 2">
+                    Integre a Paymoz em seus sistemas de forma rápida, segura e eficiente. 
+                    <br class="hidden md:block">
+                    Documentação completa com exemplos práticos.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center mt-10 animate-slide-up" style="--stagger: 3">
+                    <div class="status-indicator status-available">
+                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        API C2B Disponível
+                    </div>
+                    <div class="status-indicator status-development">
+                        <svg class="w-4 h-4 mr-2 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                        </svg>
+                        API B2C Em Desenvolvimento
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Decorative Elements -->
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-paymoz-accent via-paymoz-primary to-purple-600"></div>
+        <div class="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-paymoz-accent to-transparent opacity-50"></div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-16 relative">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass rounded-3xl shadow-2xl border border-white/50 p-8 md:p-12 space-y-16 animate-fade-in">
+                
+                <!-- Introdução -->
+                <div class="stagger-animation">
+                    <div class="flex items-center space-x-4 mb-8" style="--stagger: 0">
+                        <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center shadow-lg">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-4xl font-black text-slate-900">Introdução</h2>
+                    </div>
+                    
+                    <div class="prose prose-lg max-w-none" style="--stagger: 1">
+                        <p class="text-slate-600 text-lg leading-relaxed mb-8">
+                            Nossa API foi projetada para ser <strong>RESTful</strong> e <strong>previsível</strong>. 
+                            Ela retorna respostas em formato JSON e usa códigos de status HTTP padrão para indicar sucessos e erros.
+                        </p>
+                        
+                        <!-- URL Base -->
+                        <div class="bg-gradient-to-r from-slate-900 to-slate-800 rounded-2xl p-6 mb-8 relative overflow-hidden">
+                            <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-paymoz-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+                                </svg>
+                                URL Base
+                            </h3>
+                            <p class="text-slate-300 mb-4">Todas as URLs da API referenciadas nesta documentação têm a seguinte base:</p>
+                            <div class="code-block relative">
+                                <code class="block bg-black/30 text-green-400 rounded-xl p-4 font-mono text-sm border border-green-500/20">
+                                    {{ api_base_url }}
+                                </code>
+                                <button class="copy-button" onclick="copyToClipboard('{{ api_base_url }}')">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Autenticação -->
+                        <div class="bg-gradient-to-r from-blue-900 to-indigo-800 rounded-2xl p-6 mb-8 relative overflow-hidden">
+                            <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-paymoz-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-6 6c-3 0-6 1-6 1s-1-3-1-6a6 6 0 016-6c1 0 2 1 2 2"></path>
+                                </svg>
+                                Autenticação
+                            </h3>
+                            <p class="text-slate-300 mb-4">
+                                A autenticação é feita através de uma chave de API. Você pode encontrar sua chave de API no seu 
+                                <a href="{% url 'dashboard' %}" class="text-paymoz-accent hover:text-paymoz-secondary underline font-semibold">Dashboard</a>. 
+                                Todas as requisições à API devem incluir sua chave no cabeçalho HTTP <code class="bg-black/30 px-2 py-1 rounded text-orange-400 font-mono text-sm">X-API-Key</code>.
+                            </p>
+                            <div class="code-block relative">
+                                <code class="block bg-black/30 text-green-400 rounded-xl p-4 font-mono text-sm border border-green-500/20">
+                                    X-API-Key: <span class="text-orange-400">SUA_CHAVE_DE_API_SECRETA</span>
+                                </code>
+                                <button class="copy-button" onclick="copyToClipboard('X-API-Key: SUA_CHAVE_DE_API_SECRETA')">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-divider"></div>
+
+                <!-- API C2B -->
+                <div class="stagger-animation">
+                    <div class="flex items-center space-x-4 mb-8" style="--stagger: 0">
+                        <div class="w-12 h-12 bg-gradient-to-br from-paymoz-primary to-paymoz-accent rounded-2xl flex items-center justify-center shadow-lg">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-4xl font-black text-slate-900">API C2B</h2>
+                        <span class="text-sm text-slate-500 font-medium">(Customer-to-Business)</span>
+                    </div>
+                    
+                    <p class="text-slate-600 text-lg leading-relaxed mb-12" style="--stagger: 1">
+                        Receba pagamentos dos seus clientes de forma segura e eficiente. Oferecemos duas opções de integração flexíveis:
+                    </p>
+
+                    <!-- Opção 1: Checkout Hospedado -->
+                    <div class="api-card glass rounded-2xl border border-white/50 p-8 mb-12 shadow-xl" style="--stagger: 2">
+                        <div class="flex items-center space-x-4 mb-6">
+                            <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg">
+                                <span class="text-white font-bold text-sm">1</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-slate-900">Checkout Hospedado</h3>
+                            <div class="status-indicator status-available">
+                                <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                Disponível
+                            </div>
+                        </div>
+                        
+                        <p class="text-slate-600 mb-6 leading-relaxed">
+                            A forma mais <strong>simples</strong> de integrar. Crie uma sessão de pagamento e redirecione seu cliente 
+                            para uma página de checkout segura hospedada pela Paymoz.
+                        </p>
+                        
+                        <div class="bg-gradient-to-r from-slate-900 to-slate-800 rounded-xl p-6 mb-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h4 class="text-lg font-semibold text-white flex items-center">
+                                    <svg class="w-5 h-5 mr-2 text-paymoz-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+                                    </svg>
+                                    Endpoint
+                                </h4>
+                            </div>
+                            <div class="code-block relative">
+                                <code class="block bg-black/30 text-white rounded-lg p-4 font-mono text-sm border border-purple-500/20">
+                                    <span class="endpoint-badge">POST</span>/checkout/session/
+                                </code>
+                                <button class="copy-button" onclick="copyToClipboard('POST /checkout/session/')">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Opção 2: API de Pagamento Direto -->
+                    <div class="api-card glass rounded-2xl border border-white/50 p-8 mb-12 shadow-xl" style="--stagger: 3">
+                        <div class="flex items-center space-x-4 mb-6">
+                            <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
+                                <span class="text-white font-bold text-sm">2</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-slate-900">API de Pagamento Direto</h3>
+                            <div class="status-indicator status-available">
+                                <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                Disponível
+                            </div>
+                        </div>
+                        
+                        <p class="text-slate-600 mb-6 leading-relaxed">
+                            Use este endpoint para processar pagamentos <strong>diretamente</strong> do seu servidor. 
+                            Ideal para quando você já tem o número de celular do cliente e deseja uma integração mais profunda sem redirecionamento.
+                        </p>
+                        
+                        <div class="bg-gradient-to-r from-slate-900 to-slate-800 rounded-xl p-6 mb-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h4 class="text-lg font-semibold text-white flex items-center">
+                                    <svg class="w-5 h-5 mr-2 text-paymoz-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+                                    </svg>
+                                    Endpoints
+                                </h4>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="code-block relative">
+                                    <code class="block bg-black/30 text-white rounded-lg p-4 font-mono text-sm border border-green-500/20">
+                                        <span class="endpoint-badge">POST</span>/payment/mpesa/
+                                    </code>
+                                </div>
+                                <div class="code-block relative">
+                                    <code class="block bg-black/30 text-white rounded-lg p-4 font-mono text-sm border border-blue-500/20">
+                                        <span class="endpoint-badge">POST</span>/payment/emola/
+                                    </code>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Code Examples -->
+                        <div class="mt-8" x-data="{ tab: 'curl' }">
+                            <h4 class="text-lg font-semibold text-slate-800 mb-4 flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-paymoz-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                                </svg>
+                                Exemplos de Requisição (M-Pesa)
+                            </h4>
+                            
+                            <!-- Tabs -->
+                            <div class="mb-6 border-b border-slate-200">
+                                <nav class="-mb-px flex space-x-2" aria-label="Tabs">
+                                    <button @click="tab = 'curl'" :class="{ 'active': tab === 'curl' }" class="tab-button px-4 py-3 rounded-t-lg font-medium text-sm transition-all duration-200">
+                                        cURL
+                                    </button>
+                                    <button @click="tab = 'python'" :class="{ 'active': tab === 'python' }" class="tab-button px-4 py-3 rounded-t-lg font-medium text-sm transition-all duration-200">
+                                        Python
+                                    </button>
+                                    <button @click="tab = 'js'" :class="{ 'active': tab === 'js' }" class="tab-button px-4 py-3 rounded-t-lg font-medium text-sm transition-all duration-200">
+                                        JavaScript
+                                    </button>
+                                    <button @click="tab = 'php'" :class="{ 'active': tab === 'php' }" class="tab-button px-4 py-3 rounded-t-lg font-medium text-sm transition-all duration-200">
+                                        PHP
+                                    </button>
+                                </nav>
+                            </div>
+
+                            <!-- Tab Content -->
+                            <div class="relative">
+                                <div x-show="tab === 'curl'" class="code-block">
+                                    <pre class="bg-slate-900 text-white rounded-xl p-6 overflow-x-auto text-sm font-mono relative border border-slate-700"><code class="language-bash">curl -X POST \
+  {{ api_base_url }}/payment/mpesa/ \
+  -H 'Content-Type: application/json' \
+  -H 'X-API-Key: SUA_CHAVE_DE_API_SECRETA' \
+  -d '{
+    "numero_celular": "841234567",
+    "valor": "150.00"
+  }'</code></pre>
+                                    <button class="copy-button" onclick="copyToClipboard(`curl -X POST \\
+  {{ api_base_url }}/payment/mpesa/ \\
+  -H 'Content-Type: application/json' \\
+  -H 'X-API-Key: SUA_CHAVE_DE_API_SECRETA' \\
+  -d '{
+    \"numero_celular\": \"841234567\",
+    \"valor\": \"150.00\"
+  }'`)">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+
+                                <div x-show="tab === 'python'" class="code-block">
+                                    <pre class="bg-slate-900 text-white rounded-xl p-6 overflow-x-auto text-sm font-mono relative border border-slate-700"><code class="language-python">import requests
+import json
+
+api_key = 'SUA_CHAVE_DE_API_SECRETA'
+url = '{{ api_base_url }}/payment/mpesa/'
+
+headers = {
+    'Content-Type': 'application/json',
+    'X-API-Key': api_key
+}
+
+data = {
+    'numero_celular': '841234567',
+    'valor': '150.00'
+}
+
+response = requests.post(url, headers=headers, data=json.dumps(data))
+print(response.json())</code></pre>
+                                    <button class="copy-button" onclick="copyToClipboard(`import requests
+import json
+
+api_key = 'SUA_CHAVE_DE_API_SECRETA'
+url = '{{ api_base_url }}/payment/mpesa/'
+
+headers = {
+    'Content-Type': 'application/json',
+    'X-API-Key': api_key
+}
+
+data = {
+    'numero_celular': '841234567',
+    'valor': '150.00'
+}
+
+response = requests.post(url, headers=headers, data=json.dumps(data))
+print(response.json())`)">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+
+                                <div x-show="tab === 'js'" class="code-block">
+                                    <pre class="bg-slate-900 text-white rounded-xl p-6 overflow-x-auto text-sm font-mono relative border border-slate-700"><code class="language-javascript">const apiKey = 'SUA_CHAVE_DE_API_SECRETA';
+const url = '{{ api_base_url }}/payment/mpesa/';
+
+const data = {
+    numero_celular: '841234567',
+    valor: '150.00'
+};
+
+fetch(url, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'X-API-Key': apiKey
+    },
+    body: JSON.stringify(data)
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error('Error:', error));</code></pre>
+                                    <button class="copy-button" onclick="copyToClipboard(`const apiKey = 'SUA_CHAVE_DE_API_SECRETA';
+const url = '{{ api_base_url }}/payment/mpesa/';
+
+const data = {
+    numero_celular: '841234567',
+    valor: '150.00'
+};
+
+fetch(url, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'X-API-Key': apiKey
+    },
+    body: JSON.stringify(data)
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error('Error:', error));`)">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+
+                                <div x-show="tab === 'php'" class="code-block">
+                                    <pre class="bg-slate-900 text-white rounded-xl p-6 overflow-x-auto text-sm font-mono relative border border-slate-700"><code class="language-php">&lt;?php
+$apiKey = 'SUA_CHAVE_DE_API_SECRETA';
+$apiUrl = '{{ api_base_url }}/payment/mpesa/';
+
+$data = [
+    'numero_celular' => '841234567',
+    'valor' => '150.00'
+];
+
+$ch = curl_init($apiUrl);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    'Content-Type: application/json',
+    'X-API-Key: ' . $apiKey
+]);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+$responseData = json_decode($response, true);
+header('Content-Type: application/json');
+echo json_encode($responseData);
+?&gt;</code></pre>
+                                    <button class="copy-button" onclick="copyToClipboard(`<?php
+$apiKey = 'SUA_CHAVE_DE_API_SECRETA';
+$apiUrl = '{{ api_base_url }}/payment/mpesa/';
+
+$data = [
+    'numero_celular' => '841234567',
+    'valor' => '150.00'
+];
+
+$ch = curl_init($apiUrl);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    'Content-Type: application/json',
+    'X-API-Key: ' . $apiKey
+]);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+$responseData = json_decode($response, true);
+header('Content-Type: application/json');
+echo json_encode($responseData);
+?>`)">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Success Response -->
+                        <div class="mt-8">
+                            <h4 class="text-lg font-semibold text-slate-800 mb-4 flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                Resposta de Sucesso
+                            </h4>
+                            <div class="code-block relative">
+                                <pre class="bg-gradient-to-r from-green-900 to-emerald-800 text-white rounded-xl p-6 overflow-x-auto text-sm font-mono border border-green-500/20"><code class="language-json">{
+  "status": "success",
+  "message": "Pagamento via Mpesa processado com sucesso.",
+  "transaction_id": "...",
+  "valor_recebido": "150.00",
+  "taxa_aplicada": "15.00",
+  "valor_liquido_creditado": "135.00"
+}</code></pre>
+                                <button class="copy-button" onclick="copyToClipboard(`{
+  \"status\": \"success\",
+  \"message\": \"Pagamento via Mpesa processado com sucesso.\",
+  \"transaction_id\": \"...\",
+  \"valor_recebido\": \"150.00\",
+  \"taxa_aplicada\": \"15.00\",
+  \"valor_liquido_creditado\": \"135.00\"
+}`)">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-divider"></div>
+
+                <!-- API B2C -->
+                <div class="stagger-animation">
+                    <div class="flex items-center space-x-4 mb-8" style="--stagger: 0">
+                        <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center shadow-lg">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-4xl font-black text-slate-900">API B2C</h2>
+                        <span class="text-sm text-slate-500 font-medium">(Business-to-Customer)</span>
+                    </div>
+                    
+                    <div class="glass rounded-2xl border border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50 p-8 shadow-xl" style="--stagger: 1">
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg">
+                                    <svg class="w-6 h-6 text-white animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center space-x-3 mb-4">
+                                    <h3 class="text-2xl font-bold text-blue-900">Em Desenvolvimento</h3>
+                                    <div class="status-indicator status-development">
+                                        <svg class="w-3 h-3 mr-1 animate-pulse" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        Em Breve
+                                    </div>
+                                </div>
+                                <p class="text-blue-800 text-lg leading-relaxed mb-6">
+                                    A funcionalidade de pagamentos de <strong>empresa para cliente (B2C)</strong>, como pagamentos em massa e transferências, 
+                                    está atualmente em desenvolvimento e será disponibilizada em breve.
+                                </p>
+                                <div class="flex items-center space-x-4 text-sm text-blue-700">
+                                    <div class="flex items-center space-x-2">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                        <span>Previsão: Q2 2025</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                        </svg>
+                                        <span>Pagamentos em Massa</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+                                        </svg>
+                                        <span>Transferências</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+<script>
+    // Copy to clipboard function
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(function() {
+            // Show success feedback
+            const event = new CustomEvent('copied', { detail: { text: text } });
+            document.dispatchEvent(event);
+            
+            // Visual feedback
+            showCopyFeedback();
+        }, function(err) {
+            console.error('Could not copy text: ', err);
+        });
+    }
+    
+    // Show copy feedback
+    function showCopyFeedback() {
+        const feedback = document.createElement('div');
+        feedback.className = 'fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50 animate-fade-in';
+        feedback.innerHTML = `
+            <div class="flex items-center space-x-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span>Copiado!</span>
+            </div>
+        `;
+        
+        document.body.appendChild(feedback);
+        
+        setTimeout(() => {
+            feedback.remove();
+        }, 2000);
+    }
+    
+    // Intersection Observer for animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-fade-in');
+            }
+        });
+    }, observerOptions);
+    
+    // Observe all animated elements
+    document.querySelectorAll('.stagger-animation > *').forEach(element => {
+        observer.observe(element);
+    });
+    
+    // Add loading animation on page load
+    window.addEventListener('load', () => {
+        document.querySelectorAll('.animate-slide-up').forEach((el, index) => {
+            el.style.animationDelay = `${index * 150}ms`;
+        });
+    });
+    
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+</script>
+
+{% endblock %}

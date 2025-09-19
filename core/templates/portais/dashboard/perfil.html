@@ -1,0 +1,239 @@
+<div id="profile" class="section animate-fade-in">
+    <div class="max-w-4xl mx-auto bg-white p-8 rounded-3xl shadow-xl border border-slate-100">
+        <h2 class="text-3xl font-bold text-slate-800 mb-6">Meu Perfil</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-600">Nome de Usuário:</label>
+                    <p class="mt-1 text-lg text-slate-800 font-semibold">{{ user_profile.user.username }}</p>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-600">Nome Completo:</label>
+                    <p class="mt-1 text-lg text-slate-800">{{ user_profile.user.name }} {{ user_profile.user.surname }}</p>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-600">Email:</label>
+                    <p class="mt-1 text-lg text-slate-800">{{ user_profile.user.email }}</p>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-600">Saldo Atual:</label>
+                    <p class="mt-1 text-2xl font-bold text-blue-600">{{ formatted_balance }} MZN</p>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-600">Status da Assinatura:</label>
+                    <p class="mt-1 text-lg text-slate-800">{{ user_profile.subscription_status }}</p>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-600">Plano Atual:</label>
+                    <p class="mt-1 text-lg text-slate-800">{{ user_profile.package.name|default:"Nenhum" }}</p>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-600">Taxa de Saque (Personalizada):</label>
+                    <p class="mt-1 text-lg text-slate-800">{% if user_profile.custom_withdrawal_fee_percentage %}{{ user_profile.custom_withdrawal_fee_percentage }}%{% else %}Padrão do Plano{% endif %}</p>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-600">Taxa de Transação (Personalizada):</label>
+                    <p class="mt-1 text-lg text-slate-800">{% if user_profile.custom_transaction_fee_percentage %}{{ user_profile.custom_transaction_fee_percentage }}%{% else %}Padrão do Plano{% endif %}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-8 border-t pt-6 border-slate-200">
+            <h3 class="text-xl font-bold text-slate-800 mb-4">Configurações da API</h3>
+            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                <label class="block text-sm font-medium text-slate-600">Sua API Key:</label>
+                <div class="mt-1 flex items-center space-x-2">
+                    <span id="api-key-display" class="text-lg font-mono text-gray-700">************************</span>
+                    <span id="full-api-key" class="text-lg font-mono text-gray-700 hidden">{{ user_profile.api_key }}</span>
+                    <button id="toggle-api-key" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Mostrar</button>
+                    <button id="copy-api-key" class="text-gray-500 hover:text-gray-700 text-sm font-medium hidden">
+                        <svg id="copy-icon" class="w-5 h-5 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V7a2 2 0 012-2h2"></path></svg>
+                        <svg id="check-icon" class="w-5 h-5 inline-block text-green-500 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        Copiar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-8 border-t pt-6 border-slate-200">
+            <h3 class="text-xl font-bold text-slate-800 mb-4">Verificação de Email</h3>
+            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                <label for="email-input" class="block text-sm font-medium text-slate-600">Seu Email:</label>
+                <div class="mt-1 flex items-center space-x-2">
+                    <input type="email" id="email-input" class="form-input flex-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" value="{{ user_profile.user.email|default:'' }}" placeholder="seu.email@exemplo.com">
+                    <button id="send-verification-code-btn" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        {% if user_profile.email_verified %}
+                            Email Verificado
+                        {% else %}
+                            Verificar Email
+                        {% endif %}
+                    </button>
+                </div>
+                <p id="email-verification-status" class="mt-2 text-sm"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Verificação de Código -->
+<div id="verification-modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
+    <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+        <div class="mt-3 text-center">
+            <h3 class="text-lg leading-6 font-medium text-gray-900">Insira o Código de Verificação</h3>
+            <div class="mt-2 px-7 py-3">
+                <p class="text-sm text-gray-500">Um código de 6 dígitos foi enviado para o seu email. Por favor, insira-o abaixo:</p>
+                <input type="text" id="verification-code-input" maxlength="6" class="mt-4 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-center text-xl font-bold tracking-widest">
+                <p id="modal-status-message" class="mt-2 text-sm text-red-600"></p>
+            </div>
+            <div class="items-center px-4 py-3">
+                <button id="verify-code-btn" class="px-4 py-2 bg-blue-600 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    Verificar
+                </button>
+                <button id="close-modal-btn" class="mt-3 px-4 py-2 bg-gray-200 text-gray-800 text-base font-medium rounded-md w-full shadow-sm hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                    Cancelar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const emailInput = document.getElementById('email-input');
+        const sendCodeBtn = document.getElementById('send-verification-code-btn');
+        const emailStatus = document.getElementById('email-verification-status');
+        const verificationModal = document.getElementById('verification-modal');
+        const verificationCodeInput = document.getElementById('verification-code-input');
+        const verifyCodeBtn = document.getElementById('verify-code-btn');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const modalStatusMessage = document.getElementById('modal-status-message');
+
+        // Initial state of the button based on email_verified status
+        function updateEmailVerificationButton() {
+            if ("{{ user_profile.email_verified }}" === "True") {
+                sendCodeBtn.textContent = "Email Verificado";
+                sendCodeBtn.disabled = true;
+                sendCodeBtn.classList.remove("bg-blue-600", "hover:bg-blue-700");
+                sendCodeBtn.classList.add("bg-green-600", "cursor-not-allowed");
+                emailStatus.textContent = "Seu email está verificado.";
+                emailStatus.classList.remove("text-red-600");
+                emailStatus.classList.add("text-green-600");
+            } else {
+                sendCodeBtn.textContent = "Verificar Email";
+                sendCodeBtn.disabled = false;
+                sendCodeBtn.classList.remove("bg-green-600", "cursor-not-allowed");
+                sendCodeBtn.classList.add("bg-blue-600", "hover:bg-blue-700");
+                emailStatus.textContent = "Seu email ainda não foi verificado.";
+                emailStatus.classList.remove("text-green-600");
+                emailStatus.classList.add("text-red-600");
+            }
+        }
+
+        updateEmailVerificationButton();
+
+        sendCodeBtn.addEventListener('click', async () => {
+            const email = emailInput.value;
+            if (!email) {
+                emailStatus.textContent = 'Por favor, insira um email válido.';
+                emailStatus.classList.add('text-red-600');
+                return;
+            }
+
+            emailStatus.textContent = 'Enviando código...';
+            emailStatus.classList.remove('text-red-600', 'text-green-600');
+            emailStatus.classList.add('text-blue-600');
+
+            try {
+                const response = await fetch('{% url "send_verification_email" %}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    },
+                    body: JSON.stringify({ email: email })
+                });
+                const data = await response.json();
+
+                if (data.status === 'success') {
+                    emailStatus.textContent = data.message;
+                    emailStatus.classList.remove('text-red-600', 'text-blue-600');
+                    emailStatus.classList.add('text-green-600');
+                    verificationModal.classList.remove('hidden');
+                    modalStatusMessage.textContent = ''; // Clear previous messages
+                } else {
+                    emailStatus.textContent = data.message;
+                    emailStatus.classList.remove('text-green-600', 'text-blue-600');
+                    emailStatus.classList.add('text-red-600');
+                }
+            } catch (error) {
+                console.error('Erro ao enviar código de verificação:', error);
+                emailStatus.textContent = 'Erro ao conectar com o servidor.';
+                emailStatus.classList.remove('text-green-600', 'text-blue-600');
+                emailStatus.classList.add('text-red-600');
+            }
+        });
+
+        verifyCodeBtn.addEventListener('click', async () => {
+            const code = verificationCodeInput.value;
+            const email = emailInput.value;
+
+            if (!code) {
+                modalStatusMessage.textContent = 'Por favor, insira o código.';
+                modalStatusMessage.classList.add('text-red-600');
+                return;
+            }
+
+            modalStatusMessage.textContent = 'Verificando código...';
+            modalStatusMessage.classList.remove('text-red-600');
+            modalStatusMessage.classList.add('text-blue-600');
+
+            try {
+                const response = await fetch('{% url "verify_email_code" %}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    },
+                    body: JSON.stringify({ code: code, email: email })
+                });
+                const data = await response.json();
+
+                if (data.status === 'success') {
+                    modalStatusMessage.textContent = data.message;
+                    modalStatusMessage.classList.remove('text-red-600', 'text-blue-600');
+                    modalStatusMessage.classList.add('text-green-600');
+                    // Update the user's email in the UI if successful
+                    emailInput.value = email; // Ensure the displayed email is the one just verified
+                    // Optionally, disable the input and button after successful verification
+                    sendCodeBtn.textContent = "Email Verificado";
+                    sendCodeBtn.disabled = true;
+                    sendCodeBtn.classList.remove("bg-blue-600", "hover:bg-blue-700");
+                    sendCodeBtn.classList.add("bg-green-600", "cursor-not-allowed");
+                    emailStatus.textContent = "Seu email está verificado.";
+                    emailStatus.classList.remove("text-red-600");
+                    emailStatus.classList.add("text-green-600");
+                    verificationModal.classList.add('hidden'); // Hide modal on success
+                } else {
+                    modalStatusMessage.textContent = data.message;
+                    modalStatusMessage.classList.remove('text-green-600', 'text-blue-600');
+                    modalStatusMessage.classList.add('text-red-600');
+                }
+            } catch (error) {
+                console.error('Erro ao verificar código:', error);
+                modalStatusMessage.textContent = 'Erro ao conectar com o servidor.';
+                modalStatusMessage.classList.remove('text-green-600', 'text-blue-600');
+                modalStatusMessage.classList.add('text-red-600');
+            }
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            verificationModal.classList.add('hidden');
+            modalStatusMessage.textContent = '';
+            verificationCodeInput.value = '';
+        });
+    });
+</script>

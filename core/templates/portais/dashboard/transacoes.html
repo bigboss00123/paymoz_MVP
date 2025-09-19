@@ -1,0 +1,137 @@
+<!-- Transactions Section -->
+<section id="transactions" class="section animate-fade-in">
+    <h2 class="text-2xl font-bold text-slate-800 mb-6">Transações Recentes</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 w-full">
+        <!-- Card de Transações Concluídas -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 flex items-center justify-between border border-green-200 animate-fade-in">
+            <div>
+                <p class="text-sm font-medium text-green-600">Transações Concluídas</p>
+                <p class="text-3xl font-bold text-green-800 mt-1">{{ formatted_total_success_value }} MZN</p>
+            </div>
+            <div class="p-3 bg-green-100 rounded-full">
+                <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Card de Transações Falhas -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 flex items-center justify-between border border-red-200 animate-fade-in">
+            <div>
+                <p class="text-sm font-medium text-red-600">Transações Falhas</p>
+                <p class="text-3xl font-bold text-red-800 mt-1">{{ formatted_total_failed_value }} MZN</p>
+            </div>
+            <div class="p-3 bg-red-100 rounded-full">
+                <svg class="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 w-full sm:w-auto mb-6">
+        <input type="text" id="transaction-search" placeholder="Pesquisar transações..." class="px-4 py-2 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 w-full sm:w-auto">
+        <select id="transaction-status-filter" class="px-4 py-2 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 w-full sm:w-auto">
+            <option value="all">Todos</option>
+            <option value="SUCCESS">Concluído</option>
+            <option value="FAILED">Falhou</option>
+        </select>
+        <button id="apply-filters" class="px-4 py-2 bg-blue-500 text-white rounded-xl hover:bg-blue-600 transition-colors duration-300 w-full sm:w-auto">
+            Aplicar Filtros
+        </button>
+    </div>
+    <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-slate-100">
+        <div class="overflow-x-auto">
+            <table class="w-full">
+                <thead class="bg-slate-50/50 backdrop-blur-sm">
+                    <tr>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">ID</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Cliente</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Valor</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Status</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Hora</th>
+                    </tr>
+                </thead>
+                <tbody id="transactions-table-body" class="divide-y divide-slate-200/50">
+                    {% include 'portais/dashboard/transacoes_table.html' %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const applyFiltersButton = document.getElementById('apply-filters');
+        const transactionSearchInput = document.getElementById('transaction-search');
+        const transactionStatusFilter = document.getElementById('transaction-status-filter');
+        const transactionsTableBody = document.getElementById('transactions-table-body');
+
+        let searchTimeout;
+
+        function fetchTransactions() {
+            const searchQuery = transactionSearchInput.value;
+            const statusFilter = transactionStatusFilter.value;
+
+            let url = new URL(window.location.href);
+            url.searchParams.set('search', searchQuery);
+            url.searchParams.set('status', statusFilter);
+
+            fetch(url, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const newTbody = document.createElement('tbody');
+                newTbody.id = 'transactions-table-body';
+                newTbody.className = 'divide-y divide-slate-200/50';
+
+                if (data.transactions && data.transactions.length > 0) {
+                    data.transactions.forEach(transaction => {
+                        const row = `
+                            <tr class="hover:bg-white/50 transition-colors duration-200">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-slate-900">#${transaction.id.substring(0, 8)}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mr-3">
+                                            <span class="text-white text-xs font-semibold">${transaction.client_phone ? transaction.client_phone.charAt(0).toUpperCase() : 'U'}</span>
+                                        </div>
+                                        <span class="text-sm font-medium text-slate-900">${transaction.client_phone ? transaction.client_phone : 'N/A'}</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-slate-900">${transaction.valor} MZN</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="inline-flex px-3 py-1 text-xs font-semibold rounded-full bg-${transaction.status.toLowerCase() === 'success' ? 'green' : 'red'}-100 text-${transaction.status.toLowerCase() === 'success' ? 'green' : 'red'}-800">
+                                        ${transaction.status}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">${transaction.timestamp}</td>
+                            </tr>
+                        `;
+                        newTbody.innerHTML += row;
+                    });
+                } else {
+                    const row = `
+                        <tr>
+                            <td colspan="5" class="px-6 py-4 text-center text-sm text-slate-500">Nenhuma transação encontrada.</td>
+                        </tr>
+                    `;
+                    newTbody.innerHTML = row;
+                }
+                transactionsTableBody.replaceWith(newTbody);
+            })
+            .catch(error => console.error('Erro na requisição fetch de transações:', error));
+        }
+
+        applyFiltersButton.addEventListener('click', fetchTransactions);
+
+        transactionSearchInput.addEventListener('input', () => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(fetchTransactions, 300);
+        });
+
+        // Initial fetch is handled by the server-side render
+    });
+</script>

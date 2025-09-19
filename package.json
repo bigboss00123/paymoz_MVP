@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "connect-timeout": "^1.9.1",
+    "express": "^5.1.0",
+    "mpesa-api-nodejs": "^2.0.0"
+  }
+}

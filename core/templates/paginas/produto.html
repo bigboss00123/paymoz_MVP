@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso de Matemática Básica - Aprenda de Forma Prática</title>
+    <meta name="description" content="Curso completo de matemática básica com 50+ videoaulas, exercícios práticos e certificado. Ideal para estudantes do ensino fundamental.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    screens: {
+                        'xs': '475px',
+                    },
+                    colors: {
+                        'paymoz': {
+                            'primary': '#1e40af',
+                            'secondary': '#3b82f6',
+                            'accent': '#06b6d4',
+                            'success': '#10b981',
+                            'warning': '#f59e0b',
+                            'error': '#ef4444'
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.8s ease-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'slide-in-left': 'slideInLeft 0.8s ease-out',
+                        'slide-in-right': 'slideInRight 0.8s ease-out',
+                        'bounce-gentle': 'bounceGentle 2s infinite',
+                        'pulse-slow': 'pulse 3s infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'shake': 'shake 0.5s ease-in-out',
+                        'zoom-in': 'zoomIn 0.5s ease-out',
+                        'gradient-shift': 'gradientShift 3s ease-in-out infinite',
+                        'countdown': 'countdown 1s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(50px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        slideInLeft: {
+                            '0%': { opacity: '0', transform: 'translateX(-50px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' }
+                        },
+                        slideInRight: {
+                            '0%': { opacity: '0', transform: 'translateX(50px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' }
+                        },
+                        bounceGentle: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-20px) rotate(2deg)' }
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 20px rgba(59, 130, 246, 0.5)' },
+                            '100%': { boxShadow: '0 0 40px rgba(59, 130, 246, 0.8), 0 0 60px rgba(6, 182, 212, 0.6)' }
+                        },
+                        shake: {
+                            '0%, 100%': { transform: 'translateX(0)' },
+                            '10%, 30%, 50%, 70%, 90%': { transform: 'translateX(-2px)' },
+                            '20%, 40%, 60%, 80%': { transform: 'translateX(2px)' }
+                        },
+                        zoomIn: {
+                            '0%': { transform: 'scale(0.8)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' }
+                        },
+                        gradientShift: {
+                            '0%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                            '100%': { backgroundPosition: '0% 50%' }
+                        },
+                        countdown: {
+                            '0%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.1)' },
+                            '100%': { transform: 'scale(1)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .gradient-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 6s ease infinite;
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 50%, #06b6d4 100%);
+            background-size: 200% 200%;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-position: right center;
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.4);
+        }
+        .floating-element {
+            animation: float 3s ease-in-out infinite;
+        }
+        .sticky-buy-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            transform: translateY(100px);
+            transition: transform 0.3s ease;
+        }
+        .sticky-buy-btn.show {
+            transform: translateY(0);
+        }
+        @media (max-width: 768px) {
+            .sticky-buy-btn {
+                bottom: 10px;
+                right: 10px;
+                left: 10px;
+                right: 10px;
+            }
+        }
+        .progress-bar {
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #06b6d4);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+        .price-strike {
+            position: relative;
+        }
+        .price-strike::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #ef4444;
+            transform: rotate(-5deg);
+        }
+        .guarantee-badge {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .guarantee-badge::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+        
+        /* Responsive floating elements */
+        @media (max-width: 768px) {
+            .floating-element {
+                display: none;
+            }
+        }
+        
+        /* Responsive text sizes */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 2.5rem;
+                line-height: 1.1;
+            }
+            .hero-subtitle {
+                font-size: 1.125rem;
+            }
+            .section-title {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 475px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 min-h-screen">
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progress-bar"></div>
+
+    <!-- Sticky Buy Button -->
+    <div class="sticky-buy-btn">
+        <button class="btn-primary w-full px-4 sm:px-8 py-3 sm:py-4 rounded-full text-white font-bold text-sm sm:text-lg shadow-2xl animate-bounce-gentle">
+            🚀 Comprar Agora - MZN 2.500
+        </button>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-lg border-b border-slate-200/50 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-14 sm:h-16">
+                <div class="flex items-center space-x-2 sm:space-x-3">
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg sm:rounded-xl flex items-center justify-center">
+                        <svg class="w-4 h-4 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-lg sm:text-xl font-bold text-slate-800">Paymoz</h1>
+                        <p class="text-xs text-slate-600 hidden sm:block">Plataforma de Vendas</p>
+                    </div>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#" class="text-slate-600 hover:text-slate-800 transition-colors">Início</a>
+                    <a href="#" class="text-slate-600 hover:text-slate-800 transition-colors">Cursos</a>
+                    <a href="#" class="text-slate-600 hover:text-slate-800 transition-colors">Contato</a>
+                </nav>
+                
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden p-2 rounded-lg text-slate-600 hover:text-slate-800 hover:bg-slate-100" onclick="toggleMobileMenu()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu fixed inset-y-0 left-0 w-64 bg-white shadow-xl z-50 md:hidden" id="mobile-menu">
+            <div class="p-4">
+                <div class="flex items-center justify-between mb-8">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h1 class="text-xl font-bold text-slate-800">Paymoz</h1>
+                        </div>
+                    </div>
+                    <button onclick="toggleMobileMenu()" class="p-2 rounded-lg text-slate-600 hover:text-slate-800 hover:bg-slate-100">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <nav class="space-y-4">
+                    <a href="#" class="block py-2 px-4 text-slate-600 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition-colors">Início</a>
+                    <a href="#" class="block py-2 px-4 text-slate-600 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition-colors">Cursos</a>
+                    <a href="#" class="block py-2 px-4 text-slate-600 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition-colors">Contato</a>
+                </nav>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu Overlay -->
+        <div class="mobile-menu-overlay fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden hidden" id="mobile-menu-overlay" onclick="toggleMobileMenu()"></div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8">
+        <!-- Animated Background -->
+        <div class="absolute inset-0 gradient-hero opacity-20"></div>
+        
+        <!-- Floating Elements - Hidden on mobile -->
+        <div class="absolute top-20 left-10 w-16 h-16 sm:w-20 sm:h-20 bg-blue-400 rounded-full opacity-20 floating-element hidden md:block"></div>
+        <div class="absolute top-40 right-20 w-12 h-12 sm:w-16 sm:h-16 bg-purple-400 rounded-full opacity-20 floating-element hidden md:block" style="animation-delay: 1s;"></div>
+        <div class="absolute bottom-40 left-20 w-10 h-10 sm:w-12 sm:h-12 bg-cyan-400 rounded-full opacity-20 floating-element hidden md:block" style="animation-delay: 2s;"></div>
+
+        <div class="container mx-auto relative z-10">
+            <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <!-- Left Column - Content -->
+                <div class="text-center lg:text-left animate-slide-in-left order-2 lg:order-1">
+                    <!-- Category Badge -->
+                    <div class="inline-flex items-center bg-blue-100 text-blue-800 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-semibold mb-4 sm:mb-6">
+                        <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                        </svg>
+                        Curso Online
+                    </div>
+
+                    <!-- Main Title -->
+                    <h1 class="hero-title text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-slate-800 mb-4 sm:mb-6 leading-tight">
+                        Curso de Matemática Básica
+                    </h1>
+
+                    <!-- Short Description -->
+                    <p class="hero-subtitle text-lg sm:text-xl lg:text-2xl text-slate-600 mb-6 sm:mb-8 leading-relaxed px-4 sm:px-0">
+                        Curso completo de matemática para ensino fundamental com exercícios práticos.
+                    </p>
+
+                    <!-- Price -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-2 sm:space-y-0 sm:space-x-4 mb-6 sm:mb-8">
+                        <div class="text-4xl sm:text-5xl font-black text-gradient">MZN 2.500</div>
+                        <div class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs sm:text-sm font-semibold">
+                            ✅ Ativo
+                        </div>
+                    </div>
+
+                    <!-- CTA Button -->
+                    <button class="btn-primary w-full sm:w-auto px-8 sm:px-12 py-4 sm:py-6 rounded-xl sm:rounded-2xl text-white font-bold text-lg sm:text-xl mb-6 sm:mb-8 animate-glow">
+                        🚀 COMPRAR AGORA
+                    </button>
+
+                    <!-- Trust Indicators -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-2 sm:space-y-0 sm:space-x-6 text-xs sm:text-sm text-slate-600">
+                        <div class="flex items-center">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path>
+                            </svg>
+                            Acesso Imediato
+                        </div>
+                        <div class="flex items-center">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path>
+                            </svg>
+                            Certificado Incluído
+                        </div>
+                        <div class="flex items-center">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path>
+                            </svg>
+                            Suporte por 6 meses
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Product Image -->
+                <div class="animate-slide-in-right order-1 lg:order-2">
+                    <div class="relative">
+                        <img src="/placeholder.svg?height=400&width=600&text=Curso+de+Matemática+Básica" alt="Curso de Matemática Básica" class="w-full h-auto rounded-2xl sm:rounded-3xl shadow-2xl">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl sm:rounded-3xl"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Description Section -->
+    <section class="py-12 sm:py-16 lg:py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12 sm:mb-16 animate-fade-in">
+                    <h2 class="section-title text-3xl sm:text-4xl lg:text-5xl font-black text-slate-800 mb-4 sm:mb-6">
+                        Sobre o <span class="text-gradient">Curso</span>
+                    </h2>
+                </div>
+
+                <!-- Full Description -->
+                <div class="bg-slate-50 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 mb-8 sm:mb-12 animate-slide-up">
+                    <div class="prose prose-sm sm:prose-lg max-w-none text-slate-700">
+                        <p class="text-lg sm:text-xl leading-relaxed mb-4 sm:mb-6">
+                            Este curso completo de Matemática Básica foi desenvolvido especialmente para estudantes do ensino fundamental que desejam fortalecer seus conhecimentos matemáticos de forma prática e eficiente.
+                        </p>
+                        
+                        <h3 class="text-xl sm:text-2xl font-bold text-slate-800 mb-3 sm:mb-4">O que você vai aprender:</h3>
+                        <ul class="space-y-2 mb-4 sm:mb-6">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-green-500 mr-3 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path>
+                                </svg>
+                                <span class="text-sm sm:text-base">Operações básicas (adição, subtração, multiplicação, divisão)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-green-500 mr-3 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path>
+                                </svg>
+                                <span class="text-sm sm:text-base">Frações e números decimais</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-green-500 mr-3 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path>
+                                </svg>
+                                <span class="text-sm sm:text-base">Geometria básica</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-green-500 mr-3 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path>
+                                </svg>
+                                <span class="text-sm sm:text-base">Resolução de problemas</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-green-500 mr-3 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path>
+                                </svg>
+                                <span class="text-sm sm:text-base">Exercícios práticos com gabarito</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- What's Included -->
+                <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 animate-fade-in">
+                    <h3 class="text-2xl sm:text-3xl font-bold text-center text-slate-800 mb-6 sm:mb-8">
+                        🎁 O que está incluído:
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                        <div class="flex items-center bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-lg sm:rounded-xl flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0">
+                                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-sm sm:text-base">50+ videoaulas explicativas</h4>
+                                <p class="text-xs sm:text-sm text-slate-600">Conteúdo completo e detalhado</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 rounded-lg sm:rounded-xl flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0">
+                                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-sm sm:text-base">Material de apoio em PDF</h4>
+                                <p class="text-xs sm:text-sm text-slate-600">Para estudar offline</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 rounded-lg sm:rounded-xl flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0">
+                                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-sm sm:text-base">Exercícios práticos</h4>
+                                <p class="text-xs sm:text-sm text-slate-600">Com gabarito detalhado</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-yellow-100 rounded-lg sm:rounded-xl flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0">
+                                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-sm sm:text-base">Certificado de conclusão</h4>
+                                <p class="text-xs sm:text-sm text-slate-600">Reconhecido nacionalmente</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg sm:col-span-2">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-red-100 rounded-lg sm:rounded-xl flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0">
+                                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-sm sm:text-base">Suporte por 6 meses</h4>
+                                <p class="text-xs sm:text-sm text-slate-600">Tire suas dúvidas quando precisar</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-12 sm:py-16 lg:py-20 bg-gradient-to-r from-blue-50 to-purple-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 sm:mb-16 animate-fade-in">
+                <h2 class="section-title text-3xl sm:text-4xl lg:text-5xl font-black text-slate-800 mb-4 sm:mb-6">
+                    O que nossos <span class="text-gradient">alunos dizem</span>
+                </h2>
+                <p class="text-lg sm:text-xl text-slate-600 max-w-3xl mx-auto px-4 sm:px-0">
+                    Veja os depoimentos reais de quem já transformou suas notas com nosso curso
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 max-w-6xl mx-auto">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-2xl border border-slate-100 animate-slide-up">
+                    <div class="flex items-center mb-4 sm:mb-6">
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0">
+                            <span class="text-white font-bold text-sm sm:text-lg">JS</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-800 text-base sm:text-lg">João Silva</h4>
+                            <p class="text-slate-600 text-sm sm:text-base">Estudante</p>
+                            <div class="flex text-yellow-400 mt-1">
+                                <span class="text-sm sm:text-base">⭐⭐⭐⭐⭐</span>
+                            </div>
+                        </div>
+                    </div>
+                    <blockquote class="text-slate-700 text-base sm:text-lg italic mb-3 sm:mb-4">
+                        "Excelente curso! Consegui melhorar muito minhas notas em matemática. As explicações são claras e os exercícios ajudam muito na fixação do conteúdo."
+                    </blockquote>
+                    <div class="bg-green-100 rounded-xl sm:rounded-2xl p-3 sm:p-4">
+                        <p class="text-green-800 font-semibold text-center text-sm sm:text-base">
+                            📈 Resultado: Notas melhoraram significativamente!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-2xl border border-slate-100 animate-slide-up" style="animation-delay: 0.2s;">
+                    <div class="flex items-center mb-4 sm:mb-6">
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-green-500 to-teal-500 rounded-full flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0">
+                            <span class="text-white font-bold text-sm sm:text-lg">MS</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-800 text-base sm:text-lg">Maria Santos</h4>
+                            <p class="text-slate-600 text-sm sm:text-base">Mãe de estudante</p>
+                            <div class="flex text-yellow-400 mt-1">
+                                <span class="text-sm sm:text-base">⭐⭐⭐⭐⭐</span>
+                            </div>
+                        </div>
+                    </div>
+                    <blockquote class="text-slate-700 text-base sm:text-lg italic mb-3 sm:mb-4">
+                        "Comprei para minha filha e ela adorou! O método de ensino é muito didático e ela conseguiu entender conceitos que tinha dificuldade na escola."
+                    </blockquote>
+                    <div class="bg-blue-100 rounded-xl sm:rounded-2xl p-3 sm:p-4">
+                        <p class="text-blue-800 font-semibold text-center text-sm sm:text-base">
+                            🏆 Resultado: Filha se destacou na turma!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="py-12 sm:py-16 lg:py-20 bg-gradient-to-r from-slate-900 via-blue-900 to-purple-900 text-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 sm:mb-16 animate-fade-in">
+                <h2 class="text-3xl sm:text-4xl lg:text-6xl font-black mb-4 sm:mb-6">
+                    💰 Investimento
+                </h2>
+                <p class="text-lg sm:text-xl lg:text-2xl mb-6 sm:mb-8 max-w-4xl mx-auto px-4 sm:px-0">
+                    Um investimento que vai transformar sua relação com a matemática para sempre
+                </p>
+            </div>
+
+            <div class="max-w-2xl mx-auto">
+                <!-- Main Pricing Card -->
+                <div class="bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl sm:rounded-3xl p-6 sm:p-8 border-4 border-yellow-400 relative animate-zoom-in animate-glow">
+                    <div class="absolute -top-3 sm:-top-4 left-1/2 transform -translate-x-1/2 bg-yellow-400 text-black px-4 sm:px-6 py-1 sm:py-2 rounded-full font-bold text-xs sm:text-sm">
+                        🏆 OFERTA ESPECIAL
+                    </div>
+                    
+                    <div class="text-center mb-6 sm:mb-8 pt-4 sm:pt-0">
+                        <h3 class="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Curso Completo</h3>
+                        <div class="text-4xl sm:text-6xl font-black mb-3 sm:mb-4">MZN 2.500</div>
+                        <p class="text-green-100 text-base sm:text-lg">Acesso completo + todos os bônus</p>
+                    </div>
+
+                    <ul class="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path>
+                            </svg>
+                            <span class="text-sm sm:text-base">50+ videoaulas explicativas</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path>
+                            </svg>
+                            <span class="text-sm sm:text-base">Material de apoio em PDF</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path>
+                            </svg>
+                            <span class="text-sm sm:text-base">Exercícios práticos com gabarito</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path>
+                            </svg>
+                            <span class="text-sm sm:text-base">Certificado de conclusão</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path>
+                            </svg>
+                            <span class="text-sm sm:text-base">Suporte por 6 meses</span>
+                        </li>
+                    </ul>
+
+                    <div class="text-center">
+                        <button class="btn-primary w-full sm:w-auto px-8 sm:px-12 py-4 sm:py-6 rounded-xl sm:rounded-2xl text-white font-black text-lg sm:text-2xl mb-4 sm:mb-6 transform hover:scale-105 transition-all duration-300">
+                            🚀 COMPRAR AGORA
+                        </button>
+                        
+                        <div class="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-6 text-xs sm:text-sm text-green-100">
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path>
+                                </svg>
+                                Acesso Imediato
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path>
+                                </svg>
+                                Pagamento Seguro
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Guarantee -->
+                <div class="guarantee-badge max-w-md mx-auto mt-8 sm:mt-12">
+                    <div class="text-2xl sm:text-3xl mb-2">🛡️</div>
+                    <h4 class="text-lg sm:text-xl font-bold mb-2">Garantia de 30 Dias</h4>
+                    <p class="text-xs sm:text-sm">
+                        Se você não ficar satisfeito, devolvemos 100% do seu dinheiro. Sem perguntas, sem complicações.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-8 sm:py-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+                <div class="col-span-1 sm:col-span-2 lg:col-span-1">
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg sm:rounded-xl flex items-center justify-center mr-3">
+                            <svg class="w-4 h-4 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg sm:text-xl font-bold">Paymoz</h3>
+                    </div>
+                    <p class="text-slate-400 text-sm">
+                        Transformando vidas através da educação de qualidade.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4 text-sm sm:text-base">Links Úteis</h4>
+                    <ul class="space-y-2 text-xs sm:text-sm text-slate-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Sobre Nós</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Outros Cursos</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contato</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4 text-sm sm:text-base">Suporte</h4>
+                    <ul class="space-y-2 text-xs sm:text-sm text-slate-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Central de Ajuda</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Termos de Uso</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Política de Privacidade</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Garantia</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4 text-sm sm:text-base">Contato</h4>
+                    <ul class="space-y-2 text-xs sm:text-sm text-slate-400">
+                        <li>📧 suporte@paymoz.co.mz</li>
+                        <li>📱 +258 84 123 4567</li>
+                        <li>🕒 24/7 Online</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 mt-6 sm:mt-8 pt-6 sm:pt-8 text-center text-xs sm:text-sm text-slate-400">
+                <p>&copy; 2024 Paymoz. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const overlay = document.getElementById('mobile-menu-overlay');
+            
+            mobileMenu.classList.toggle('open');
+            overlay.classList.toggle('hidden');
+        }
+
+        // Progress Bar
+        function updateProgressBar() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.offsetHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('progress-bar').style.width = scrollPercent + '%';
+        }
+
+        window.addEventListener('scroll', updateProgressBar);
+
+        // Sticky Buy Button
+        function updateStickyButton() {
+            const stickyBtn = document.querySelector('.sticky-buy-btn');
+            const heroSection = document.querySelector('section');
+            const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+            
+            if (window.pageYOffset > heroBottom) {
+                stickyBtn.classList.add('show');
+            } else {
+                stickyBtn.classList.remove('show');
+            }
+        }
+
+        window.addEventListener('scroll', updateStickyButton);
+
+        // Intersection Observer for Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.animate-fade-in, .animate-slide-up, .animate-slide-in-left, .animate-slide-in-right').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            observer.observe(el);
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuButton = event.target.closest('button[onclick="toggleMobileMenu()"]');
+            
+            if (!mobileMenu.contains(event.target) && !mobileMenuButton && mobileMenu.classList.contains('open')) {
+                toggleMobileMenu();
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgressBar();
+            updateStickyButton();
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const overlay = document.getElementById('mobile-menu-overlay');
+            
+            if (window.innerWidth >= 768 && mobileMenu.classList.contains('open')) {
+                mobileMenu.classList.remove('open');
+                overlay.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>

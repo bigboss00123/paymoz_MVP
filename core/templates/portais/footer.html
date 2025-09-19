@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paymoz - Footer Moderno</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'paymoz': {
+                            'primary': '#1e40af',
+                            'secondary': '#3b82f6',
+                            'accent': '#06b6d4',
+                            'success': '#10b981',
+                            'warning': '#f59e0b',
+                            'error': '#ef4444'
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.8s ease-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'bounce-gentle': 'bounceGentle 2s infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'float': 'float 3s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s infinite',
+                        'gradient-shift': 'gradientShift 4s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(50px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        bounceGentle: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-5px)' }
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 5px rgba(59, 130, 246, 0.5)' },
+                            '100%': { boxShadow: '0 0 20px rgba(59, 130, 246, 0.8)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-8px)' }
+                        },
+                        gradientShift: {
+                            '0%, 100%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .glass-footer {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-link {
+            position: relative;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .footer-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #06b6d4, #1e40af);
+            transition: width 0.3s ease;
+        }
+        
+        .footer-link:hover::after {
+            width: 100%;
+        }
+        
+        .footer-link:hover {
+            transform: translateX(5px);
+            color: #06b6d4;
+        }
+        
+        .social-icon {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .social-icon:hover::before {
+            left: 100%;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 10px 25px rgba(6, 182, 212, 0.3);
+        }
+        
+        .logo-glow {
+            text-shadow: 0 0 20px rgba(30, 64, 175, 0.5);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #06b6d4, #1e40af, #8b5cf6);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 4s ease-in-out infinite;
+        }
+        
+        .newsletter-input {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .newsletter-input:focus {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: #06b6d4;
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+        }
+        
+        .btn-newsletter {
+            background: linear-gradient(135deg, #06b6d4, #1e40af);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-newsletter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-newsletter:hover::before {
+            left: 100%;
+        }
+        
+        .btn-newsletter:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(30, 64, 175, 0.4);
+        }
+        
+        .floating-element {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .stagger-animation > * {
+            animation-delay: calc(var(--stagger) * 200ms);
+        }
+        
+        .wave-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .wave-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='%23f8fafc'/%3E%3C/svg%3E") no-repeat;
+            background-size: cover;
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 min-h-screen">
+    
+    
+    
+    <!-- Modern Footer -->
+    <footer class="wave-bg text-white relative">
+        <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+            
+            <!-- Main Footer Content -->
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-12 mb-12">
+                
+                <!-- Brand Section -->
+                <div class="lg:col-span-1 space-y-6 stagger-animation animate-fade-in" style="--stagger: 0">
+                    <div class="flex items-center space-x-3 floating-element">
+                        <div class="w-12 h-12 bg-gradient-to-br from-paymoz-accent to-paymoz-primary rounded-xl flex items-center justify-center shadow-lg">
+                            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                            </svg>
+                        </div>
+                        <a href="/" class="text-3xl font-bold gradient-text logo-glow">
+                            Paymoz
+                        </a>
+                    </div>
+                    
+                    <p class="text-gray-300 text-lg leading-relaxed">
+                        A plataforma de pagamentos para o futuro de Moçambique. Conectando negócios e pessoas através de soluções inovadoras.
+                    </p>
+                    
+                    <!-- Social Media Icons -->
+                    <div class="flex flex-wrap gap-4">
+                        {% if support_contacts.facebook_link %}
+                        <a href="{{ support_contacts.facebook_link }}" target="_blank" rel="noopener noreferrer" class="social-icon w-12 h-12 bg-gray-700/50 hover:bg-blue-600 rounded-xl flex items-center justify-center transition-all duration-300" aria-label="Facebook">
+                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M9.19795 21.5H13.198V13.4901H16.1618L16.6758 9.49006H13.198V7.5C13.198 6.94772 13.6457 6.5 14.198 6.5H16.5V2.5H13.198C11.0795 2.5 9.19795 4.2312 9.19795 6.5V9.49006H7.19795V13.4901H9.19795V21.5Z"></path>
+                            </svg>
+                        </a>
+                        {% endif %}
+
+                        {% if support_contacts.x_link %}
+                        <a href="{{ support_contacts.x_link }}" target="_blank" rel="noopener noreferrer" class="social-icon w-12 h-12 bg-gray-700/50 hover:bg-black rounded-xl flex items-center justify-center transition-all duration-300" aria-label="X">
+                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                            </svg>
+                        </a>
+                        {% endif %}
+
+                        {% if support_contacts.linkedin_link %}
+                        <a href="{{ support_contacts.linkedin_link }}" target="_blank" rel="noopener noreferrer" class="social-icon w-12 h-12 bg-gray-700/50 hover:bg-blue-700 rounded-xl flex items-center justify-center transition-all duration-300" aria-label="LinkedIn">
+                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </a>
+                        {% endif %}
+
+                        {% if support_contacts.instagram_link %}
+                        <a href="{{ support_contacts.instagram_link }}" target="_blank" rel="noopener noreferrer" class="social-icon w-12 h-12 bg-gray-700/50 hover:bg-pink-600 rounded-xl flex items-center justify-center transition-all duration-300" aria-label="Instagram">
+                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919C8.416 2.175 8.796 2.163 12 2.163m0-2.163C8.74 0 8.333.011 7.053.072 2.695.272.273 2.69.073 7.052.012 8.333 0 8.74 0 12s.012 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98C8.333 23.988 8.74 24 12 24s3.667-.012 4.947-.072c4.354-.2 6.782-2.618 6.979-6.98.06-1.28.072-1.687.072-4.947s-.012-3.667-.072-4.947c-.196-4.354-2.617-6.78-6.979-6.98C15.667.012 15.26 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.88 1.44 1.44 0 000-2.88z"/></svg>
+                        </a>
+                        {% endif %}
+
+                        {% if support_contacts.whatsapp %}
+                        <a href="https://wa.me/{{ support_contacts.whatsapp }}" target="_blank" rel="noopener noreferrer" class="social-icon w-12 h-12 bg-gray-700/50 hover:bg-green-600 rounded-xl flex items-center justify-center transition-all duration-300" aria-label="WhatsApp">
+                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                            </svg>
+                        </a>
+                        {% endif %}
+
+                        {% if support_contacts.youtube_link %}
+                        <a href="{{ support_contacts.youtube_link }}" target="_blank" rel="noopener noreferrer" class="social-icon w-12 h-12 bg-gray-700/50 hover:bg-red-600 rounded-xl flex items-center justify-center transition-all duration-300" aria-label="YouTube">
+                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </a>
+                        {% endif %}
+
+                        {% if support_contacts.github_link %}
+                        <a href="{{ support_contacts.github_link }}" target="_blank" rel="noopener noreferrer" class="social-icon w-12 h-12 bg-gray-700/50 hover:bg-gray-800 rounded-xl flex items-center justify-center transition-all duration-300" aria-label="GitHub">
+                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.565 21.795 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                        {% endif %}
+
+                        {% if support_contacts.pinterest_link %}
+                        <a href="{{ support_contacts.pinterest_link }}" target="_blank" rel="noopener noreferrer" class="social-icon w-12 h-12 bg-gray-700/50 hover:bg-red-700 rounded-xl flex items-center justify-center transition-all duration-300" aria-label="Pinterest">
+                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001 12.017.001z"/>
+                            </svg>
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <!-- Solutions Column -->
+                <div class="stagger-animation animate-fade-in" style="--stagger: 1">
+                    <h3 class="text-lg font-bold text-white mb-6 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-paymoz-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        Soluções
+                    </h3>
+                    <ul class="space-y-4">
+                        <li><a href="#" class="footer-link text-gray-300 hover:text-paymoz-accent">Pagamentos Online</a></li>
+                        <li><a href="#" class="footer-link text-gray-300 hover:text-paymoz-accent">Páginas de Vendas</a></li>
+                        <li><a href="#" class="footer-link text-gray-300 hover:text-paymoz-accent">API para Desenvolvedores</a></li>
+                        <li><a href="#" class="footer-link text-gray-300 hover:text-paymoz-accent">Integração E-commerce</a></li>
+                        <li><a href="#" class="footer-link text-gray-300 hover:text-paymoz-accent">Mobile Payments</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Support Column -->
+                <div class="stagger-animation animate-fade-in" style="--stagger: 2">
+                    <h3 class="text-lg font-bold text-white mb-6 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-paymoz-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                        Suporte
+                    </h3>
+                    <ul class="space-y-4">
+                        <li><a href="#" class="footer-link text-gray-300 hover:text-paymoz-accent">Preços</a></li>
+                        <li><a href="#" class="footer-link text-gray-300 hover:text-paymoz-accent">Documentação</a></li>
+                        <li><a href="#" class="footer-link text-gray-300 hover:text-paymoz-accent">Guias</a></li>
+                        <li><a href="#" class="footer-link text-gray-300 hover:text-paymoz-accent">FAQ</a></li>
+                        <li><a href="#" class="footer-link text-gray-300 hover:text-paymoz-accent">Contato</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Newsletter Section -->
+                <div class="stagger-animation animate-fade-in" style="--stagger: 3">
+                    <h3 class="text-lg font-bold text-white mb-6 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-paymoz-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                        Newsletter
+                    </h3>
+                    <p class="text-gray-300 mb-6">
+                        Receba as últimas novidades e atualizações do Paymoz diretamente no seu email.
+                    </p>
+                    <form class="space-y-4">
+                        <div class="relative">
+                            <input 
+                                type="email" 
+                                placeholder="Seu email aqui..." 
+                                class="newsletter-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-paymoz-accent"
+                            >
+                            <svg class="absolute right-3 top-3.5 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path>
+                            </svg>
+                        </div>
+                        <button type="submit" class="btn-newsletter w-full px-6 py-3 text-white font-semibold rounded-xl shadow-lg">
+                            Subscrever Newsletter
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Additional Links Section -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12 pt-8 border-t border-gray-700">
+                <div class="animate-slide-up" style="animation-delay: 0.4s">
+                    <h4 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">Empresa</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="footer-link text-gray-300 hover:text-paymoz-accent text-sm">Sobre Nós</a></li>
+                        <li><a href="#" class="footer-link text-gray-300 hover:text-paymoz-accent text-sm">Blog</a></li>
+                        <li><a href="#" class="footer-link text-gray-300 hover:text-paymoz-accent text-sm">Carreiras</a></li>
+                        <li><a href="#" class="footer-link text-gray-300 hover:text-paymoz-accent text-sm">Imprensa</a></li>
+                    </ul>
+                </div>
+                <div class="animate-slide-up" style="animation-delay: 0.5s">
+                    <h4 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">Legal</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="footer-link text-gray-300 hover:text-paymoz-accent text-sm">Privacidade</a></li>
+                        <li><a href="#" class="footer-link text-gray-300 hover:text-paymoz-accent text-sm">Termos de Uso</a></li>
+                        <li><a href="#" class="footer-link text-gray-300 hover:text-paymoz-accent text-sm">Cookies</a></li>
+                        <li><a href="#" class="footer-link text-gray-300 hover:text-paymoz-accent text-sm">Compliance</a></li>
+                    </ul>
+                </div>
+                <div class="animate-slide-up" style="animation-delay: 0.6s">
+                    <h4 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">Recursos</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="footer-link text-gray-300 hover:text-paymoz-accent text-sm">Status da API</a></li>
+                        <li><a href="#" class="footer-link text-gray-300 hover:text-paymoz-accent text-sm">Changelog</a></li>
+                        <li><a href="#" class="footer-link text-gray-300 hover:text-paymoz-accent text-sm">Webhooks</a></li>
+                        <li><a href="#" class="footer-link text-gray-300 hover:text-paymoz-accent text-sm">SDKs</a></li>
+                    </ul>
+                </div>
+                <div class="animate-slide-up" style="animation-delay: 0.7s">
+                    <h4 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">Parceiros</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="footer-link text-gray-300 hover:text-paymoz-accent text-sm">Programa de Parceiros</a></li>
+                        <li><a href="#" class="footer-link text-gray-300 hover:text-paymoz-accent text-sm">Integrações</a></li>
+                        <li><a href="#" class="footer-link text-gray-300 hover:text-paymoz-accent text-sm">Marketplace</a></li>
+                        <li><a href="#" class="footer-link text-gray-300 hover:text-paymoz-accent text-sm">Afiliados</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Bottom Section -->
+            <div class="pt-8 border-t border-gray-700">
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                    <div class="flex items-center space-x-6">
+                        <p class="text-gray-400 text-sm">
+                            &copy; 2025 <span class="text-paymoz-accent font-semibold">Neuratech, Lda</span>. Todos os direitos reservados.
+                        </p>
+                    </div>
+                    
+                    <div class="flex items-center space-x-6">
+                        <div class="flex items-center space-x-2 text-gray-400 text-sm">
+                            <svg class="w-4 h-4 text-green-500 animate-pulse-slow" fill="currentColor" viewBox="0 0 20 20">
+                                <circle cx="10" cy="10" r="3"/>
+                            </svg>
+                            <span>Sistema Online</span>
+                        </div>
+                        
+                        <div class="flex items-center space-x-2 text-gray-400 text-sm">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <span>Maputo, Moçambique</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Decorative Elements -->
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-paymoz-accent via-paymoz-primary to-purple-600"></div>
+        <div class="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-paymoz-accent to-transparent opacity-50"></div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script>
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all footer sections
+        document.querySelectorAll('footer > div > div > div').forEach(section => {
+            observer.observe(section);
+        });
+        
+        // Newsletter form submission
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('input[type="email"]').value;
+            
+            if (email) {
+                // Simulate form submission
+                const button = this.querySelector('button');
+                const originalText = button.textContent;
+                
+                button.textContent = 'Subscrevendo...';
+                button.disabled = true;
+                
+                setTimeout(() => {
+                    button.textContent = 'Subscrito! ✓';
+                    button.classList.add('bg-green-600');
+                    
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                        button.disabled = false;
+                        button.classList.remove('bg-green-600');
+                        this.reset();
+                    }, 2000);
+                }, 1500);
+            }
+        });
+        
+        // Smooth scroll for footer links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.querySelector('footer').classList.add('animate-fade-in');
+        });
+        
+        // Social media hover effects
+        document.querySelectorAll('.social-icon').forEach(icon => {
+            icon.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px) scale(1.1) rotate(5deg)';
+            });
+            
+            icon.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1) rotate(0deg)';
+            });
+        });
+        
+        // Dynamic year update
+        const currentYear = new Date().getFullYear();
+        document.querySelector('footer').innerHTML = document.querySelector('footer').innerHTML.replace('2025', currentYear);
+    </script>
+</body>
+</html>

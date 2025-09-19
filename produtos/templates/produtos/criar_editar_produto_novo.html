@@ -1,0 +1,1520 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{{ form.media }}
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    'paymoz': {
+                        'primary': '#1e40af',
+                        'secondary': '#3b82f6',
+                        'accent': '#06b6d4',
+                        'success': '#10b981',
+                        'warning': '#f59e0b',
+                        'error': '#ef4444'
+                    }
+                },
+                animation: {
+                    'fade-in': 'fadeIn 0.8s ease-out',
+                    'slide-up': 'slideUp 0.6s ease-out',
+                    'bounce-gentle': 'bounceGentle 2s infinite',
+                    'glow': 'glow 2s ease-in-out infinite alternate',
+                    'float': 'float 3s ease-in-out infinite',
+                    'pulse-slow': 'pulse 3s infinite',
+                    'gradient-shift': 'gradientShift 4s ease-in-out infinite',
+                },
+                keyframes: {
+                    fadeIn: {
+                        '0%': { opacity: '0', transform: 'translateY(30px)' },
+                        '100%': { opacity: '1', transform: 'translateY(0)' }
+                    },
+                    slideUp: {
+                        '0%': { opacity: '0', transform: 'translateY(50px)' },
+                        '100%': { opacity: '1', transform: 'translateY(0)' }
+                    },
+                    bounceGentle: {
+                        '0%, 100%': { transform: 'translateY(0)' },
+                        '50%': { transform: 'translateY(-5px)' }
+                    },
+                    glow: {
+                        '0%': { boxShadow: '0 0 5px rgba(59, 130, 246, 0.5)' },
+                        '100%': { boxShadow: '0 0 20px rgba(59, 130, 246, 0.8)' }
+                    },
+                    float: {
+                        '0%, 100%': { transform: 'translateY(0px)' },
+                        '50%': { transform: 'translateY(-8px)' }
+                    },
+                    gradientShift: {
+                        '0%, 100%': { backgroundPosition: '0% 50%' },
+                        '50%': { backgroundPosition: '100% 50%' }
+                    }
+                }
+            }
+        }
+    }
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        font-family: 'Inter', sans-serif;
+    }
+    
+    .glass {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .gradient-text {
+        background: linear-gradient(135deg, #1e40af, #06b6d4, #8b5cf6);
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: gradientShift 4s ease-in-out infinite;
+    }
+    
+    .input-group {
+        position: relative;
+        transition: all 0.3s ease;
+    }
+    
+    .input-field {
+        transition: all 0.3s ease;
+        position: relative;
+    }
+    
+    .input-field:focus {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(30, 64, 175, 0.15);
+    }
+    
+    .trigger-option {
+        transition: all 0.3s ease;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .trigger-option::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.1), transparent);
+        transition: left 0.5s;
+    }
+    
+    .trigger-option:hover::before {
+        left: 100%;
+    }
+    
+    .trigger-option:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(6, 182, 212, 0.15);
+    }
+    
+    .trigger-option.selected {
+        border-color: #06b6d4;
+        background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(30, 64, 175, 0.05));
+        box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+    }
+    
+    .btn-primary {
+        background: linear-gradient(135deg, #1e40af, #06b6d4);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .btn-primary::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        transition: left 0.5s;
+    }
+    
+    .btn-primary:hover::before {
+        left: 100%;
+    }
+    
+    .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(30, 64, 175, 0.4);
+    }
+    
+    .btn-secondary {
+        background: linear-gradient(135deg, #10b981, #059669);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .btn-secondary::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        transition: left 0.5s;
+    }
+    
+    .btn-secondary:hover::before {
+        left: 100%;
+    }
+    
+    .btn-secondary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
+    }
+    
+    .floating-element {
+        animation: float 3s ease-in-out infinite;
+    }
+    
+    .stagger-animation > *
+ {
+        animation-delay: calc(var(--stagger) * 200ms);
+    }
+    
+    .section-card {
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .section-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        transition: left 0.5s;
+    }
+    
+    .section-card:hover::before {
+        left: 100%;
+    }
+    
+    .testimonial-item {
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .testimonial-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .star-rating {
+        transition: all 0.2s ease;
+        cursor: pointer;
+        font-size: 1.5rem;
+    }
+    
+    .star-rating:hover {
+        transform: scale(1.2);
+    }
+    
+    .form-section {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.8));
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    /* Estilo para campos de formulário Django */
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    input[type="tel"],
+    input[type="url"],
+    input[type="datetime-local"],
+    textarea,
+    select {
+        width: 100%;
+        padding: 12px 16px;
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        background: white;
+        color: #334155;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="number"]:focus,
+    input[type="tel"]:focus,
+    input[type="url"]:focus,
+    input[type="datetime-local"]:focus,
+    textarea:focus,
+    select:focus {
+        outline: none;
+        border-color: #06b6d4;
+        box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+        transform: translateY(-2px);
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 100px;
+    }
+
+    /* Estilo para checkboxes e radio buttons */
+    input[type="checkbox"],
+    input[type="radio"] {
+        width: 18px;
+        height: 18px;
+        accent-color: #06b6d4;
+        margin-right: 8px;
+    }
+
+    /* Estilo para file inputs */
+    input[type="file"] {
+        padding: 8px;
+        border: 2px dashed #e2e8f0;
+        border-radius: 12px;
+        background: #f8fafc;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    input[type="file"]:hover {
+        border-color: #06b6d4;
+        background: #f0f9ff;
+    }
+</style>
+
+<div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 py-8">
+    <!-- Background Pattern -->
+    <div class="fixed inset-0 opacity-5">
+        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23000000\' fill-opacity=\'0.1\'%3E%3Ccircle cx=\'30\' cy=\'30\' r=\'2\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+    </div>
+
+    <div class="container mx-auto px-4 relative z-10">
+        <!-- Header -->
+        <div class="text-center mb-12 animate-fade-in">
+            <div class="floating-element mb-6">
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-paymoz-accent to-paymoz-primary rounded-2xl shadow-lg">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                    </svg>
+                </div>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-black text-slate-900 mb-4">
+                {{ titulo|default:"Criar Produto" }}
+            </h1>
+            <p class="text-xl text-slate-600 max-w-2xl mx-auto">
+                Configure seu produto com gatilhos mentais, depoimentos e muito mais para maximizar suas vendas.
+            </p>
+        </div>
+
+        <form method="post" enctype="multipart/form-data" class="max-w-6xl mx-auto space-y-8">
+            {% csrf_token %}
+            
+            <!-- Hidden fields for JSON data -->
+            <div style="display: none;">
+                {{ form.gatilhos_mentais }}
+                {{ form.depoimentos }}
+                {{ form.campos_personalizados }}
+                {{ form.faq }}
+            </div>
+
+            <!-- Informações Básicas -->
+            <div class="form-section rounded-3xl shadow-2xl p-8 animate-slide-up stagger-animation" style="--stagger: 0">
+                <div class="flex items-center space-x-4 mb-8">
+                    <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl font-bold text-slate-900">Informações Básicas</h2>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="input-group">
+                        <label for="id_nome" class="block text-sm font-semibold text-slate-700 mb-3 flex items-center">
+                            <svg class="w-4 h-4 mr-2 text-paymoz-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                            </svg>
+                            Nome do Produto
+                        </label>
+                        {{ form.nome }}
+                    </div>
+
+                    <div class="input-group">
+                        <label for="id_preco" class="block text-sm font-semibold text-slate-700 mb-3 flex items-center">
+                            <svg class="w-4 h-4 mr-2 text-paymoz-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                            </svg>
+                            Preço (MZN)
+                        </label>
+                        {{ form.preco }}
+                    </div>
+
+                    <div class="input-group">
+                        <label for="id_preco_oferta" class="block text-sm font-semibold text-slate-700 mb-3 flex items-center">
+                            <svg class="w-4 h-4 mr-2 text-paymoz-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                            </svg>
+                            Preço de Oferta (MZN)
+                        </label>
+                        {{ form.preco_oferta }}
+                    </div>
+
+                    <div class="input-group">
+                        <label for="id_categoria" class="block text-sm font-semibold text-slate-700 mb-3 flex items-center">
+                            <svg class="w-4 h-4 mr-2 text-paymoz-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                            </svg>
+                            Categoria
+                        </label>
+                        {{ form.categoria }}
+                    </div>
+
+                    
+                </div>
+
+                <div class="mt-8">
+                    <div class="input-group">
+                        <label for="id_imagem_destaque" class="block text-sm font-semibold text-slate-700 mb-3 flex items-center">
+                            <svg class="w-4 h-4 mr-2 text-paymoz-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                            Imagem de Destaque
+                        </label>
+                        {{ form.imagem_destaque }}
+                        {% if form.instance.imagem_destaque %}
+                            <div class="mt-4 p-4 bg-green-50 border border-green-200 rounded-xl">
+                                <p class="text-sm text-green-700 flex items-center">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    Imagem atual: 
+                                    <a href="{{ form.instance.imagem_destaque.url }}" target="_blank" class="ml-1 font-semibold hover:underline">
+                                        {{ form.instance.imagem_destaque.name }}
+                                    </a>
+                                </p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+                    <div class="input-group">
+                        <label for="id_descricao_curta" class="block text-sm font-semibold text-slate-700 mb-3 flex items-center">
+                            <svg class="w-4 h-4 mr-2 text-paymoz-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path>
+                            </svg>
+                            Descrição Curta
+                        </label>
+                        {{ form.descricao_curta }}
+                    </div>
+
+                    <div class="input-group">
+                        <label for="id_descricao" class="block text-sm font-semibold text-slate-700 mb-3 flex items-center">
+                            <svg class="w-4 h-4 mr-2 text-paymoz-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            Descrição Completa
+                        </label>
+                        {{ form.descricao }}
+                    </div>
+                    <div class="input-group">
+                        <label for="id_video_url" class="block text-sm font-semibold text-slate-700 mb-3 flex items-center">
+                            <svg class="w-4 h-4 mr-2 text-paymoz-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14m-5 4v-4a3 3 0 00-3-3H4a3 3 0 00-3 3v4a3 3 0 003 3h3a3 3 0 003-3z"></path>
+                            </svg>
+                            URL do Vídeo de Vendas
+                        </label>
+                        {{ form.video_url }}
+                        <p class="text-xs text-slate-500 mt-1">Link do vídeo (YouTube, Vimeo). Use o link de incorporação (embed).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gatilhos Mentais -->
+            <div class="form-section rounded-3xl shadow-2xl p-8 animate-slide-up stagger-animation" style="--stagger: 1">
+                <div class="flex items-center space-x-4 mb-8">
+                    <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center shadow-lg">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-bold text-slate-900">Gatilhos Mentais</h2>
+                        <p class="text-slate-600 mt-1">Adicione elementos psicológicos para aumentar suas conversões</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Escassez -->
+                    <div class="trigger-option section-card p-6 border-2 border-slate-200 rounded-2xl cursor-pointer" data-trigger-type="escassez">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <div class="w-10 h-10 bg-gradient-to-br from-red-500 to-pink-600 rounded-xl flex items-center justify-center">
+                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="font-bold text-slate-800">Escassez</h3>
+                        </div>
+                        <p class="text-sm text-slate-600 mb-4">Crie urgência com tempo ou vagas limitadas.</p>
+                        <div class="trigger-content hidden space-y-4">
+                            <input type="text" name="escassez_texto" placeholder="Ex: Apenas 50 vagas disponíveis" class="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-paymoz-primary">
+                            <input type="datetime-local" name="escassez_data_fim" class="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-paymoz-primary">
+                        </div>
+                    </div>
+
+                    <!-- Autoridade -->
+                    <div class="trigger-option section-card p-6 border-2 border-slate-200 rounded-2xl cursor-pointer" data-trigger-type="authority">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center">
+                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="font-bold text-slate-800">Autoridade</h3>
+                        </div>
+                        <p class="text-sm text-slate-600 mb-4">Mostre suas credenciais e experiência.</p>
+                        <div class="trigger-content hidden space-y-4">
+                            <input type="text" name="authority_credencial1" placeholder="Ex: Professor há 15 anos" class="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-paymoz-primary">
+                            <input type="text" name="authority_credencial2" placeholder="Ex: Formado em Matemática pela UEM" class="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-paymoz-primary">
+                        </div>
+                    </div>
+
+                    <!-- Bônus -->
+                    <div class="trigger-option section-card p-6 border-2 border-slate-200 rounded-2xl cursor-pointer" data-trigger-type="bonus">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center">
+                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path>
+                                </svg>
+                            </div>
+                            <h3 class="font-bold text-slate-800">Bônus</h3>
+                        </div>
+                        <p class="text-sm text-slate-600 mb-4">Adicione bônus exclusivos ao seu produto.</p>
+                        <div class="trigger-content hidden space-y-4">
+                            <input type="text" name="bonus_item1" placeholder="Ex: E-book de exercícios extras" class="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-paymoz-primary">
+                            <input type="text" name="bonus_item2" placeholder="Valor do bônus (opcional)" class="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-paymoz-primary">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Campos Personalizados -->
+            <div class="form-section rounded-3xl shadow-2xl p-8 animate-slide-up stagger-animation" style="--stagger: 2">
+                <div class="flex items-center justify-between mb-8">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-3xl font-bold text-slate-900">Campos Personalizados do Checkout</h2>
+                            <p class="text-slate-600 mt-1">Solicite informações adicionais do cliente na página de vendas.</p>
+                        </div>
+                    </div>
+                    <button type="button" id="add-custom-field-btn" class="btn-secondary px-6 py-3 text-white font-bold rounded-xl shadow-lg flex items-center space-x-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                        <span>Adicionar Campo</span>
+                    </button>
+                </div>
+                <div id="custom-fields-container" class="space-y-6">
+                    <!-- Campos dinâmicos serão inseridos aqui -->
+                </div>
+            </div>
+
+            <!-- Imagens da Galeria -->
+            <div class="form-section rounded-3xl shadow-2xl p-8 animate-slide-up stagger-animation" style="--stagger: 2">
+                <div class="flex items-center justify-between mb-8">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-rose-600 rounded-2xl flex items-center justify-center shadow-lg">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-3xl font-bold text-slate-900">Imagens da Galeria</h2>
+                            <p class="text-slate-600 mt-1">Adicione mais imagens para mostrar seu produto</p>
+                        </div>
+                    </div>
+                    <button type="button" id="add-imagem-btn" class="btn-secondary px-6 py-3 text-white font-bold rounded-xl shadow-lg flex items-center space-x-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                        <span>Adicionar Imagem</span>
+                    </button>
+                </div>
+                <div id="imagem-formset-container" class="space-y-4">
+                    {{ imagem_formset.management_form }}
+                    {% for form in imagem_formset %}
+                        <div class="imagem-form glass p-6 rounded-2xl border border-slate-200 shadow-lg">
+                            {{ form.id }}
+                            {{ form.DELETE }}
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="input-group md:col-span-2">
+                                    <label class="block text-sm font-semibold text-slate-700 mb-2">Imagem:</label>
+                                    {{ form.imagem }}
+                                    {% if form.instance.imagem %}
+                                        <p class="text-xs text-slate-500 mt-1">Imagem atual: <a href="{{ form.instance.imagem.url }}" target="_blank" class="text-paymoz-primary hover:underline">{{ form.instance.imagem.name }}</a></p>
+                                    {% endif %}
+                                </div>
+                                <div class="input-group">
+                                    <label class="block text-sm font-semibold text-slate-700 mb-2">Ordem:</label>
+                                    {{ form.ordem }}
+                                </div>
+                            </div>
+                            <div class="input-group mt-4">
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">Legenda (Opcional):</label>
+                                {{ form.legenda }}
+                            </div>
+                            <button type="button" class="remove-imagem-btn text-red-500 hover:text-red-700 font-semibold px-4 py-2 rounded-lg hover:bg-red-50 transition-all duration-200 mt-4">Remover</button>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Depoimentos -->
+            <div class="form-section rounded-3xl shadow-2xl p-8 animate-slide-up stagger-animation" style="--stagger: 2">
+                <div class="flex items-center justify-between mb-8">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-3xl font-bold text-slate-900">Depoimentos</h2>
+                            <p class="text-slate-600 mt-1">Adicione credibilidade com depoimentos de clientes</p>
+                        </div>
+                    </div>
+                    <button type="button" id="add-testimonial-btn" class="btn-secondary px-6 py-3 text-white font-bold rounded-xl shadow-lg flex items-center space-x-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                        <span>Adicionar Depoimento</span>
+                    </button>
+                </div>
+                <div id="testimonials-container" class="space-y-6">
+                    <!-- Dynamic testimonial items will be added here by JS -->
+                </div>
+            </div>
+
+            <!-- O que está incluído (Formset) -->
+            <div class="form-section rounded-3xl shadow-2xl p-8 animate-slide-up stagger-animation" style="--stagger: 3">
+                <div class="flex items-center justify-between mb-8">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-2xl flex items-center justify-center shadow-lg">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-3xl font-bold text-slate-900">O que está incluído</h2>
+                            <p class="text-slate-600 mt-1">Liste tudo que o cliente receberá (texto ou arquivo)</p>
+                        </div>
+                    </div>
+                    <button type="button" id="add-item-incluido-btn" class="btn-secondary px-6 py-3 text-white font-bold rounded-xl shadow-lg flex items-center space-x-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                        <span>Adicionar Item</span>
+                    </button>
+                </div>
+                <div id="item-incluido-formset-container" class="space-y-4">
+                    <div style="display: none;">
+                        {{ item_incluido_formset.management_form }}
+                    </div>
+                    {% for form in item_incluido_formset %}
+                        <div class="item-incluido-form glass p-6 rounded-2xl border border-slate-200 shadow-lg">
+                            {% csrf_token %}
+                            {{ form.id }}
+                            {{ form.DELETE }}
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="input-group">
+                                    <label class="block text-sm font-semibold text-slate-700 mb-2">Descrição:</label>
+                                    {{ form.descricao }}
+                                </div>
+                                <div class="input-group">
+                                    <label class="block text-sm font-semibold text-slate-700 mb-2">Arquivo (Opcional):</label>
+                                    {{ form.arquivo }}
+                                    {% if form.instance.arquivo %}
+                                        <p class="text-xs text-slate-500 mt-1">Arquivo atual: <a href="{{ form.instance.arquivo.url }}" target="_blank" class="text-paymoz-primary hover:underline">{{ form.instance.arquivo.name }}</a></p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <button type="button" class="remove-item-incluido-btn text-red-500 hover:text-red-700 font-semibold px-4 py-2 rounded-lg hover:bg-red-50 transition-all duration-200 mt-4">Remover</button>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Configurações SEO -->
+            <div class="form-section rounded-3xl shadow-2xl p-8 animate-slide-up stagger-animation" style="--stagger: 4">
+                <div class="flex items-center space-x-4 mb-8">
+                    <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-bold text-slate-900">Configurações SEO</h2>
+                        <p class="text-slate-600 mt-1">Otimize seu produto para mecanismos de busca</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="input-group">
+                        <label for="id_titulo_seo" class="block text-sm font-semibold text-slate-700 mb-3 flex items-center">
+                            <svg class="w-4 h-4 mr-2 text-paymoz-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                            </svg>
+                            Título SEO
+                        </label>
+                        {{ form.titulo_seo }}
+                    </div>
+
+                    <div class="input-group">
+                        <label for="id_slug" class="block text-sm font-semibold text-slate-700 mb-3 flex items-center">
+                            <svg class="w-4 h-4 mr-2 text-paymoz-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+                            </svg>
+                            URL Slug
+                        </label>
+                        {{ form.slug }}
+                    </div>
+                </div>
+
+                <div class="mt-8">
+                    <div class="input-group">
+                        <label for="id_descricao_seo" class="block text-sm font-semibold text-slate-700 mb-3 flex items-center">
+                            <svg class="w-4 h-4 mr-2 text-paymoz-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path>
+                            </svg>
+                            Descrição SEO
+                        </label>
+                        {{ form.descricao_seo }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Configurações Avançadas -->
+            <div class="form-section rounded-3xl shadow-2xl p-8 animate-slide-up stagger-animation" style="--stagger: 5">
+                <div class="flex items-center space-x-4 mb-8">
+                    <div class="w-12 h-12 bg-gradient-to-br from-slate-500 to-gray-600 rounded-2xl flex items-center justify-center shadow-lg">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-bold text-slate-900">Configurações Avançadas</h2>
+                        <p class="text-slate-600 mt-1">Personalize funcionalidades e aparência</p>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-4">Configurações da Página:</label>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <label class="flex items-center p-4 bg-white rounded-xl border border-slate-300 hover:border-paymoz-accent transition-all duration-200 cursor-pointer">
+                                {{ form.permitir_comentarios }}
+                                <span class="ml-3 text-sm font-medium text-slate-700">Permitir Comentários</span>
+                            </label>
+                            <label class="flex items-center p-4 bg-white rounded-xl border border-slate-300 hover:border-paymoz-accent transition-all duration-200 cursor-pointer">
+                                {{ form.mostrar_relacionados }}
+                                <span class="ml-3 text-sm font-medium text-slate-700">Mostrar Relacionados</span>
+                            </label>
+                            <label class="flex items-center p-4 bg-white rounded-xl border border-slate-300 hover:border-paymoz-accent transition-all duration-200 cursor-pointer">
+                                {{ form.habilitar_analytics }}
+                                <span class="ml-3 text-sm font-medium text-slate-700">Habilitar Analytics</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="id_css_customizado" class="block text-sm font-semibold text-slate-700 mb-3 flex items-center">
+                            <svg class="w-4 h-4 mr-2 text-paymoz-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                            </svg>
+                            CSS Personalizado
+                        </label>
+                        {{ form.css_customizado }}
+                    </div>
+
+                    <div class="input-group">
+                        <label for="id_mensagem_whatsapp_sucesso" class="block text-sm font-semibold text-slate-700 mb-3 flex items-center">
+                            <svg class="w-4 h-4 mr-2 text-paymoz-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+                            </svg>
+                            Mensagem WhatsApp de Sucesso
+                        </label>
+                        {{ form.mensagem_whatsapp_sucesso }}
+                        <p class="text-xs text-slate-500 mt-1">Use {nome_cliente}, {nome_produto}, {valor_pago} para variáveis.</p>
+                    </div>
+                    <div class="input-group">
+                        <label for="id_facebook_pixel_id" class="block text-sm font-semibold text-slate-700 mb-3 flex items-center">
+                            <svg class="w-4 h-4 mr-2 text-paymoz-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                            Facebook Pixel ID
+                        </label>
+                        {{ form.facebook_pixel_id }}
+                        <p class="text-xs text-slate-500 mt-1">ID do seu Pixel do Facebook para rastreamento de conversões.</p>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="id_callback_url" class="block text-sm font-semibold text-slate-700 mb-3 flex items-center">
+                            <svg class="w-4 h-4 mr-2 text-paymoz-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                            </svg>
+                            URL de Callback (Opcional)
+                        </label>
+                        {{ form.callback_url }}
+                        <p class="text-xs text-slate-500 mt-1">URL para onde o cliente será redirecionado após o pagamento bem-sucedido. Se deixado em branco, será usada uma página de sucesso padrão.</p>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="id_arquivo_download" class="block text-sm font-semibold text-slate-700 mb-3 flex items-center">
+                            <svg class="w-4 h-4 mr-2 text-paymoz-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                            </svg>
+                            Arquivo para Download (Opcional)
+                        </label>
+                        {{ form.arquivo_download }}
+                        <p class="text-xs text-slate-500 mt-1">Ficheiro digital para download após a compra (ex: PDF, ZIP).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="form-section rounded-3xl shadow-2xl p-8 animate-slide-up stagger-animation" style="--stagger: 6">
+                <div class="flex items-center justify-between mb-8">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9.247a.75.75 0 01.968-.024L12 11.628l2.804-2.405a.75.75 0 11.944 1.104L12.75 13.128l2.995 2.562a.75.75 0 01-.944 1.104L12 14.628l-2.804 2.405a.75.75 0 01-1.104-.944l2.995-2.562-2.995-2.562a.75.75 0 01.024-.968zM12 2a10 10 0 100 20 10 10 0 000-20z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-3xl font-bold text-slate-900">Perguntas Frequentes (FAQ)</h2>
+                            <p class="text-slate-600 mt-1">Adicione perguntas e respostas comuns sobre o produto.</p>
+                        </div>
+                    </div>
+                    <button type="button" id="add-faq-btn" class="btn-secondary px-6 py-3 text-white font-bold rounded-xl shadow-lg flex items-center space-x-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                        <span>Adicionar Pergunta</span>
+                    </button>
+                </div>
+                <div id="faq-container" class="space-y-6">
+                    <!-- FAQ items will be added here by JS -->
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center animate-slide-up stagger-animation" style="--stagger: 7">
+                <button type="submit" class="btn-primary px-12 py-4 text-white font-bold rounded-2xl shadow-2xl text-lg flex items-center justify-center space-x-3 mx-auto">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>Salvar Produto</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM carregado, iniciando script...');
+
+    // Função para verificar se elemento existe antes de usar
+    function safeGetElement(id) {
+        const element = document.getElementById(id);
+        if (!element) {
+            console.warn(`Elemento com ID '${id}' não encontrado`);
+        }
+        return element;
+    }
+
+    // Mental Triggers functionality
+    function updateMentalTriggersJson() {
+        const gatilhosInput = safeGetElement('id_gatilhos_mentais');
+        if (!gatilhosInput) return;
+
+        const currentGatilhos = {};
+        document.querySelectorAll('.trigger-option.selected').forEach(triggerElement => {
+            const triggerType = triggerElement.dataset.triggerType;
+            const inputs = triggerElement.querySelectorAll('input, select, textarea');
+            let triggerData = {};
+            
+            if (triggerType === 'escassez') {
+                triggerData.texto = inputs[0] ? inputs[0].value : '';
+                triggerData.data_fim = inputs[1] ? inputs[1].value : '';
+            } else if (triggerType === 'authority') {
+                triggerData.credencial1 = inputs[0] ? inputs[0].value : '';
+                triggerData.credencial2 = inputs[1] ? inputs[1].value : '';
+            } else if (triggerType === 'bonus') {
+                triggerData.item1 = inputs[0] ? inputs[0].value : '';
+                triggerData.item2 = inputs[1] ? inputs[1].value : '';
+            }
+            currentGatilhos[triggerType] = triggerData;
+        });
+        gatilhosInput.value = JSON.stringify(currentGatilhos);
+    }
+
+    function toggleTrigger(element, triggerType) {
+        const content = element.querySelector('.trigger-content');
+        const inputField = safeGetElement('id_gatilhos_mentais');
+        if (!inputField) return;
+
+        let gatilhos = {};
+        try {
+            gatilhos = JSON.parse(inputField.value || '{}');
+        } catch (e) {
+            console.error("Erro ao parsear gatilhos mentais JSON:", e);
+        }
+        
+        if (element.classList.contains('selected')) {
+            element.classList.remove('selected');
+            content.classList.add('hidden');
+            delete gatilhos[triggerType];
+        } else {
+            element.classList.add('selected');
+            content.classList.remove('hidden');
+            if (!gatilhos[triggerType]) {
+                gatilhos[triggerType] = {};
+            }
+        }
+        inputField.value = JSON.stringify(gatilhos);
+        updateMentalTriggersJson();
+    }
+
+    // Add event listeners to mental trigger options
+    document.querySelectorAll('.trigger-option').forEach(option => {
+        option.addEventListener('click', function() {
+            const triggerType = this.dataset.triggerType;
+            toggleTrigger(this, triggerType);
+        });
+        
+        option.querySelectorAll('input, select, textarea').forEach(input => {
+            input.addEventListener('change', updateMentalTriggersJson);
+            input.addEventListener('click', function(event) {
+                event.stopPropagation();
+            });
+        });
+    });
+
+    // Initialize mental triggers on page load
+    const gatilhosInput = safeGetElement('id_gatilhos_mentais');
+    if (gatilhosInput) {
+        try {
+            const gatilhosMentais = JSON.parse(gatilhosInput.value || '{}');
+            for (const triggerType in gatilhosMentais) {
+                const triggerElement = document.querySelector(`.trigger-option[data-trigger-type="${triggerType}"]`);
+                if (triggerElement) {
+                    triggerElement.classList.add('selected');
+                    const content = triggerElement.querySelector('.trigger-content');
+                    if (content) {
+                        content.classList.remove('hidden');
+                        const inputs = content.querySelectorAll('input, select, textarea');
+                        
+                        if (triggerType === 'escassez' && gatilhosMentais.escassez) {
+                            if (gatilhosMentais.escassez.texto && inputs[0]) inputs[0].value = gatilhosMentais.escassez.texto;
+                            if (gatilhosMentais.escassez.data_fim && inputs[1]) inputs[1].value = gatilhosMentais.escassez.data_fim;
+                        } else if (triggerType === 'authority' && gatilhosMentais.authority) {
+                            if (gatilhosMentais.authority.credencial1 && inputs[0]) inputs[0].value = gatilhosMentais.authority.credencial1;
+                            if (gatilhosMentais.authority.credencial2 && inputs[1]) inputs[1].value = gatilhosMentais.authority.credencial2;
+                        } else if (triggerType === 'bonus' && gatilhosMentais.bonus) {
+                            if (gatilhosMentais.bonus.item1 && inputs[0]) inputs[0].value = gatilhosMentais.bonus.item1;
+                            if (gatilhosMentais.bonus.item2 && inputs[1]) inputs[1].value = gatilhosMentais.bonus.item2;
+                        }
+                    }
+                }
+            }
+        } catch (e) {
+            console.error("Erro ao inicializar gatilhos mentais:", e);
+        }
+    }
+
+    // Testimonials functionality
+    function addTestimonial() {
+        console.log('addTestimonial function called!');
+        const container = safeGetElement('testimonials-container');
+        const depoimentosInput = safeGetElement('id_depoimentos');
+        if (!container || !depoimentosInput) {
+            console.error('Container or depoimentosInput not found. Cannot add testimonial.');
+            return;
+        }
+
+        let depoimentos = [];
+        try {
+            console.log('Valor de depoimentosInput.value antes do parse:', depoimentosInput.value);
+            const rawValue = depoimentosInput.value;
+            if (rawValue === "null" || rawValue === "") {
+                depoimentos = [];
+            } else {
+                depoimentos = JSON.parse(rawValue);
+            }
+        } catch (e) {
+            console.error("Erro ao parsear depoimentos JSON:", e);
+            depoimentos = []; // Garante que seja um array mesmo em caso de erro
+        }
+        
+        depoimentos.push({"autor": "", "profissao": "", "texto": "", "rating": 0, "foto_url": ""});
+        depoimentosInput.value = JSON.stringify(depoimentos);
+        const newIndex = depoimentos.length - 1;
+        
+        const testimonialHTML = `
+            <div class="testimonial-item glass p-6 rounded-2xl border border-slate-200 shadow-lg">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Autor:</label>
+                        <input type="text" name="depoimentos-${newIndex}-autor" placeholder="Nome do cliente" value="" class="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-paymoz-primary" onchange="updateTestimonialJson()">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Profissão/Cargo:</label>
+                        <input type="text" name="depoimentos-${newIndex}-profissao" placeholder="Profissão/Cargo" value="" class="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-paymoz-primary" onchange="updateTestimonialJson()">
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">URL da Foto (Opcional):</label>
+                    <input type="url" name="depoimentos-${newIndex}-foto_url" placeholder="https://exemplo.com/foto.jpg" value="" class="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-paymoz-primary" onchange="updateTestimonialJson()">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Depoimento:</label>
+                    <textarea name="depoimentos-${newIndex}-texto" placeholder="Depoimento do cliente..." rows="3" class="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm resize-none focus:outline-none focus:ring-2 focus:ring-paymoz-primary" onchange="updateTestimonialJson()">
+                    </textarea>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-2">
+                        <label class="block text-sm font-semibold text-slate-700">Avaliação:</label>
+                        <div class="flex space-x-1">
+                            ${[1,2,3,4,5].map(star => `<button type="button" class="star-rating text-gray-300 hover:text-yellow-500 text-2xl" data-rating="${star}" onclick="setStarRating(this, ${newIndex}); updateTestimonialJson()">★</button>`).join('')}
+                        </div>
+                    </div>
+                    <button type="button" onclick="removeTestimonial(this)" class="text-red-500 hover:text-red-700 font-semibold px-4 py-2 rounded-lg hover:bg-red-50 transition-all duration-200">Remover</button>
+                </div>
+            </div>
+        `;
+        container.insertAdjacentHTML('beforeend', testimonialHTML);
+    }
+
+    // Global functions for testimonials
+    window.setStarRating = function(clickedStar, index) {
+        const rating = parseInt(clickedStar.dataset.rating);
+        const starsContainer = clickedStar.closest('.flex.space-x-1');
+        const stars = starsContainer.querySelectorAll('.star-rating');
+        
+        stars.forEach((star, i) => {
+            if (i < rating) {
+                star.classList.add('text-yellow-400');
+                star.classList.remove('text-gray-300');
+            } else {
+                star.classList.add('text-gray-300');
+                star.classList.remove('text-yellow-400');
+            }
+        });
+    }
+
+    window.updateTestimonialJson = function() {
+        const testimonialsContainer = safeGetElement('testimonials-container');
+        const depoimentosInput = safeGetElement('id_depoimentos');
+        if (!testimonialsContainer || !depoimentosInput) return;
+
+        const currentTestimonials = [];
+        testimonialsContainer.querySelectorAll('.testimonial-item').forEach((item, index) => {
+            const autorInput = item.querySelector(`input[name="depoimentos-${index}-autor"]`);
+            const profissaoInput = item.querySelector(`input[name="depoimentos-${index}-profissao"]`);
+            const fotoUrlInput = item.querySelector(`input[name="depoimentos-${index}-foto_url"]`);
+            const textoInput = item.querySelector(`textarea[name="depoimentos-${index}-texto"]`);
+            const ratingStars = item.querySelectorAll('.star-rating.text-yellow-400');
+            
+            const autor = autorInput ? autorInput.value : '';
+            const profissao = profissaoInput ? profissaoInput.value : '';
+            const foto_url = fotoUrlInput ? fotoUrlInput.value : '';
+            const texto = textoInput ? textoInput.value : '';
+            const rating = ratingStars ? ratingStars.length : 0;
+            currentTestimonials.push({ autor, profissao, foto_url, texto, rating });
+        });
+        depoimentosInput.value = JSON.stringify(currentTestimonials);
+    }
+
+    window.removeTestimonial = function(button) {
+        const testimonial = button.closest('.testimonial-item');
+        if (testimonial) {
+            testimonial.remove();
+            updateTestimonialJson();
+        }
+    }
+
+    // Initialize testimonials on page load
+    const depoimentosInput = safeGetElement('id_depoimentos');
+    if (depoimentosInput) {
+        try {
+            const depoimentos = JSON.parse(depoimentosInput.value || '[]');
+            if (depoimentos && depoimentos.length > 0) {
+                const testimonialsContainer = safeGetElement('testimonials-container');
+                if (testimonialsContainer) {
+                    testimonialsContainer.innerHTML = '';
+                    depoimentos.forEach((depoimento, index) => {
+                        const testimonialHTML = `
+                            <div class="testimonial-item glass p-6 rounded-2xl border border-slate-200 shadow-lg">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                    <div>
+                                        <label class="block text-sm font-semibold text-slate-700 mb-2">Autor:</label>
+                                        <input type="text" name="depoimentos-${index}-autor" placeholder="Nome do cliente" value="${depoimento.autor || ''}" class="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-paymoz-primary" onchange="updateTestimonialJson()">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold text-slate-700 mb-2">Profissão/Cargo:</label>
+                                        <input type="text" name="depoimentos-${index}-profissao" placeholder="Profissão/Cargo" value="${depoimento.profissao || ''}" class="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-paymoz-primary" onchange="updateTestimonialJson()">
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <label class="block text-sm font-semibold text-slate-700 mb-2">URL da Foto (Opcional):</label>
+                                    <input type="url" name="depoimentos-${index}-foto_url" placeholder="https://exemplo.com/foto.jpg" value="${depoimento.foto_url || ''}" class="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-paymoz-primary" onchange="updateTestimonialJson()">
+                                </div>
+                                <div class="mb-4">
+                                    <label class="block text-sm font-semibold text-slate-700 mb-2">Depoimento:</label>
+                                    <textarea name="depoimentos-${index}-texto" placeholder="Depoimento do cliente..." rows="3" class="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm resize-none focus:outline-none focus:ring-2 focus:ring-paymoz-primary" onchange="updateTestimonialJson()">${depoimento.texto || ''}</textarea>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-2">
+                                        <label class="block text-sm font-semibold text-slate-700">Avaliação:</label>
+                                        <div class="flex space-x-1">
+                                            ${[1,2,3,4,5].map(star => `<button type="button" class="star-rating ${star <= (depoimento.rating || 0) ? 'text-yellow-400' : 'text-gray-300'} hover:text-yellow-500 text-2xl" data-rating="${star}" onclick="setStarRating(this, ${index}); updateTestimonialJson()">★</button>`).join('')}
+                                        </div>
+                                    </div>
+                                    <button type="button" onclick="removeTestimonial(this)" class="text-red-500 hover:text-red-700 font-semibold px-4 py-2 rounded-lg hover:bg-red-50 transition-all duration-200">Remover</button>
+                                </div>
+                            </div>
+                        `;
+                        testimonialsContainer.insertAdjacentHTML('beforeend', testimonialHTML);
+                    });
+                }
+            }
+        } catch (e) {
+            console.error("Erro ao inicializar depoimentos:", e);
+        }
+    }
+
+    // Add testimonial button event listener
+    const addTestimonialBtn = safeGetElement('add-testimonial-btn');
+    if (addTestimonialBtn) {
+        addTestimonialBtn.addEventListener('click', addTestimonial);
+    }
+
+    // Auto-generate slug from product name
+    const nomeInput = safeGetElement('id_nome');
+    const slugInput = safeGetElement('id_slug');
+    
+    if (nomeInput && slugInput) {
+        nomeInput.addEventListener('input', function() {
+            const slug = this.value
+                .toLowerCase()
+                .replace(/[^a-z0-9\s-]/g, '')
+                .replace(/\s+/g, '-')
+                .replace(/-+/g, '-')
+                .trim();
+            slugInput.value = slug;
+        });
+    }
+
+    // Auto-generate SEO title from product name
+    const tituloSeoInput = safeGetElement('id_titulo_seo');
+    
+    if (nomeInput && tituloSeoInput) {
+        nomeInput.addEventListener('input', function() {
+            if (!tituloSeoInput.value) {
+                tituloSeoInput.value = this.value;
+            }
+        });
+    }
+
+    // Character counter for SEO description
+    const descricaoSeoInput = safeGetElement('id_descricao_seo');
+    
+    if (descricaoSeoInput) {
+        const counter = document.createElement('div');
+        counter.className = 'text-xs text-slate-500 mt-2';
+        descricaoSeoInput.parentNode.appendChild(counter);
+        
+        function updateCounter() {
+            const length = descricaoSeoInput.value.length;
+            const maxLength = 160;
+            counter.textContent = `${length}/${maxLength} caracteres`;
+            
+            if (length > maxLength) {
+                counter.classList.add('text-red-500');
+                counter.classList.remove('text-slate-500');
+            } else {
+                counter.classList.add('text-slate-500');
+                counter.classList.remove('text-red-500');
+            }
+        }
+        
+        descricaoSeoInput.addEventListener('input', updateCounter);
+        updateCounter();
+    }
+
+    // Add loading animation on page load
+    window.addEventListener('load', () => {
+        document.querySelectorAll('.animate-slide-up').forEach((el, index) => {
+            el.style.animationDelay = `${index * 150}ms`;
+        });
+    });
+
+    // Form field styling
+    const inputs = document.querySelectorAll('input, textarea, select');
+    inputs.forEach(input => {
+        input.addEventListener('focus', function() {
+            this.classList.add('input-field');
+        });
+        
+        input.addEventListener('blur', function() {
+            this.classList.remove('input-field');
+        });
+    });
+
+    // Smooth scroll for form sections
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Form validation feedback
+    const form = document.querySelector('form');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            // Garantir que todos os dados JSON sejam atualizados antes de submeter
+            updateMentalTriggersJson();
+            updateTestimonialJson();
+            updateCustomFieldsJson();
+
+            console.log("Formulário submetido. Verificando dados...");
+            const formData = new FormData(form);
+            for (let [key, value] of formData.entries()) {
+                console.log(`${key}: ${value}`);
+            }
+
+            const requiredFields = form.querySelectorAll('[required]');
+            let hasErrors = false;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    field.classList.add('border-red-500');
+                    hasErrors = true;
+                } else {
+                    field.classList.remove('border-red-500');
+                }
+            });
+            
+            if (hasErrors) {
+                e.preventDefault();
+                // Scroll to first error
+                const firstError = form.querySelector('.border-red-500');
+                if (firstError) {
+                    firstError.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }
+            }
+        });
+    }
+
+    // Item Incluído Formset Management
+    const addItemIncluidoBtn = safeGetElement('add-item-incluido-btn');
+    const itemIncluidoContainer = safeGetElement('item-incluido-formset-container');
+    const totalFormsInput = safeGetElement('id_itens_incluidos-TOTAL_FORMS');
+    const emptyFormTemplate = `
+        <div class="item-incluido-form glass p-6 rounded-2xl border border-slate-200 shadow-lg">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="input-group">
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Descrição:</label>
+                    <input type="text" name="itens_incluidos-__prefix__-descricao" class="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-paymoz-primary">
+                </div>
+                <div class="input-group">
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Arquivo (Opcional):</label>
+                    <input type="file" name="itens_incluidos-__prefix__-arquivo" class="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-paymoz-primary">
+                </div>
+            </div>
+            <input type="hidden" name="itens_incluidos-__prefix__-id" id="id_itens_incluidos-__prefix__-id">
+            <input type="hidden" name="itens_incluidos-__prefix__-DELETE" id="id_itens_incluidos-__prefix__-DELETE" value="off">
+            <button type="button" class="remove-item-incluido-btn text-red-500 hover:text-red-700 font-semibold px-4 py-2 rounded-lg hover:bg-red-50 transition-all duration-200 mt-4">Remover</button>
+        </div>
+    `;
+
+    if (addItemIncluidoBtn && itemIncluidoContainer && totalFormsInput) {
+        addItemIncluidoBtn.addEventListener('click', function() {
+            const currentForms = parseInt(totalFormsInput.value);
+            const newFormHtml = emptyFormTemplate.replace(/__prefix__/g, currentForms);
+
+            const newFormElement = document.createElement('div');
+            newFormElement.innerHTML = newFormHtml.trim();
+            const appendedForm = itemIncluidoContainer.appendChild(newFormElement.firstChild);
+
+            // Update total forms
+            totalFormsInput.value = currentForms + 1;
+
+            // Add event listener to the new remove button
+            appendedForm.querySelector('.remove-item-incluido-btn').addEventListener('click', function() {
+                removeForm(this);
+            });
+        });
+
+        // Function to remove a form
+        function removeForm(button) {
+            const formToRemove = button.closest('.item-incluido-form');
+            const deleteInput = formToRemove.querySelector('input[type="hidden"][name$="-DELETE"]');
+            if (deleteInput) {
+                deleteInput.value = 'on';
+            }
+            formToRemove.style.display = 'none'; // Hide the form
+        }
+
+        // Add event listeners to existing remove buttons
+        itemIncluidoContainer.querySelectorAll('.remove-item-incluido-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                removeForm(this);
+            });
+        });
+    }
+
+    // Imagem da Galeria Formset Management
+    const addImagemBtn = safeGetElement('add-imagem-btn');
+    const imagemContainer = safeGetElement('imagem-formset-container');
+    const totalImagemFormsInput = safeGetElement('id_imagens-TOTAL_FORMS');
+    const emptyImagemFormTemplate = `
+        <div class="imagem-form glass p-6 rounded-2xl border border-slate-200 shadow-lg">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="input-group md:col-span-2">
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Imagem:</label>
+                    <input type="file" name="imagens-__prefix__-imagem" class="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-paymoz-primary">
+                </div>
+                <div class="input-group">
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Ordem:</label>
+                    <input type="number" name="imagens-__prefix__-ordem" value="0" class="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-paymoz-primary">
+                </div>
+            </div>
+            <div class="input-group mt-4">
+                <label class="block text-sm font-semibold text-slate-700 mb-2">Legenda (Opcional):</label>
+                <input type="text" name="imagens-__prefix__-legenda" class="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-paymoz-primary">
+            </div>
+            <input type="hidden" name="imagens-__prefix__-id" id="id_imagens-__prefix__-id">
+            <input type="hidden" name="imagens-__prefix__-DELETE" id="id_imagens-__prefix__-DELETE" value="off">
+            <button type="button" class="remove-imagem-btn text-red-500 hover:text-red-700 font-semibold px-4 py-2 rounded-lg hover:bg-red-50 transition-all duration-200 mt-4">Remover</button>
+        </div>
+    `;
+
+    if (addImagemBtn && imagemContainer && totalImagemFormsInput) {
+        addImagemBtn.addEventListener('click', function() {
+            const currentForms = parseInt(totalImagemFormsInput.value);
+            const newFormHtml = emptyImagemFormTemplate.replace(/__prefix__/g, currentForms);
+
+            const newFormElement = document.createElement('div');
+            newFormElement.innerHTML = newFormHtml.trim();
+            const appendedForm = imagemContainer.appendChild(newFormElement.firstChild);
+
+            totalImagemFormsInput.value = currentForms + 1;
+
+            appendedForm.querySelector('.remove-imagem-btn').addEventListener('click', function() {
+                removeImagemForm(this);
+            });
+        });
+
+        function removeImagemForm(button) {
+            const formToRemove = button.closest('.imagem-form');
+            const deleteInput = formToRemove.querySelector('input[type="hidden"][name$="-DELETE"]');
+            if (deleteInput) {
+                deleteInput.value = 'on';
+            }
+            formToRemove.style.display = 'none';
+        }
+
+        imagemContainer.querySelectorAll('.remove-imagem-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                removeImagemForm(this);
+            });
+        });
+    }
+
+    // Adicione este script no final do seu arquivo, dentro do bloco de script existente
+
+    // Campos Personalizados
+    const addCustomFieldBtn = safeGetElement('add-custom-field-btn');
+    const customFieldsContainer = safeGetElement('custom-fields-container');
+    const customFieldsInput = safeGetElement('id_campos_personalizados');
+
+    function updateCustomFieldsJson() {
+        if (!customFieldsContainer || !customFieldsInput) return;
+        const fields = [];
+        customFieldsContainer.querySelectorAll('.custom-field-item').forEach(item => {
+            const label = item.querySelector('input[name^="custom_label_"]').value;
+            const tipo = item.querySelector('select[name^="custom_tipo_"]').value;
+            const obrigatorio = item.querySelector('input[name^="custom_obrigatorio_"]').checked;
+            if (label) { // Apenas adiciona se o label estiver preenchido
+                fields.push({ label, tipo, obrigatorio });
+            }
+        });
+        customFieldsInput.value = JSON.stringify(fields);
+    }
+
+    function addCustomField(field = { label: '', tipo: 'text', obrigatorio: false }) {
+        if (!customFieldsContainer) return;
+        const index = customFieldsContainer.children.length;
+        const fieldHtml = `
+            <div class="custom-field-item glass p-6 rounded-2xl border border-slate-200 shadow-lg flex items-center space-x-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 flex-grow">
+                    <div class="input-group">
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Nome do Campo</label>
+                        <input type="text" name="custom_label_${index}" placeholder="Ex: Seu WhatsApp" value="${field.label}" class="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-paymoz-primary" onchange="updateCustomFieldsJson()">
+                    </div>
+                    <div class="input-group">
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Tipo do Campo</label>
+                        <select name="custom_tipo_${index}" class="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-paymoz-primary" onchange="updateCustomFieldsJson()">
+                            <option value="text" ${field.tipo === 'text' ? 'selected' : ''}>Texto</option>
+                            <option value="email" ${field.tipo === 'email' ? 'selected' : ''}>Email</option>
+                            <option value="tel" ${field.tipo === 'tel' ? 'selected' : ''}>Telefone</option>
+                            <option value="number" ${field.tipo === 'number' ? 'selected' : ''}>Número</option>
+                        </select>
+                    </div>
+                    <div class="input-group flex items-center justify-center pt-8">
+                        <input type="checkbox" name="custom_obrigatorio_${index}" class="h-5 w-5 rounded text-paymoz-primary focus:ring-paymoz-accent" ${field.obrigatorio ? 'checked' : ''} onchange="updateCustomFieldsJson()">
+                        <label class="ml-2 text-sm font-medium text-slate-700">Obrigatório</label>
+                    </div>
+                </div>
+                <button type="button" class="remove-custom-field-btn text-red-500 hover:text-red-700 font-semibold px-3 py-3 rounded-lg hover:bg-red-50 transition-all duration-200">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                </button>
+            </div>
+        `;
+        customFieldsContainer.insertAdjacentHTML('beforeend', fieldHtml);
+        const newField = customFieldsContainer.lastElementChild;
+        newField.querySelector('.remove-custom-field-btn').addEventListener('click', () => {
+            newField.remove();
+            updateCustomFieldsJson();
+        });
+    }
+
+    if (addCustomFieldBtn) {
+        addCustomFieldBtn.addEventListener('click', () => addCustomField());
+    }
+
+    // Inicializar campos personalizados existentes
+    if (customFieldsInput && customFieldsInput.value) {
+        try {
+            const fields = JSON.parse(customFieldsInput.value);
+            if (Array.isArray(fields)) {
+                fields.forEach(addCustomField);
+            }
+        } catch (e) {
+            console.error("Erro ao inicializar campos personalizados:", e);
+        }
+    }
+
+    // Inicializar campos personalizados existentes
+    if (customFieldsInput && customFieldsInput.value) {
+        try {
+            const fields = JSON.parse(customFieldsInput.value);
+            if (Array.isArray(fields)) {
+                fields.forEach(addCustomField);
+            }
+        } catch (e) {
+            console.error("Erro ao inicializar campos personalizados:", e);
+        }
+    }
+
+    // FAQ Management
+    const addFaqBtn = safeGetElement('add-faq-btn');
+    const faqContainer = safeGetElement('faq-container');
+    const faqInput = safeGetElement('id_faq');
+
+    window.updateFaqJson = function() {
+        if (!faqContainer || !faqInput) return;
+        const faqs = [];
+        faqContainer.querySelectorAll('.faq-item').forEach(item => {
+            const pergunta = item.querySelector('input[name^="faq_pergunta_"]').value;
+            const resposta = item.querySelector('textarea[name^="faq_resposta_"]').value;
+            if (pergunta) { // Only add if question is not empty
+                faqs.push({ pergunta, resposta });
+            }
+        });
+        faqInput.value = JSON.stringify(faqs);
+    }
+
+    function addFaqItem(faq = { pergunta: '', resposta: '' }) {
+        if (!faqContainer) return;
+        const index = faqContainer.children.length;
+        const faqHtml = `
+            <div class="faq-item glass p-6 rounded-2xl border border-slate-200 shadow-lg">
+                <div class="input-group mb-4">
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Pergunta:</label>
+                    <input type="text" name="faq_pergunta_${index}" placeholder="Ex: Como acesso o produto?" value="${faq.pergunta}" class="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-paymoz-primary" onchange="updateFaqJson()">
+                </div>
+                <div class="input-group mb-4">
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Resposta:</label>
+                    <textarea name="faq_resposta_${index}" placeholder="Ex: Você receberá um e-mail com as instruções..." rows="3" class="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm resize-none focus:outline-none focus:ring-2 focus:ring-paymoz-primary" onchange="updateFaqJson()">${faq.resposta}</textarea>
+                </div>
+                <button type="button" class="remove-faq-btn text-red-500 hover:text-red-700 font-semibold px-4 py-2 rounded-lg hover:bg-red-50 transition-all duration-200">Remover</button>
+            </div>
+        `;
+        faqContainer.insertAdjacentHTML('beforeend', faqHtml);
+        const newFaqItem = faqContainer.lastElementChild;
+        newFaqItem.querySelector('.remove-faq-btn').addEventListener('click', () => {
+            newFaqItem.remove();
+            updateFaqJson();
+        });
+    }
+
+    if (addFaqBtn) {
+        addFaqBtn.addEventListener('click', () => addFaqItem());
+    }
+
+    // Initialize existing FAQ items
+    if (faqInput && faqInput.value) {
+        try {
+            const faqs = JSON.parse(faqInput.value);
+            if (Array.isArray(faqs)) {
+                faqs.forEach(addFaqItem);
+            }
+        } catch (e) {
+            console.error("Erro ao inicializar FAQ:", e);
+        }
+    }
+
+    console.log('Script inicializado com sucesso!');
+});
+</script>
+
+{% endblock %}

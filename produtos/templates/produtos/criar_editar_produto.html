@@ -1,0 +1,986 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{{ form.media }}
+<body class="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 min-h-screen transition-colors duration-300">
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-lg border-b border-slate-200/50 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo and Back Button -->
+                <div class="flex items-center space-x-4">
+                    <button onclick="goBack()" class="p-2 rounded-xl glass text-slate-700 hover:bg-white/20 transition-all duration-300">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h1 class="text-xl font-bold text-slate-800">Paymoz</h1>
+                            <p class="text-xs text-slate-600">Editar Produto</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Actions -->
+                <div class="flex items-center space-x-3">
+                    <button id="preview-btn" class="px-4 py-2 bg-slate-500 hover:bg-slate-600 text-white rounded-xl transition-colors duration-300 text-sm font-medium">
+                        <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                        </svg>
+                        Visualizar
+                    </button>
+                    <button id="save-btn" type="submit" form="product-form" class="px-6 py-2 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white rounded-xl transition-all duration-300 text-sm font-medium transform hover:scale-105">
+                        <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Salvar Produto
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <form id="product-form" method="post" enctype="multipart/form-data" class="space-y-8">
+            {% csrf_token %}
+            <!-- Product Basic Info -->
+            <section class="bg-white rounded-3xl p-8 shadow-2xl border border-slate-100 animate-fade-in">
+                <div class="flex items-center mb-6">
+                    <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center mr-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4-8-4m16 0v10l-8 4-8-4V7"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800">Informações Básicas</h2>
+                        <p class="text-slate-600">Dados principais do seu produto</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Left Column -->
+                    <div class="space-y-6">
+                        <!-- Product Name -->
+                        <div class="space-y-2">
+                            <label for="id_nome" class="block text-sm font-semibold text-slate-700">
+                                <svg class="inline w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                                </svg>
+                                Nome do Produto *
+                            </label>
+                            {{ form.nome }}
+                        </div>
+
+                        <!-- Product Price -->
+                        <div class="space-y-2">
+                            <label for="id_preco" class="block text-sm font-semibold text-slate-700">
+                                <svg class="inline w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                                </svg>
+                                Preço (MZN) *
+                            </label>
+                            <div class="relative">
+                                {{ form.preco }}
+                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                    <span class="text-slate-500 font-medium">MZN</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product Category -->
+                        <div class="space-y-2">
+                            <label for="id_categoria" class="block text-sm font-semibold text-slate-700">
+                                <svg class="inline w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                                </svg>
+                                Categoria *
+                            </label>
+                            {{ form.categoria }}
+                        </div>
+
+                        <!-- Product Status -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-slate-700">
+                                <svg class="inline w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                Status do Produto
+                            </label>
+                            <div class="flex space-x-4">
+                                {% for radio in form.status %}
+                                    <label class="flex items-center">
+                                        {{ radio.tag }}
+                                        <div class="w-4 h-4 {% if radio.choice_label == 'Ativo' %}bg-green-500{% elif radio.choice_label == 'Rascunho' %}bg-yellow-500{% else %}bg-red-500{% endif %} rounded-full mr-2"></div>
+                                        <span class="text-sm text-slate-700">{{ radio.choice_label }}</span>
+                                    </label>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column -->
+                    <div class="space-y-6">
+                        <!-- Product Image -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-slate-700">
+                                <svg class="inline w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                                Imagem do Produto
+                            </label>
+                            <div class="border-2 border-dashed border-slate-300 rounded-xl p-6 text-center hover:border-blue-400 transition-colors duration-300">
+                                <div id="image-preview" class="{% if form.instance.imagem_destaque %}block{% else %}hidden{% endif %}">
+                                    <img id="preview-img" src="{% if form.instance.imagem_destaque %}{{ form.instance.imagem_destaque.url }}{% else %}/placeholder.svg{% endif %}" alt="Preview" class="max-w-full h-48 object-cover rounded-lg mx-auto image-preview">
+                                    <button type="button" onclick="removeImage()" class="mt-2 text-red-500 hover:text-red-700 text-sm">Remover imagem</button>
+                                </div>
+                                <div id="upload-area" class="{% if form.instance.imagem_destaque %}hidden{% else %}block{% endif %}">
+                                    <svg class="mx-auto h-12 w-12 text-slate-400" stroke="currentColor" viewBox="0 0 48 48">
+                                        <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                    <div class="mt-4">
+                                        <label for="id_imagem_destaque" class="cursor-pointer">
+                                            <span class="mt-2 block text-sm font-medium text-slate-700">
+                                                Clique para fazer upload ou arraste uma imagem
+                                            </span>
+                                            {{ form.imagem_destaque }}
+                                        </label>
+                                        <p class="mt-1 text-xs text-slate-500">PNG, JPG, GIF até 10MB</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Short Description -->
+                        <div class="space-y-2">
+                            <label for="id_descricao_curta" class="block text-sm font-semibold text-slate-700">
+                                <svg class="inline w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-1l-4 4z"></path>
+                                </svg>
+                                Descrição Curta *
+                            </label>
+                            {{ form.descricao_curta }}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Product Description -->
+            <section class="bg-white rounded-3xl p-8 shadow-2xl border border-slate-100 animate-fade-in">
+                <div class="flex items-center mb-6">
+                    <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center mr-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800">Descrição Completa</h2>
+                        <p class="text-slate-600">Descreva detalhadamente seu produto</p>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="space-y-2">
+                        <label for="id_descricao" class="block text-sm font-semibold text-slate-700">
+                            Descrição Detalhada *
+                        </label>
+                        {{ form.descricao }}
+                    </div>
+
+                    <!-- What's Included -->
+                    <div class="space-y-2">
+                        <label for="id_o_que_esta_incluido" class="block text-sm font-semibold text-slate-700">
+                            <svg class="inline w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            O que está incluído
+                        </label>
+                        <div id="included-items" class="space-y-2">
+                            {# O campo oculto do Django para o_que_esta_incluido #}
+                            {{ form.o_que_esta_incluido }}
+                            {# Os inputs dinâmicos serão adicionados via JS #}
+                        </div>
+                        <button type="button" onclick="addIncludedItem()" class="mt-2 text-blue-500 hover:text-blue-700 text-sm font-medium">
+                            + Adicionar item
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Mental Triggers -->
+            <section class="bg-white rounded-3xl p-8 shadow-2xl border border-slate-100 animate-fade-in">
+                <div class="flex items-center mb-6">
+                    <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center mr-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800">Gatilhos Mentais</h2>
+                        <p class="text-slate-600">Adicione elementos persuasivos à sua página (opcional)</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Scarcity -->
+                    <div class="trigger-option p-4 border border-slate-200 rounded-xl hover:border-blue-300" data-trigger-type="escassez">
+                        <div class="flex items-center mb-3">
+                            <div class="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center mr-3">
+                                <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="font-semibold text-slate-800">Escassez</h3>
+                        </div>
+                        <p class="text-sm text-slate-600 mb-3">Crie urgência com tempo limitado ou vagas limitadas</p>
+                        <div class="trigger-content hidden space-y-3">
+                            <input type="text" name="escassez_texto" placeholder="Ex: Apenas 50 vagas disponíveis" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm">
+                            <input type="datetime-local" name="escassez_data_fim" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm">
+                        </div>
+                    </div>
+
+                    <!-- Social Proof -->
+                    <div class="trigger-option p-4 border border-slate-200 rounded-xl hover:border-blue-300" data-trigger-type="social_proof">
+                        <div class="flex items-center mb-3">
+                            <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                                <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="font-semibold text-slate-800">Prova Social</h3>
+                        </div>
+                        <p class="text-sm text-slate-600 mb-3">Mostre quantas pessoas já compraram</p>
+                        <div class="trigger-content hidden space-y-3">
+                            <input type="number" name="social_proof_quantidade" placeholder="Ex: 1247" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm">
+                            <input type="text" name="social_proof_texto" placeholder="Ex: pessoas já compraram" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm">
+                        </div>
+                    </div>
+
+                    <!-- Authority -->
+                    <div class="trigger-option p-4 border border-slate-200 rounded-xl hover:border-blue-300" data-trigger-type="authority">
+                        <div class="flex items-center mb-3">
+                            <div class="w-8 h-8 bg-yellow-100 rounded-lg flex items-center justify-center mr-3">
+                                <svg class="w-4 h-4 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="font-semibold text-slate-800">Autoridade</h3>
+                        </div>
+                        <p class="text-sm text-slate-600 mb-3">Mostre suas credenciais e experiência</p>
+                        <div class="trigger-content hidden space-y-3">
+                            <input type="text" name="authority_credencial1" placeholder="Ex: Professor há 15 anos" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm">
+                            <input type="text" name="authority_credencial2" placeholder="Ex: Formado em Matemática pela UEM" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm">
+                        </div>
+                    </div>
+
+                    <!-- Guarantee -->
+                    <div class="trigger-option p-4 border border-slate-200 rounded-xl hover:border-blue-300" data-trigger-type="guarantee">
+                        <div class="flex items-center mb-3">
+                            <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center mr-3">
+                                <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="font-semibold text-slate-800">Garantia</h3>
+                        </div>
+                        <p class="text-sm text-slate-600 mb-3">Ofereça garantia de satisfação</p>
+                        <div class="trigger-content hidden space-y-3">
+                            <select name="guarantee_dias" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm">
+                                <option value="7">7 dias</option>
+                                <option value="15">15 dias</option>
+                                <option value="30" selected>30 dias</option>
+                                <option value="60">60 dias</option>
+                                <option value="90">90 dias</option>
+                            </select>
+                            <input type="text" name="guarantee_texto" placeholder="Ex: Garantia incondicional" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm">
+                        </div>
+                    </div>
+
+                    <!-- Bonus -->
+                    <div class="trigger-option p-4 border border-slate-200 rounded-xl hover:border-blue-300" data-trigger-type="bonus">
+                        <div class="flex items-center mb-3">
+                            <div class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center mr-3">
+                                <svg class="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path>
+                                </svg>
+                            </div>
+                            <h3 class="font-semibold text-slate-800">Bônus</h3>
+                        </div>
+                        <p class="text-sm text-slate-600 mb-3">Adicione bônus exclusivos</p>
+                        <div class="trigger-content hidden space-y-3">
+                            <input type="text" name="bonus_item1" placeholder="Ex: E-book de exercícios extras" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm">
+                            <input type="text" name="bonus_item2" placeholder="Valor do bônus (opcional)" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm">
+                        </div>
+                    </div>
+
+                    <!-- Reciprocity -->
+                    <div class="trigger-option p-4 border border-slate-200 rounded-xl hover:border-blue-300" data-trigger-type="reciprocity">
+                        <div class="flex items-center mb-3">
+                            <div class="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center mr-3">
+                                <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="font-semibold text-slate-800">Reciprocidade</h3>
+                        </div>
+                        <p class="text-sm text-slate-600 mb-3">Ofereça algo gratuito primeiro</p>
+                        <div class="trigger-content hidden space-y-3">
+                            <input type="text" name="reciprocity_item" placeholder="Ex: Aula gratuita de introdução" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm">
+                            <input type="text" name="reciprocity_link" placeholder="Link ou descrição" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Testimonials -->
+            <section class="bg-white rounded-3xl p-8 shadow-2xl border border-slate-100 animate-fade-in">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl flex items-center justify-center mr-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-slate-800">Depoimentos</h2>
+                            <p class="text-slate-600">Adicione depoimentos de clientes satisfeitos</p>
+                        </div>
+                    </div>
+                    <button type="button" onclick="addTestimonial()" class="px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-xl transition-colors duration-300 text-sm font-medium">
+                        <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                        Adicionar Depoimento
+                    </button>
+                </div>
+
+                <div id="testimonials-container" class="space-y-6">
+                    {# O campo oculto do Django para depoimentos #}
+                    {{ form.depoimentos }}
+                    {# Os inputs dinâmicos serão adicionados via JS #}
+                </div>
+            </section>
+
+            <!-- SEO and Advanced Settings -->
+            <section class="bg-white rounded-3xl p-8 shadow-2xl border border-slate-100 animate-fade-in">
+                <div class="flex items-center mb-6">
+                    <div class="w-12 h-12 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-xl flex items-center justify-center mr-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800">Configurações Avançadas</h2>
+                        <p class="text-slate-600">SEO e configurações da página de vendas</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="space-y-6">
+                        <!-- SEO Title -->
+                        <div class="space-y-2">
+                            <label for="id_titulo_seo" class="block text-sm font-semibold text-slate-700">
+                                <svg class="inline w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                                </svg>
+                                Título SEO
+                            </label>
+                            {{ form.titulo_seo }}
+                            <p class="text-xs text-slate-500">Caracteres: <span id="seo-title-count">{% if form.instance.titulo_seo %}{{ form.instance.titulo_seo|length }}{% else %}0{% endif %}</span>/60</p>
+                        </div>
+
+                        <!-- SEO Description -->
+                        <div class="space-y-2">
+                            <label for="id_descricao_seo" class="block text-sm font-semibold text-slate-700">
+                                <svg class="inline w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                </svg>
+                                Descrição SEO
+                            </label>
+                            {{ form.descricao_seo }}
+                            <p class="text-xs text-slate-500">Caracteres: <span id="seo-desc-count">{% if form.instance.descricao_seo %}{{ form.instance.descricao_seo|length }}{% else %}0{% endif %}</span>/160</p>
+                        </div>
+
+                        <!-- URL Slug -->
+                        <div class="space-y-2">
+                            <label for="id_slug" class="block text-sm font-semibold text-slate-700">
+                                <svg class="inline w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+                                </svg>
+                                URL da Página
+                            </label>
+                            <div class="flex">
+                                <span class="inline-flex items-center px-3 rounded-l-xl border border-r-0 border-slate-200 bg-slate-50 text-slate-500 text-sm">
+                                    paymoz.co.mz/p/
+                                </span>
+                                {{ form.slug }}
+                            </div>
+                        </div>
+
+                        <!-- Callback URL -->
+                        <div class="space-y-2">
+                            <label for="id_callback_url" class="block text-sm font-semibold text-slate-700">
+                                <svg class="inline w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                                URL de Callback (Opcional)
+                            </label>
+                            {{ form.callback_url }}
+                            <p class="text-xs text-slate-500">URL para onde o cliente será redirecionado após o pagamento bem-sucedido. Se deixado em branco, será usada uma página de sucesso padrão.</p>
+                        </div>
+
+                        <!-- Arquivo para Download -->
+                        <div class="space-y-2">
+                            <label for="id_arquivo_download" class="block text-sm font-semibold text-slate-700">
+                                <svg class="inline w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                </svg>
+                                Arquivo para Download (Opcional)
+                            </label>
+                            {{ form.arquivo_download }}
+                            <p class="text-xs text-slate-500">Ficheiro digital para download após a compra (ex: PDF, ZIP).</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <!-- Page Settings -->
+                        <div class="space-y-4">
+                            <h3 class="text-lg font-semibold text-slate-800">Configurações da Página</h3>
+                            
+                            <!-- Enable Comments -->
+                            <label class="flex items-center">
+                                {{ form.permitir_comentarios }}
+                                <span class="ml-2 text-sm text-slate-700">Permitir comentários</span>
+                            </label>
+
+                            <!-- Show Related Products -->
+                            <label class="flex items-center">
+                                {{ form.mostrar_relacionados }}
+                                <span class="ml-2 text-sm text-slate-700">Mostrar produtos relacionados</span>
+                            </label>
+
+                            <!-- Enable Analytics -->
+                            <label class="flex items-center">
+                                {{ form.habilitar_analytics }}
+                                <span class="ml-2 text-sm text-slate-700">Habilitar analytics</span>
+                            </label>
+
+                            <!-- Custom CSS -->
+                            <div class="space-y-2">
+                                <label for="id_css_customizado" class="block text-sm font-semibold text-slate-700">
+                                    CSS Personalizado (Opcional)
+                                </label>
+                                {{ form.css_customizado }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </form>
+    </main>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-3xl p-8 max-w-md mx-4 animate-fade-in">
+            <div class="text-center">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-slate-800 mb-2">Produto Salvo!</h3>
+                <p class="text-slate-600 mb-6">Seu produto foi salvo com sucesso e está pronto para vendas.</p>
+                <div class="flex space-x-3">
+                    <button onclick="closeModal()" class="flex-1 px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-xl transition-colors duration-300">
+                        Fechar
+                    </button>
+                    <button onclick="viewProduct()" class="flex-1 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl transition-colors duration-300">
+                        Ver Produto
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Form functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Character counters
+            const seoTitle = document.getElementById('id_titulo_seo');
+            const seoTitleCount = document.getElementById('seo-title-count');
+            const seoDesc = document.getElementById('id_descricao_seo');
+            const seoDescCount = document.getElementById('seo-desc-count');
+
+            if (seoTitle && seoTitleCount) {
+                seoTitle.addEventListener('input', function() {
+                    seoTitleCount.textContent = this.value.length;
+                });
+            }
+
+            if (seoDesc && seoDescCount) {
+                seoDesc.addEventListener('input', function() {
+                    seoDescCount.textContent = this.value.length;
+                });
+            }
+
+            // Auto-generate URL slug from product name
+            const productName = document.getElementById('id_nome');
+            const urlSlug = document.getElementById('id_slug');
+
+            if (productName && urlSlug) {
+                productName.addEventListener('input', function() {
+                    const slug = this.value
+                        .toLowerCase()
+                        .replace(/[^a-z0-9\s-]/g, '')
+                        .replace(/\s+/g, '-')
+                        .replace(/-+/g, '-')
+                        .trim('-');
+                    urlSlug.value = slug;
+                });
+            }
+
+            // Star rating functionality
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('star-rating')) {
+                    const rating = parseInt(e.target.dataset.rating);
+                    const stars = e.target.parentElement.querySelectorAll('.star-rating');
+                    
+                    stars.forEach((star, index) => {
+                        if (index < rating) {
+                            star.classList.add('text-yellow-400');
+                            star.classList.remove('text-slate-300');
+                        } else {
+                            star.classList.add('text-slate-300');
+                            star.classList.remove('text-yellow-400');
+                        }
+                    });
+                }
+            });
+
+            // Form submission
+            const form = document.getElementById('product-form');
+            const saveBtn = document.getElementById('save-btn');
+
+            if (form && saveBtn) {
+                saveBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Show loading state
+                    this.innerHTML = `
+                        <svg class="animate-spin -ml-1 mr-3 h-4 w-4 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Salvando...
+                    `;
+                    this.disabled = true;
+
+                    // Submit the form
+                    form.submit();
+                });
+            }
+
+            // Initialize form fields with existing data if editing
+            {% if form.instance.pk %}
+                // Set initial values for category and status radio buttons
+                const categorySelect = document.getElementById('id_categoria');
+                if (categorySelect) {
+                    categorySelect.value = "{{ form.instance.categoria }}";
+                }
+
+                const statusRadios = document.querySelectorAll('input[name="status"]');
+                statusRadios.forEach(radio => {
+                    if (radio.value === "{{ form.instance.status }}") {
+                        radio.checked = true;
+                    }
+                });
+
+                // Populate included items
+                const includedItemsContainer = document.getElementById('included-items');
+                const oQueEstaIncluido = {{ form.instance.o_que_esta_incluido|safe }};
+                if (oQueEstaIncluido && oQueEstaIncluido.length > 0) {
+                    includedItemsContainer.innerHTML = ''; // Clear existing static items
+                    oQueEstaIncluido.forEach(item => {
+                        const itemHTML = `
+                            <div class="flex items-center space-x-2">
+                                <input type="text" name="o_que_esta_incluido" placeholder="Ex: Novo item incluído" class="flex-1 px-3 py-2 border border-slate-200 rounded-lg text-sm" value="${item}">
+                                <button type="button" onclick="removeIncludedItem(this)" class="text-red-500 hover:text-red-700">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        `;
+                        includedItemsContainer.insertAdjacentHTML('beforeend', itemHTML);
+                    });
+                } else {
+                    // If no items, ensure the Django field is rendered
+                    includedItemsContainer.innerHTML = '{{ form.o_que_esta_incluido }}';
+                }
+
+                // Populate testimonials
+                const testimonialsContainer = document.getElementById('testimonials-container');
+                const depoimentos = {{ form.instance.depoimentos|safe }};
+                if (depoimentos && depoimentos.length > 0) {
+                    testimonialsContainer.innerHTML = ''; // Clear existing static items
+                    depoimentos.forEach((depoimento, index) => {
+                        const testimonialHTML = `
+                            <div class="testimonial-item bg-slate-50 rounded-2xl p-6 border border-slate-200">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full flex items-center justify-center">
+                                            <span class="text-white font-semibold text-sm">${depoimento.autor ? depoimento.autor.substring(0, 2).toUpperCase() : ''}</span>
+                                        </div>
+                                        <div>
+                                            <input type="text" name="depoimentos-${index}-autor" placeholder="Nome do cliente" value="${depoimento.autor || ''}" class="font-semibold text-slate-800 bg-transparent border-none focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-2 py-1" onchange="updateTestimonialJson()">
+                                            <input type="text" name="depoimentos-${index}-profissao" placeholder="Profissão/Cargo" value="${depoimento.profissao || ''}" class="text-sm text-slate-600 bg-transparent border-none focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-2 py-1 block" onchange="updateTestimonialJson()">
+                                        </div>
+                                    </div>
+                                    <button type="button" onclick="removeTestimonial(this)" class="text-red-500 hover:text-red-700">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <textarea name="depoimentos-${index}-texto" placeholder="Depoimento do cliente..." rows="3" class="w-full bg-transparent border-none focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-2 py-1 text-slate-700 resize-none">${depoimento.texto || ''}</textarea>
+                                <div class="flex items-center mt-4">
+                                    <span class="text-sm text-slate-600 mr-2">Avaliação:</span>
+                                    <div class="flex space-x-1">
+                                        ${[1, 2, 3, 4, 5].map(star => `
+                                            <button type="button" class="star-rating ${star <= (depoimento.rating || 0) ? 'text-yellow-400' : 'text-slate-300'} hover:text-yellow-500" data-rating="${star}">★</button>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        testimonialsContainer.insertAdjacentHTML('beforeend', testimonialHTML);
+                    });
+                } else {
+                    testimonialsContainer.innerHTML = '{{ form.depoimentos }}';
+                }
+
+                // Populate mental triggers
+                const gatilhosMentais = {{ form.instance.gatilhos_mentais|safe }};
+                if (gatilhosMentais) {
+                    for (const triggerType in gatilhosMentais) {
+                        const triggerElement = document.querySelector(`.trigger-option[data-trigger-type="${triggerType}"]`);
+                        if (triggerElement) {
+                            triggerElement.classList.add('selected');
+                            const content = triggerElement.querySelector('.trigger-content');
+                            content.classList.remove('hidden');
+                            // Populate inputs within the trigger content
+                            const inputs = content.querySelectorAll('input, select, textarea');
+                            if (triggerType === 'escassez') {
+                                if (gatilhosMentais.escassez.texto) inputs[0].value = gatilhosMentais.escassez.texto;
+                                if (gatilhosMentais.escassez.data_fim) inputs[1].value = gatilhosMentais.escassez.data_fim;
+                            } else if (triggerType === 'social_proof') {
+                                if (gatilhosMentais.social_proof.quantidade) inputs[0].value = gatilhosMentais.social_proof.quantidade;
+                                if (gatilhosMentais.social_proof.texto) inputs[1].value = gatilhosMentais.social_proof.texto;
+                            } else if (triggerType === 'authority') {
+                                if (gatilhosMentais.authority.credencial1) inputs[0].value = gatilhosMentais.authority.credencial1;
+                                if (gatilhosMentais.authority.credencial2) inputs[1].value = gatilhosMentais.authority.credencial2;
+                            } else if (triggerType === 'guarantee') {
+                                if (gatilhosMentais.guarantee.dias) inputs[0].value = gatilhosMentais.guarantee.dias;
+                                if (gatilhosMentais.guarantee.texto) inputs[1].value = gatilhosMentais.guarantee.texto;
+                            } else if (triggerType === 'bonus') {
+                                if (gatilhosMentais.bonus.item1) inputs[0].value = gatilhosMentais.bonus.item1;
+                                if (gatilhosMentais.bonus.item2) inputs[1].value = gatilhosMentais.bonus.item2;
+                            } else if (triggerType === 'reciprocity') {
+                                if (gatilhosMentais.reciprocity.item) inputs[0].value = gatilhosMentais.reciprocity.item;
+                                if (gatilhosMentais.reciprocity.link) inputs[1].value = gatilhosMentais.reciprocity.link;
+                            }
+                        }
+                    }
+                
+
+            {% endif %}
+
+        });
+
+        // Image preview functionality
+        function previewImage(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    const previewImg = document.getElementById('preview-img');
+                    const imagePreview = document.getElementById('image-preview');
+                    const uploadArea = document.getElementById('upload-area');
+                    
+                    previewImg.src = e.target.result;
+                    imagePreview.classList.remove('hidden');
+                    uploadArea.classList.add('hidden');
+                };
+                
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function removeImage() {
+            const previewImg = document.getElementById('preview-img');
+            const imagePreview = document.getElementById('image-preview');
+            const uploadArea = document.getElementById('upload-area');
+            const fileInput = document.getElementById('id_imagem_destaque');
+            
+            previewImg.src = '';
+            imagePreview.classList.add('hidden');
+            uploadArea.classList.remove('hidden');
+            fileInput.value = ''; // Clear the file input
+        }
+
+        // Mental triggers functionality
+        function updateMentalTriggersJson() {
+            const gatilhosInput = document.getElementById('id_gatilhos_mentais');
+            const currentGatilhos = {};
+
+            document.querySelectorAll('.trigger-option.selected').forEach(triggerElement => {
+                const triggerType = triggerElement.dataset.triggerType;
+                const inputs = triggerElement.querySelectorAll('input, select, textarea');
+                let triggerData = {};
+
+                if (triggerType === 'escassez') {
+                    triggerData.texto = inputs[0] ? inputs[0].value : '';
+                    triggerData.data_fim = inputs[1] ? inputs[1].value : '';
+                } else if (triggerType === 'social_proof') {
+                    triggerData.quantidade = inputs[0] ? inputs[0].value : '';
+                    triggerData.texto = inputs[1] ? inputs[1].value : '';
+                } else if (triggerType === 'authority') {
+                    triggerData.credencial1 = inputs[0] ? inputs[0].value : '';
+                    triggerData.credencial2 = inputs[1] ? inputs[1].value : '';
+                } else if (triggerType === 'guarantee') {
+                    triggerData.dias = inputs[0] ? inputs[0].value : '';
+                    triggerData.texto = inputs[1] ? inputs[1].value : '';
+                } else if (triggerType === 'bonus') {
+                    triggerData.item1 = inputs[0] ? inputs[0].value : '';
+                    triggerData.item2 = inputs[1] ? inputs[1].value : '';
+                } else if (triggerType === 'reciprocity') {
+                    triggerData.item = inputs[0] ? inputs[0].value : '';
+                    triggerData.link = inputs[1] ? inputs[1].value : '';
+                }
+                currentGatilhos[triggerType] = triggerData;
+            });
+            gatilhosInput.value = JSON.stringify(currentGatilhos);
+        }
+
+        function toggleTrigger(element, triggerType) {
+            const content = element.querySelector('.trigger-content');
+            const inputField = document.getElementById('id_gatilhos_mentais');
+            let gatilhos = {};
+            try {
+                gatilhos = JSON.parse(inputField.value || '{}');
+            } catch (e) {
+                console.error("Erro ao parsear gatilhos mentais JSON:", e);
+            }
+
+            if (element.classList.contains('selected')) {
+                element.classList.remove('selected');
+                content.classList.add('hidden');
+                delete gatilhos[triggerType];
+            } else {
+                element.classList.add('selected');
+                content.classList.remove('hidden');
+                if (!gatilhos[triggerType]) {
+                    gatilhos[triggerType] = {}; // Initialize if not exists
+                }
+            }
+            inputField.value = JSON.stringify(gatilhos);
+            updateMentalTriggersJson(); // Update JSON after toggling
+        }
+
+        // Add event listeners to mental trigger options
+        document.querySelectorAll('.trigger-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const triggerType = this.dataset.triggerType;
+                toggleTrigger(this, triggerType);
+            });
+            // Add onchange listeners to inputs within trigger content
+            option.querySelectorAll('input, select, textarea').forEach(input => {
+                input.addEventListener('change', updateMentalTriggersJson);
+            });
+        });
+
+        // Testimonials functionality
+        function addTestimonial() {
+            const container = document.getElementById('testimonials-container');
+            
+            // Get current testimonials from the hidden field
+            const depoimentosInput = document.getElementById('id_depoimentos');
+            let depoimentos = [];
+            try {
+                depoimentos = JSON.parse(depoimentosInput.value || '[]');
+            } catch (e) {
+                console.error("Erro ao parsear depoimentos JSON:", e);
+            }
+
+            // Add a new empty testimonial to the array
+            depoimentos.push({"autor": "", "profissao": "", "texto": "", "rating": 0});
+            depoimentosInput.value = JSON.stringify(depoimentos);
+
+            // Render the new testimonial in the UI
+            const newIndex = depoimentos.length - 1;
+            const testimonialHTML = `
+                <div class="testimonial-item bg-slate-50 rounded-2xl p-6 border border-slate-200">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full flex items-center justify-center">
+                                <span class="text-white font-semibold text-sm">T${newIndex + 1}</span>
+                            </div>
+                            <div>
+                                <input type="text" name="depoimentos-${newIndex}-autor" placeholder="Nome do cliente" class="font-semibold text-slate-800 bg-transparent border-none focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-2 py-1" onchange="updateTestimonialJson()">
+                                <input type="text" name="depoimentos-${newIndex}-profissao" placeholder="Profissão/Cargo" class="text-sm text-slate-600 bg-transparent border-none focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-2 py-1 block" onchange="updateTestimonialJson()">
+                            </div>
+                        </div>
+                        <button type="button" onclick="removeTestimonial(this)" class="text-red-500 hover:text-red-700">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <textarea name="depoimentos-${newIndex}-texto" placeholder="Depoimento do cliente..." rows="3" class="w-full bg-transparent border-none focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-2 py-1 text-slate-700 resize-none" onchange="updateTestimonialJson()"></textarea>
+                    <div class="flex items-center mt-4">
+                        <span class="text-sm text-slate-600 mr-2">Avaliação:</span>
+                        <div class="flex space-x-1">
+                            <button type="button" class="star-rating text-slate-300 hover:text-yellow-500" data-rating="1" onclick="setStarRating(this, ${newIndex}); updateTestimonialJson()">★</button>
+                            <button type="button" class="star-rating text-slate-300 hover:text-yellow-500" data-rating="2" onclick="setStarRating(this, ${newIndex}); updateTestimonialJson()">★</button>
+                            <button type="button" class="star-rating text-slate-300 hover:text-yellow-500" data-rating="3" onclick="setStarRating(this, ${newIndex}); updateTestimonialJson()">★</button>
+                            <button type="button" class="star-rating text-slate-300 hover:text-yellow-500" data-rating="4" onclick="setStarRating(this, ${newIndex}); updateTestimonialJson()">★</button>
+                            <button type="button" class="star-rating text-slate-300 hover:text-yellow-500" data-rating="5" onclick="setStarRating(this, ${newIndex}); updateTestimonialJson()">★</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            container.insertAdjacentHTML('beforeend', testimonialHTML);
+        }
+
+        function setStarRating(clickedStar, index) {
+            const rating = parseInt(clickedStar.dataset.rating);
+            const starsContainer = clickedStar.closest('.flex.space-x-1');
+            const stars = starsContainer.querySelectorAll('.star-rating');
+            
+            stars.forEach((star, i) => {
+                if (i < rating) {
+                    star.classList.add('text-yellow-400');
+                    star.classList.remove('text-slate-300');
+                } else {
+                    star.classList.add('text-slate-300');
+                    star.classList.remove('text-yellow-400');
+                }
+            });
+        }
+
+        function updateTestimonialJson() {
+            const testimonialsContainer = document.getElementById('testimonials-container');
+            const depoimentosInput = document.getElementById('id_depoimentos');
+            const currentTestimonials = [];
+
+            testimonialsContainer.querySelectorAll('.testimonial-item').forEach((item, index) => {
+                const autorInput = item.querySelector(`input[name="depoimentos-${index}-autor"]`);
+                const profissaoInput = item.querySelector(`input[name="depoimentos-${index}-profissao"]`);
+                const textoInput = item.querySelector(`textarea[name="depoimentos-${index}-texto"]`);
+                const ratingStars = item.querySelectorAll('.star-rating.text-yellow-400');
+
+                const autor = autorInput ? autorInput.value : '';
+                const profissao = profissaoInput ? profissaoInput.value : '';
+                const texto = textoInput ? textoInput.value : '';
+                const rating = ratingStars ? ratingStars.length : 0;
+                
+                currentTestimonials.push({ autor, profissao, texto, rating });
+            });
+            depoimentosInput.value = JSON.stringify(currentTestimonials);
+        }
+
+        function removeTestimonial(button) {
+            const testimonial = button.closest('.testimonial-item');
+            testimonial.remove();
+            updateTestimonialJson(); // Update JSON after removal
+        }
+
+        // Included items functionality
+        function addIncludedItem() {
+            const container = document.getElementById('included-items');
+            const includedInput = document.getElementById('id_o_que_esta_incluido');
+            let includedItems = [];
+            try {
+                includedItems = JSON.parse(includedInput.value || '[]');
+            } catch (e) {
+                console.error("Erro ao parsear itens incluídos JSON:", e);
+            }
+
+            includedItems.push(""); // Add an empty item
+            includedInput.value = JSON.stringify(includedItems);
+
+            const newIndex = includedItems.length - 1;
+            const itemHTML = `
+                <div class="flex items-center space-x-2">
+                    <input type="text" name="o_que_esta_incluido-${newIndex}" placeholder="Ex: Novo item incluído" class="flex-1 px-3 py-2 border border-slate-200 rounded-lg text-sm" onchange="updateIncludedItemsJson()">
+                    <button type="button" onclick="removeIncludedItem(this)" class="text-red-500 hover:text-red-700">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            `;
+            container.insertAdjacentHTML('beforeend', itemHTML);
+        }
+
+        function updateIncludedItemsJson() {
+            const includedItemsContainer = document.getElementById('included-items');
+            const includedInput = document.getElementById('id_o_que_esta_incluido');
+            const currentItems = [];
+
+            includedItemsContainer.querySelectorAll('input[type="text"]').forEach(input => {
+                currentItems.push(input.value);
+            });
+            includedInput.value = JSON.stringify(currentItems);
+        }
+
+        function removeIncludedItem(button) {
+            const item = button.closest('.flex');
+            item.remove();
+            updateIncludedItemsJson(); // Update JSON after removal
+        }
+
+        // Modal functionality
+        function showSuccessModal() {
+            const modal = document.getElementById('success-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('success-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function viewProduct() {
+            // Redirect to product page
+            const slug = document.getElementById('id_slug').value;
+            window.open(`/produtos/${slug}/`, '_blank');
+            closeModal();
+        }
+
+        // Navigation functions
+        function goBack() {
+            window.history.back();
+        }
+
+        // Preview functionality
+        document.getElementById('preview-btn').addEventListener('click', function() {
+            // Open preview in new tab
+            const slug = document.getElementById('id_slug').value;
+            window.open(`/produtos/${slug}/`, '_blank');
+        });
+    </script>
+</body>
+{% endblock %}

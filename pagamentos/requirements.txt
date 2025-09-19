@@ -1,0 +1,8 @@
+certifi
+chardet
+idna
+pycryptodome
+requests
+urllib3
+Flask-SQLAlchemy
+Django

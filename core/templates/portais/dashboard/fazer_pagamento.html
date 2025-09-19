@@ -1,0 +1,119 @@
+<section id="make-payment" class="section animate-fade-in">
+    <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-8">
+            <h2 class="text-3xl font-bold text-slate-800 mb-4">Testar API de Pagamento (C2B)</h2>
+            <p class="text-slate-600 text-lg">Use esta interface para simular uma requisição à sua API de pagamento direto.</p>
+        </div>
+
+        <div class="bg-white rounded-3xl p-8 shadow-2xl border border-slate-100">
+            
+            <!-- API Key Field -->
+            <div class="bg-gradient-to-r from-slate-800 to-slate-900 rounded-2xl p-6 mb-8 relative overflow-hidden">
+                <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                    <svg class="w-5 h-5 mr-2 text-paymoz-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-6 6c-3 0-6 1-6 1s-1-3-1-6a6 6 0 016-6c1 0 2 1 2 2"></path></svg>
+                    Sua Chave de API
+                </h3>
+                <p class="text-slate-300 mb-4">Use esta chave no cabeçalho <code class="bg-black/30 px-2 py-1 rounded text-orange-400 font-mono text-sm">X-API-Key</code> para autenticar suas requisições.</p>
+                <div class="code-block relative">
+                    <code id="api-key-field" class="block bg-black/30 text-green-400 rounded-xl p-4 font-mono text-sm border border-green-500/20">{{ user_profile.api_key }}</code>
+                    <button class="copy-button" onclick="copyToClipboard('{{ user_profile.api_key }}')">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                    </button>
+                </div>
+            </div>
+
+            <form id="test-payment-form" class="space-y-6">
+                {% csrf_token %}
+                
+                <!-- Phone Number Field -->
+                <div class="space-y-2">
+                    <label for="phone_number" class="block text-sm font-semibold text-slate-700">Número de Celular do Cliente</label>
+                    <input type="tel" id="phone_number" name="phone_number" required class="form-input w-full px-4 py-3 bg-white border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="841234567">
+                </div>
+
+                <!-- Amount Field -->
+                <div class="space-y-2">
+                    <label for="amount" class="block text-sm font-semibold text-slate-700">Valor (MZN)</label>
+                    <input type="number" id="amount" name="amount" min="1" step="0.01" required class="form-input w-full px-4 py-3 bg-white border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="100.00">
+                </div>
+
+                <!-- Submit Button -->
+                <div class="pt-4">
+                    <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-bold py-3 px-6 rounded-xl transition-transform transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300 flex items-center justify-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                        Testar Pagamento
+                    </button>
+                </div>
+            </form>
+
+            <!-- Response Display -->
+            <div id="response-container" class="mt-8 hidden">
+                <h3 class="text-lg font-bold text-slate-800 mb-4">Resposta da API</h3>
+                <pre><code id="response-code" class="language-json block bg-slate-900 text-white rounded-lg p-4 overflow-x-auto text-sm"></code></pre>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('test-payment-form');
+    const responseContainer = document.getElementById('response-container');
+    const responseCode = document.getElementById('response-code');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const apiKey = document.getElementById('api-key-field').textContent.trim();
+        const phoneNumber = document.getElementById('phone_number').value;
+        const amount = document.getElementById('amount').value;
+
+        let method = '';
+        if (phoneNumber.startsWith('84') || phoneNumber.startsWith('85')) {
+            method = 'mpesa';
+        } else if (phoneNumber.startsWith('86') || phoneNumber.startsWith('87')) {
+            method = 'emola';
+        } else {
+            alert('Número de celular inválido. Deve começar com 84, 85, 86 ou 87.');
+            return;
+        }
+
+        const url = `/api/v1/payment/${method}/`;
+        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-API-Key': apiKey,
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify({ 
+                    numero_celular: phoneNumber, 
+                    valor: amount 
+                })
+            });
+
+            const data = await response.json();
+
+            responseCode.textContent = JSON.stringify(data, null, 2);
+            responseContainer.classList.remove('hidden');
+            // Highlight the response code
+            if (window.Prism) {
+                Prism.highlightElement(responseCode);
+            }
+
+        } catch (error) {
+            responseCode.textContent = JSON.stringify({ error: error.message }, null, 2);
+            responseContainer.classList.remove('hidden');
+        }
+    });
+});
+
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => {
+        alert('API Key copiada para a área de transferência!');
+    });
+}
+</script>

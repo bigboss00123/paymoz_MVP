@@ -1,0 +1,32 @@
+const mpesaConfig = require("./mpesa.json");
+const MpesaAPI = require("mpesa-api-nodejs");
+
+const api_key = mpesaConfig.api_key;
+const public_key = mpesaConfig.public_key;
+const environment = "production"; // ou "development" se for sandbox
+const ssl = true;
+
+const mpesa = MpesaAPI.init(api_key, public_key, environment, ssl);
+
+const payMpesa = async (phone, value, reference) => {
+  const data = {
+    value,
+    client_number: phone,
+    agent_id: mpesaConfig.shortcode,
+    transaction_reference: "pagaMoz",
+    third_party_reference: reference
+  };
+
+  try {
+    const response = await mpesa.c2b(data);
+    const isSuccess = response.output_ResponseCode === "INS-0";
+    return isSuccess
+      ? { success: true, message: response.output_ResponseDesc }
+      : { error: response.output_ResponseDesc };
+  } catch (err) {
+    return { error: err.message || "Erro ao processar o pagamento" };
+  }
+};
+
+// CHAMADA DE TESTE
+payMpesa("258843550143", "10", "ref123").then(console.log);

@@ -1,0 +1,1934 @@
+{% extends 'base.html' %}
+
+{% block title %}Paymoz - A Plataforma de Pagamentos para o Futuro de Moçambique{% endblock %}
+
+{% block content %}
+  {% include 'portais/header.html' %}
+
+  
+
+  <main class="antialiased pt-16 z-0 overflow-hidden">
+    <!-- Hero Section -->
+    <section id="inicio" class="relative min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 overflow-hidden">
+      <!-- Background Elements -->
+      <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute -top-40 -right-32 w-80 h-80 bg-gradient-to-br from-blue-400/20 to-purple-600/20 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute -bottom-40 -left-32 w-96 h-96 bg-gradient-to-tr from-cyan-400/20 to-blue-600/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-purple-400/10 to-pink-400/10 rounded-full blur-2xl animate-bounce"></div>
+      </div>
+
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col lg:flex-row items-center justify-between min-h-screen py-20">
+          <!-- Content -->
+          <div class="flex-1 lg:pr-12 text-center lg:text-left">
+            <div class="space-y-8">
+              <!-- Badge -->
+              <div class="inline-flex items-center px-4 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-sm font-medium text-slate-700 shadow-lg animate-fade-in-down">
+                <span class="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
+                Plataforma #1 em Moçambique
+              </div>
+
+              <!-- Main Heading -->
+              <h1 class="text-5xl lg:text-7xl font-black tracking-tight text-slate-900 animate-fade-in-up">
+                <span class="block">Acelere suas</span>
+                <span class="block bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-500 bg-clip-text text-transparent">
+                  Vendas Online
+                </span>
+                <span class="block text-4xl lg:text-5xl font-bold text-slate-700 mt-2">
+                  em Moçambique
+                </span>
+              </h1>
+
+              <!-- Subtitle -->
+              <p class="text-xl lg:text-2xl text-slate-600 max-w-2xl leading-relaxed animate-fade-in-up delay-200">
+                Crie páginas de vendas de <span class="font-semibold text-blue-600">alta conversão</span>, 
+                integre nossa <span class="font-semibold text-purple-600">API robusta</span> e receba seus 
+                pagamentos em <span class="font-semibold text-cyan-600">tempo recorde</span>.
+              </p>
+
+              
+
+              <!-- CTA Buttons -->
+              <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in-up delay-400">
+                {% if user.is_authenticated %}
+                  {% if current_package %}
+                    <a href="{% url 'dashboard' %}" class="group relative px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-2xl shadow-xl cursor-pointer">
+                      <span class="relative flex items-center justify-center">
+                        Você está no plano: {{ current_package.name }}
+                      </span>
+                    </a>
+                  {% else %}
+                     <a href="{% url 'dashboard' %}" class="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 overflow-hidden">
+                        <span class="relative flex items-center justify-center">
+                          Ir para o Dashboard
+                          <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                          </svg>
+                        </span>
+                     </a>
+                  {% endif %}
+                {% else %}
+                  <a href="{% url 'login_sso' %}" class="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-purple-600 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <span class="relative flex items-center justify-center">
+                      Começar Grátis
+                      <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                      </svg>
+                    </span>
+                  </a>
+                {% endif %}
+                
+                <a href="{% url 'documentacao' %}" class="group px-8 py-4 bg-white/80 backdrop-blur-md border border-white/50 text-slate-700 font-semibold rounded-2xl shadow-lg hover:shadow-xl hover:bg-white/90 transform hover:-translate-y-1 transition-all duration-300">
+                  <span class="flex items-center justify-center">
+                    <svg class="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    Documentação
+                  </span>
+                </a>
+              </div>
+
+              <!-- Trust Indicators -->
+              <div class="flex flex-wrap items-center justify-center lg:justify-start gap-6 pt-8 animate-fade-in-up delay-500">
+                <div class="flex items-center space-x-2 text-sm text-slate-600">
+                  <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span>Sem taxas de setup</span>
+                </div>
+                <div class="flex items-center space-x-2 text-sm text-slate-600">
+                  <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span>Suporte 24/7</span>
+                </div>
+                <div class="flex items-center space-x-2 text-sm text-slate-600">
+                  <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span>Integração em 5min</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Image/Visual -->
+          <div class="flex-1 relative mt-16 lg:mt-0">
+            <div class="relative">
+              <!-- Main Device Mockup -->
+              <div class="relative mx-auto w-80 h-96 bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-500">
+                <div class="absolute inset-2 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl overflow-hidden">
+                  <div class="p-6 space-y-4">
+                    <div class="flex items-center justify-between">
+                      <div class="w-8 h-8 bg-white/20 rounded-full"></div>
+                      <div class="text-white font-semibold">Paymoz</div>
+                      <div class="w-8 h-8 bg-white/20 rounded-full"></div>
+                    </div>
+                    <div class="space-y-3">
+                      <div class="h-4 bg-white/30 rounded-full"></div>
+                      <div class="h-4 bg-white/20 rounded-full w-3/4"></div>
+                      <div class="h-4 bg-white/20 rounded-full w-1/2"></div>
+                    </div>
+                    <div class="mt-8 p-4 bg-white/10 rounded-xl backdrop-blur-sm">
+                      <div class="text-center text-white">
+                        <div class="text-2xl font-bold">₼1,250</div>
+                        <div class="text-sm opacity-80">Pagamento Recebido</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Floating Elements -->
+              <div class="absolute -top-8 -left-8 w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-500 rounded-2xl shadow-lg animate-bounce delay-300 flex items-center justify-center">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+
+              <div class="absolute -bottom-4 -right-4 w-20 h-20 bg-gradient-to-br from-orange-400 to-red-500 rounded-2xl shadow-lg animate-pulse flex items-center justify-center">
+                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+              </div>
+
+              <div class="absolute top-1/2 -right-12 w-12 h-12 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full shadow-lg animate-ping"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <svg class="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="recursos" class="py-24 bg-white relative overflow-hidden">
+      <!-- Background Pattern -->
+      <div class="absolute inset-0 bg-gradient-to-br from-slate-50/50 to-blue-50/50"></div>
+      <div class="absolute inset-0 bg-grid-pattern opacity-5"></div>
+
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="text-center max-w-3xl mx-auto mb-20">
+          <div class="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 text-blue-800 text-sm font-medium mb-6">
+            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"></path>
+            </svg>
+            A Plataforma Completa
+          </div>
+          <h2 class="text-4xl lg:text-5xl font-black text-slate-900 mb-6">
+            Tudo que seu negócio precisa para 
+            <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">decolar</span>
+          </h2>
+          <p class="text-xl text-slate-600 leading-relaxed">
+            Da criação de páginas de produtos à gestão de pagamentos, a Paymoz oferece uma solução completa e integrada para o seu sucesso.
+          </p>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <!-- Feature 1 -->
+          <div class="group relative p-8 bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg hover:shadow-2xl border border-white/50 transition-all duration-500 hover:-translate-y-2">
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div class="relative">
+              <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900 mb-4">Páginas de Vendas que Convertem</h3>
+              <p class="text-slate-600 leading-relaxed">
+                Lance produtos em minutos com páginas de vendas otimizadas para conversão. Crie uma vitrine profissional para seus clientes, sem precisar de uma linha de código.
+              </p>
+            </div>
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="group relative p-8 bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg hover:shadow-2xl border border-white/50 transition-all duration-500 hover:-translate-y-2">
+            <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div class="relative">
+              <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900 mb-4">API Robusta para Desenvolvedores</h3>
+              <p class="text-slate-600 leading-relaxed">
+                Integre a Paymoz em qualquer sistema com nossa API RESTful. Documentação clara e suporte de primeira para uma integração rápida e segura.
+              </p>
+            </div>
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="group relative p-8 bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg hover:shadow-2xl border border-white/50 transition-all duration-500 hover:-translate-y-2">
+            <div class="absolute inset-0 bg-gradient-to-br from-green-500/5 to-emerald-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div class="relative">
+              <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900 mb-4">Receba Pagamentos em 24 Horas</h3>
+              <p class="text-slate-600 leading-relaxed">
+                Acelere o fluxo de caixa do seu negócio. Com a Paymoz, seu dinheiro está na sua conta em menos de 24 horas, pronto para ser reinvestido.
+              </p>
+            </div>
+          </div>
+
+          <!-- Feature 4 -->
+          <div class="group relative p-8 bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg hover:shadow-2xl border border-white/50 transition-all duration-500 hover:-translate-y-2">
+            <div class="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-red-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div class="relative">
+              <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900 mb-4">Suporte que Realmente Ajuda</h3>
+              <p class="text-slate-600 leading-relaxed">
+                Nossa equipe de especialistas está sempre disponível para ajudar você a superar qualquer desafio e garantir que suas operações nunca parem.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it Works Section -->
+    <section id="como-funciona" class="py-24 bg-gradient-to-br from-slate-50 to-blue-50 relative overflow-hidden">
+      <!-- Background Elements -->
+      <div class="absolute top-0 left-0 w-72 h-72 bg-gradient-to-br from-blue-400/10 to-purple-600/10 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-purple-400/10 to-pink-600/10 rounded-full blur-3xl"></div>
+
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="text-center max-w-3xl mx-auto mb-20">
+          <div class="inline-flex items-center px-4 py-2 rounded-full bg-purple-100 text-purple-800 text-sm font-medium mb-6">
+            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+            </svg>
+            Como Funciona
+          </div>
+          <h2 class="text-4xl lg:text-5xl font-black text-slate-900 mb-6">
+            Venda Online em 
+            <span class="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">3 Passos Simples</span>
+          </h2>
+          <p class="text-xl text-slate-600 leading-relaxed">
+            Nossa plataforma foi projetada para ser tão simples que qualquer pessoa pode começar a vender em minutos.
+          </p>
+        </div>
+
+        <!-- Steps -->
+        <div class="relative">
+          <!-- Connection Line -->
+          <div class="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-200 via-purple-200 to-pink-200 transform -translate-y-1/2"></div>
+          
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-8">
+            <!-- Step 1 -->
+            <div class="relative text-center group">
+              <div class="relative inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-3xl shadow-xl mb-8 group-hover:scale-110 transition-transform duration-300">
+                <span class="text-2xl font-black text-white">1</span>
+                <div class="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-500 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </div>
+              <h3 class="text-2xl font-bold text-slate-900 mb-4">Crie sua Conta Grátis</h3>
+              <p class="text-slate-600 leading-relaxed max-w-sm mx-auto">
+                Cadastre-se em poucos minutos e tenha acesso imediato a todas as ferramentas da Paymoz.
+              </p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="relative text-center group">
+              <div class="relative inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 rounded-3xl shadow-xl mb-8 group-hover:scale-110 transition-transform duration-300">
+                <span class="text-2xl font-black text-white">2</span>
+                <div class="absolute inset-0 bg-gradient-to-br from-purple-400 to-pink-500 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </div>
+              <h3 class="text-2xl font-bold text-slate-900 mb-4">Configure seus Produtos</h3>
+              <p class="text-slate-600 leading-relaxed max-w-sm mx-auto">
+                Crie suas páginas de vendas ou integre nossa API. Adicione seus produtos, preços e descrições.
+              </p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="relative text-center group">
+              <div class="relative inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-pink-500 to-pink-600 rounded-3xl shadow-xl mb-8 group-hover:scale-110 transition-transform duration-300">
+                <span class="text-2xl font-black text-white">3</span>
+                <div class="absolute inset-0 bg-gradient-to-br from-pink-400 to-red-500 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </div>
+              <h3 class="text-2xl font-bold text-slate-900 mb-4">Comece a Vender</h3>
+              <p class="text-slate-600 leading-relaxed max-w-sm mx-auto">
+                Seus clientes pagam com M-Pesa ou E-Mola e você acompanha tudo em tempo real pelo seu painel.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="precos" class="py-24 bg-white relative overflow-hidden">
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="text-center max-w-3xl mx-auto mb-20">
+          <div class="inline-flex items-center px-4 py-2 rounded-full bg-green-100 text-green-800 text-sm font-medium mb-6">
+            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"></path>
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"></path>
+            </svg>
+            Preços Transparentes
+          </div>
+          <h2 class="text-4xl lg:text-5xl font-black text-slate-900 mb-6">
+            Planos para todos os 
+            <span class="bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">negócios</span>
+          </h2>
+          <p class="text-xl text-slate-600 leading-relaxed">
+            Escolha o plano ideal para você. Comece grátis e cresça com a gente.
+          </p>
+        </div>
+
+        <!-- Pricing Cards -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          {% if packages %}
+          {% for package in packages %}
+          <!-- {{ package.name }} Plan -->
+          <div class="relative p-8 {% if package == current_package %}bg-gradient-to-br from-green-500 to-emerald-600 text-white transform scale-105{% elif package.package_type == 'ONE_TIME' %}bg-gradient-to-br from-slate-900 to-slate-800 text-white transform scale-105 hover:scale-110{% else %}bg-white text-slate-900 hover:shadow-2xl{% endif %} rounded-3xl shadow-lg border border-slate-200 transition-all duration-500 hover:-translate-y-2">
+            {% if package == current_package %}
+            <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+              <div class="px-4 py-2 bg-white text-green-700 text-sm font-bold rounded-full shadow-lg">
+                SEU PLANO ATUAL
+              </div>
+            </div>
+            {% elif package.package_type == 'ONE_TIME' %}
+            <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+              <div class="px-4 py-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-slate-900 text-sm font-bold rounded-full">
+                MAIS POPULAR
+              </div>
+            </div>
+            {% endif %}
+            
+            <div class="text-center">
+              <div class="inline-flex items-center px-4 py-2 rounded-full {% if package.package_type == 'ONE_TIME' %}bg-white/20 text-white{% else %}bg-blue-100 text-blue-800{% endif %} text-sm font-semibold mb-6">
+                {{ package.name }}
+              </div>
+              <div class="mb-6 h-24 flex flex-col justify-center">
+                {% if package.package_type == 'ENTERPRISE' %}
+                  <span class="text-4xl font-black leading-tight">Personalizado</span>
+                  <p class="{% if package == current_package %}text-slate-200{% else %}text-slate-500{% endif %} mt-2 text-sm">Fale com a nossa equipe para um plano sob medida.</p>
+                {% else %}
+                  <div>
+                    <span class="text-5xl font-black">{% if package.price == 0 %}0{% else %}{{ package.price|floatformat:0 }}{% endif %}</span>
+                    <span class="text-xl {% if package.package_type == 'ONE_TIME' or package == current_package %}text-slate-300{% else %}text-slate-600{% endif %} ml-2">MZN</span>
+                  </div>
+                  <div class="{% if package.package_type == 'ONE_TIME' or package == current_package %}text-slate-400{% else %}text-slate-500{% endif %} mt-1">{% if package.package_type == 'TRIAL' %}/7 dias{% elif package.package_type == 'ONE_TIME' %}/pagamento único{% endif %}</div>
+                {% endif %}
+              </div>
+              <p class="{% if package.package_type == 'ONE_TIME' %}text-slate-300{% else %}text-slate-600{% endif %} mb-8">{{ package.description }}</p>
+              
+              <ul class="space-y-4 mb-8 text-left">
+                {% if package.package_type == 'TRIAL' or package.package_type == 'ONE_TIME' %}
+                <li class="flex items-center">
+                  <svg class="w-5 h-5 {% if package.package_type == 'ONE_TIME' %}text-green-400{% else %}text-green-500{% endif %} mr-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="{% if package.package_type == 'ONE_TIME' %}text-slate-200{% else %}text-slate-700{% endif %}">Páginas de produtos ilimitadas</span>
+                </li>
+                <li class="flex items-center">
+                  <svg class="w-5 h-5 {% if package.package_type == 'ONE_TIME' %}text-green-400{% else %}text-green-500{% endif %} mr-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="{% if package.package_type == 'ONE_TIME' or package == current_package %}text-slate-200{% else %}text-slate-700{% endif %}">Taxa de {{ package.transaction_fee_percentage|floatformat:0 }}% por transação</span>
+                </li>
+                {% endif %}
+                {% if package.package_type == 'ONE_TIME' %}
+                <li class="flex items-center">
+                  <svg class="w-5 h-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="text-slate-200">Suporte prioritário</span>
+                </li>
+                {% endif %}
+                {% if package.package_type == 'ENTERPRISE' %}
+                <li class="flex items-center">
+                  <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="text-slate-700">Tudo do Pro e mais</span>
+                </li>
+                <li class="flex items-center">
+                  <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="text-slate-700">Gerente de contas dedicado</span>
+                </li>
+                <li class="flex items-center">
+                  <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="text-slate-700">Integrações personalizadas</span>
+                </li>
+                {% endif %}
+              </ul>
+              
+              <a href="{% if package == current_package %}#{% elif user.is_authenticated %}{% if package.package_type == 'ONE_TIME' %}{% url 'checkout_pro' %}{% else %}/dashboard/{% endif %}{% else %}{% if package.package_type == 'ONE_TIME' %}{% url 'login_sso' %}?next={% url 'checkout_pro' %}{% else %}{% url 'login_sso' %}{% endif %}{% endif %}" 
+                 class="block w-full py-4 px-6 
+                        {% if package == current_package %}
+                          bg-gray-400 text-gray-800 cursor-not-allowed
+                        {% elif package.package_type == 'ONE_TIME' %}
+                          bg-gradient-to-r from-yellow-400 to-orange-500 text-slate-900 font-bold hover:from-orange-500 hover:to-yellow-400
+                        {% elif package.package_type == 'TRIAL' %}
+                          bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold hover:from-purple-600 hover:to-blue-600
+                        {% else %}
+                          bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold hover:from-pink-600 hover:to-purple-600
+                        {% endif %} 
+                        rounded-2xl transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl">
+                {% if package == current_package %}
+                  Plano Ativo
+                {% elif package.package_type == 'TRIAL' %}
+                  Começar Teste Grátis
+                {% elif package.package_type == 'ONE_TIME' %}
+                  Quero o Plano Pro
+                {% else %}
+                  Fale com um especialista
+                {% endif %}
+              </a>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-24 bg-gradient-to-br from-slate-50 to-blue-50">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl lg:text-5xl font-black text-slate-900 mb-6">
+            Perguntas 
+            <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Frequentes</span>
+          </h2>
+          <p class="text-xl text-slate-600">Tire suas dúvidas sobre a plataforma</p>
+        </div>
+
+        <div class="space-y-6">
+          <!-- FAQ Item 1 -->
+          <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/50 overflow-hidden">
+            <button type="button" class="w-full px-8 py-6 text-left flex justify-between items-center hover:bg-white/50 transition-colors duration-200" onclick="toggleFAQ(this)">
+              <span class="text-lg font-semibold text-slate-900">Quais são os métodos de pagamento aceitos?</span>
+              <svg class="w-6 h-6 text-slate-400 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="px-8 pb-6 hidden">
+              <p class="text-slate-600 leading-relaxed">
+                Aceitamos os principais métodos de pagamento móvel em Moçambique, incluindo M-Pesa e E-Mola, para garantir que seus clientes possam pagar da forma que preferirem.
+              </p>
+            </div>
+          </div>
+
+          <!-- FAQ Item 2 -->
+          <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/50 overflow-hidden">
+            <button type="button" class="w-full px-8 py-6 text-left flex justify-between items-center hover:bg-white/50 transition-colors duration-200" onclick="toggleFAQ(this)">
+              <span class="text-lg font-semibold text-slate-900">Preciso de um site para usar a Paymoz?</span>
+              <svg class="w-6 h-6 text-slate-400 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="px-8 pb-6 hidden">
+              <p class="text-slate-600 leading-relaxed">
+                Não! Você pode criar páginas de vendas personalizadas diretamente na nossa plataforma para vender seus produtos e serviços, sem a necessidade de um site próprio. Se você já tem um site, pode integrar nossa API facilmente.
+              </p>
+            </div>
+          </div>
+
+          <!-- FAQ Item 3 -->
+          <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/50 overflow-hidden">
+            <button type="button" class="w-full px-8 py-6 text-left flex justify-between items-center hover:bg-white/50 transition-colors duration-200" onclick="toggleFAQ(this)">
+              <span class="text-lg font-semibold text-slate-900">Em quanto tempo recebo meu dinheiro?</span>
+              <svg class="w-6 h-6 text-slate-400 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="px-8 pb-6 hidden">
+              <p class="text-slate-600 leading-relaxed">
+                Os pagamentos são processados e o valor fica disponível para saque em menos de 24 horas. Queremos que você tenha acesso rápido ao seu dinheiro para poder reinvestir no seu negócio.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contato" class="py-24 bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900 relative overflow-hidden">
+      <!-- Background Elements -->
+      <div class="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-purple-600/20"></div>
+      <div class="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-blue-500/10 to-transparent rounded-full blur-3xl"></div>
+      <div class="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-purple-500/10 to-transparent rounded-full blur-3xl"></div>
+
+      <div class="relative max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+        <h2 class="text-4xl lg:text-6xl font-black text-white mb-8">
+          <span class="block">Pronto para Transformar</span>
+          <span class="block bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            seu Negócio?
+          </span>
+        </h2>
+        <p class="text-xl text-slate-300 mb-12 max-w-2xl mx-auto leading-relaxed">
+          Junte-se a milhares de empreendedores de sucesso que já escolheram a Paymoz para acelerar suas vendas online.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-6 justify-center">
+          {% if user.is_authenticated %}
+            {% if current_package %}
+              <a href="{% url 'dashboard' %}" class="group px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold rounded-2xl shadow-2xl hover:shadow-green-500/25 transform hover:-translate-y-1 transition-all duration-300">
+                <span class="flex items-center justify-center">
+                  Você está no plano: {{ current_package.name }}
+                </span>
+              </a>
+            {% else %}
+              <a href="{% url 'dashboard' %}" class="group px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold rounded-2xl shadow-2xl hover:shadow-blue-500/25 transform hover:-translate-y-1 transition-all duration-300">
+                <span class="flex items-center justify-center">
+                  Ir para o Dashboard
+                  <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                  </svg>
+                </span>
+              </a>
+            {% endif %}
+          {% else %}
+            <a href="{% url 'login_sso' %}" class="group px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold rounded-2xl shadow-2xl hover:shadow-blue-500/25 transform hover:-translate-y-1 transition-all duration-300">
+              <span class="flex items-center justify-center">
+                Comece a Vender Agora
+                <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                </svg>
+              </span>
+            </a>
+          {% endif %}
+          
+          <a href="#" class="group px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white font-semibold rounded-2xl hover:bg-white/20 transform hover:-translate-y-1 transition-all duration-300">
+            <span class="flex items-center justify-center">
+              <svg class="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+              </svg>
+              Fale com um Especialista
+            </span>
+          </a>
+        </div>
+
+        <!-- Trust Indicators -->
+        <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+          <div class="text-white/80">
+            <div class="text-3xl font-bold text-white mb-2">99.9%</div>
+            <div class="text-sm">Uptime Garantido</div>
+          </div>
+          <div class="text-white/80">
+            <div class="text-3xl font-bold text-white mb-2">24/7</div>
+            <div class="text-sm">Suporte Técnico</div>
+          </div>
+          <div class="text-white/80">
+            <div class="text-3xl font-bold text-white mb-2">SSL</div>
+            <div class="text-sm">Segurança Máxima</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  
+  {% include 'portais/footer.html' %}
+
+  <!-- Custom Styles -->
+  <style>
+    @keyframes fade-in-down {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fade-in-up {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-in-down {
+      animation: fade-in-down 0.8s ease-out;
+    }
+
+    .animate-fade-in-up {
+      animation: fade-in-up 0.8s ease-out;
+    }
+
+    .delay-200 {
+      animation-delay: 0.2s;
+    }
+
+    .delay-300 {
+      animation-delay: 0.3s;
+    }
+
+    .delay-400 {
+      animation-delay: 0.4s;
+    }
+
+    .delay-500 {
+      animation-delay: 0.5s;
+    }
+
+    .bg-grid-pattern {
+      background-image: radial-gradient(circle, #e2e8f0 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Custom gradient text */
+    .bg-clip-text {
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+  </style>
+
+  <!-- JavaScript for FAQ Toggle -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+
+      // Add scroll animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, observerOptions);
+
+      const animatedElements = document.querySelectorAll('.animate-fade-in-up, .animate-fade-in-down');
+      animatedElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+        observer.observe(el);
+      });
+    });
+
+    // Moved toggleFAQ to be globally accessible as it's called via onclick attribute
+    function toggleFAQ(button) {
+      const content = button.nextElementSibling;
+      const icon = button.querySelector('svg');
+      
+      if (content.classList.contains('hidden')) {
+        content.classList.remove('hidden');
+        icon.style.transform = 'rotate(180deg)';
+      } else {
+        content.classList.add('hidden');
+        icon.style.transform = 'rotate(0deg)';
+      }
+    }
+  </script>
+{% endblock %}<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Moderno Paymoz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'paymoz': {
+                            'primary': '#1e40af',
+                            'secondary': '#3b82f6',
+                            'accent': '#06b6d4',
+                            'success': '#10b981',
+                            'warning': '#f59e0b',
+                            'error': '#ef4444'
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-out',
+                        'slide-in': 'slideIn 0.4s ease-out',
+                        'bounce-gentle': 'bounceGentle 2s infinite',
+                        'pulse-slow': 'pulse 3s infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        slideIn: {
+                            '0%': { transform: 'translateX(-100%)' },
+                            '100%': { transform: 'translateX(0)' }
+                        },
+                        bounceGentle: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-5px)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 5px rgba(59, 130, 246, 0.5)' },
+                            '100%': { boxShadow: '0 0 20px rgba(59, 130, 246, 0.8)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .glass-dark {
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .gradient-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .gradient-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .chart-bar {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .chart-bar:hover {
+            transform: scaleY(1.1) scaleX(1.05);
+        }
+        .metric-card {
+            transition: all 0.3s ease;
+        }
+        .metric-card:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+        .sidebar-link {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .sidebar-link:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        .sidebar-link:hover:before {
+            left: 100%;
+        }
+        .dark {
+            color-scheme: dark;
+        }
+        .floating-element {
+            animation: float 3s ease-in-out infinite;
+        }
+        .stagger-animation > * {
+            animation-delay: calc(var(--stagger) * 100ms);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 min-h-screen transition-colors duration-300">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" class="md:hidden fixed top-4 left-4 z-50 p-3 rounded-xl glass text-slate-700 hover:bg-white/20 transition-all duration-300 shadow-lg">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" class="fixed top-4 right-4 z-50 p-3 rounded-xl glass text-slate-700 hover:bg-white/20 transition-all duration-300 shadow-lg">
+            <svg id="sun-icon" class="w-6 h-6 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+            <svg id="moon-icon" class="w-6 h-6 absolute top-3 left-3 opacity-0 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+            </svg>
+        </button>
+
+        <!-- Sidebar -->
+        <div id="sidebar" class="fixed inset-y-0 left-0 z-40 w-72 transform -translate-x-full transition-transform duration-300 md:translate-x-0 md:static md:inset-0">
+            <div class="flex flex-col h-full gradient-primary text-white shadow-2xl">
+                <!-- Logo -->
+                <div class="flex items-center justify-center h-20 border-b border-white/20 relative overflow-hidden">
+                    <div class="flex items-center space-x-3 floating-element">
+                        <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h1 class="text-2xl font-bold">Paymoz</h1>
+                            <p class="text-xs text-white/70">Admin Dashboard</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="flex-1 px-4 py-6 space-y-2">
+                    <a href="#overview" class="sidebar-link flex items-center px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-300 group">
+                        <svg class="h-6 w-6 mr-4 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                        </svg>
+                        <span class="font-medium">Visão Geral</span>
+                    </a>
+                    
+                    <a href="#transactions" class="sidebar-link flex items-center px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-300 group">
+                        <svg class="h-6 w-6 mr-4 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                        <span class="font-medium">Transações</span>
+                    </a>
+                    
+                    <a href="#customers" class="sidebar-link flex items-center px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-300 group">
+                        <svg class="h-6 w-6 mr-4 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"></path>
+                        </svg>
+                        <span class="font-medium">Clientes</span>
+                    </a>
+                    
+                    <a href="#analytics" class="sidebar-link flex items-center px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-300 group">
+                        <svg class="h-6 w-6 mr-4 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                        <span class="font-medium">Analytics</span>
+                    </a>
+                    
+                    <a href="#settings" class="sidebar-link flex items-center px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-300 group">
+                        <svg class="h-6 w-6 mr-4 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        <span class="font-medium">Configurações</span>
+                    </a>
+                </nav>
+
+                <!-- User Profile -->
+                <div class="p-4 border-t border-white/20">
+                    <div class="flex items-center space-x-3 p-3 rounded-xl bg-white/10 backdrop-blur-sm">
+                        <div class="w-10 h-10 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full flex items-center justify-center">
+                            <span class="text-white font-semibold">U</span>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-white font-medium">Usuário Admin</p>
+                            <p class="text-white/60 text-sm">admin@paymoz.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Top Bar -->
+            <header class="bg-white/60 backdrop-blur-md border-b border-white/20 shadow-sm">
+                <div class="flex justify-between items-center p-6">
+                    <div>
+                        <h1 class="text-3xl font-bold text-slate-800">Dashboard</h1>
+                        <p class="text-slate-600">Bem-vindo de volta! Aqui está o resumo do seu negócio.</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <!-- Search Bar -->
+                        <div class="relative">
+                            <input type="text" placeholder="Buscar..." class="pl-10 pr-4 py-2 bg-white/50 border border-white/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all duration-300">
+                            <svg class="absolute left-3 top-2.5 h-5 w-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                        </div>
+                        
+                        <!-- Notifications -->
+                        <button class="relative p-2 rounded-xl bg-white/50 hover:bg-white/70 transition-all duration-300">
+                            <svg class="h-6 w-6 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-3.5-3.5c-.38-.41-.6-.98-.6-1.58v-4.42c0-3.31-2.69-6-6-6s-6 2.69-6 6v4.42c0 .6-.22 1.17-.6 1.58l-3.5 3.5h5m6 0v1a3 3 0 11-6 0v-1m6 0h-6"></path>
+                            </svg>
+                            <span class="absolute -top-1 -right-1 h-4 w-4 bg-red-500 rounded-full text-xs text-white flex items-center justify-center">3</span>
+                        </button>
+                        
+                        <!-- Logout Button -->
+                        <button class="px-6 py-2 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-xl hover:from-red-600 hover:to-pink-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+                            Logout
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <main class="flex-1 overflow-x-hidden overflow-y-auto p-6 space-y-8">
+                <!-- Metrics Section -->
+                <section id="overview" class="stagger-animation">
+                    <h2 class="text-2xl font-bold text-slate-800 mb-6">Visão Geral</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- Metric Card 1 -->
+                        <div class="metric-card glass rounded-2xl p-6 animate-fade-in" style="--stagger: 0">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-slate-600 text-sm font-medium">Total de Vendas</p>
+                                    <p class="text-3xl font-bold text-slate-800 mt-1">12.345 MZN</p>
+                                    <div class="flex items-center mt-2">
+                                        <svg class="h-4 w-4 text-green-500 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17l9.2-9.2M17 8v9H8"></path>
+                                        </svg>
+                                        <span class="text-green-500 text-sm font-medium">+12.5%</span>
+                                    </div>
+                                </div>
+                                <div class="p-4 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl shadow-lg">
+                                    <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Metric Card 2 -->
+                        <div class="metric-card glass rounded-2xl p-6 animate-fade-in" style="--stagger: 1">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-slate-600 text-sm font-medium">Novos Clientes</p>
+                                    <p class="text-3xl font-bold text-slate-800 mt-1">250</p>
+                                    <div class="flex items-center mt-2">
+                                        <svg class="h-4 w-4 text-green-500 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17l9.2-9.2M17 8v9H8"></path>
+                                        </svg>
+                                        <span class="text-green-500 text-sm font-medium">+8.2%</span>
+                                    </div>
+                                </div>
+                                <div class="p-4 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl shadow-lg">
+                                    <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Metric Card 3 -->
+                        <div class="metric-card glass rounded-2xl p-6 animate-fade-in" style="--stagger: 2">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-slate-600 text-sm font-medium">Receita Média</p>
+                                    <p class="text-3xl font-bold text-slate-800 mt-1">500 MZN</p>
+                                    <div class="flex items-center mt-2">
+                                        <svg class="h-4 w-4 text-red-500 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 7l-9.2 9.2M8 8v9h9"></path>
+                                        </svg>
+                                        <span class="text-red-500 text-sm font-medium">-2.4%</span>
+                                    </div>
+                                </div>
+                                <div class="p-4 bg-gradient-to-br from-green-500 to-emerald-500 rounded-2xl shadow-lg">
+                                    <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Metric Card 4 -->
+                        <div class="metric-card glass rounded-2xl p-6 animate-fade-in" style="--stagger: 3">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-slate-600 text-sm font-medium">Taxa de Conversão</p>
+                                    <p class="text-3xl font-bold text-slate-800 mt-1">23.8%</p>
+                                    <div class="flex items-center mt-2">
+                                        <svg class="h-4 w-4 text-green-500 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17l9.2-9.2M17 8v9H8"></path>
+                                        </svg>
+                                        <span class="text-green-500 text-sm font-medium">+4.1%</span>
+                                    </div>
+                                </div>
+                                <div class="p-4 bg-gradient-to-br from-orange-500 to-red-500 rounded-2xl shadow-lg">
+                                    <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Charts Section -->
+                <section id="charts" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Sales Chart -->
+                    <div class="glass rounded-2xl p-6 animate-fade-in">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-xl font-bold text-slate-800">Vendas por Mês</h3>
+                            <div class="flex space-x-2">
+                                <button class="px-3 py-1 bg-blue-500 text-white rounded-lg text-sm">Mês</button>
+                                <button class="px-3 py-1 bg-slate-200 text-slate-600 rounded-lg text-sm">Ano</button>
+                            </div>
+                        </div>
+                        <div class="flex items-end justify-between h-64 space-x-2">
+                            <div class="chart-bar w-full bg-gradient-to-t from-blue-500 to-cyan-400 rounded-t-lg" style="height: 65%"></div>
+                            <div class="chart-bar w-full bg-gradient-to-t from-blue-500 to-cyan-400 rounded-t-lg" style="height: 78%"></div>
+                            <div class="chart-bar w-full bg-gradient-to-t from-blue-500 to-cyan-400 rounded-t-lg" style="height: 45%"></div>
+                            <div class="chart-bar w-full bg-gradient-to-t from-blue-500 to-cyan-400 rounded-t-lg" style="height: 88%"></div>
+                            <div class="chart-bar w-full bg-gradient-to-t from-blue-500 to-cyan-400 rounded-t-lg" style="height: 92%"></div>
+                            <div class="chart-bar w-full bg-gradient-to-t from-blue-500 to-cyan-400 rounded-t-lg" style="height: 67%"></div>
+                            <div class="chart-bar w-full bg-gradient-to-t from-blue-500 to-cyan-400 rounded-t-lg" style="height: 85%"></div>
+                        </div>
+                        <div class="flex justify-between text-xs text-slate-500 mt-4">
+                            <span>Jan</span>
+                            <span>Fev</span>
+                            <span>Mar</span>
+                            <span>Abr</span>
+                            <span>Mai</span>
+                            <span>Jun</span>
+                            <span>Jul</span>
+                        </div>
+                    </div>
+
+                    <!-- Donut Chart -->
+                    <div class="glass rounded-2xl p-6 animate-fade-in">
+                        <h3 class="text-xl font-bold text-slate-800 mb-6">Clientes por Região</h3>
+                        <div class="flex items-center justify-center">
+                            <div class="relative w-48 h-48">
+                                <svg class="w-48 h-48 transform -rotate-90" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="40" stroke="#e5e7eb" stroke-width="8" fill="none"/>
+                                    <circle cx="50" cy="50" r="40" stroke="url(#gradient1)" stroke-width="8" fill="none" 
+                                            stroke-dasharray="75 25" stroke-linecap="round"/>
+                                    <circle cx="50" cy="50" r="40" stroke="url(#gradient2)" stroke-width="8" fill="none" 
+                                            stroke-dasharray="50 50" stroke-dashoffset="-75" stroke-linecap="round"/>
+                                    <circle cx="50" cy="50" r="40" stroke="url(#gradient3)" stroke-width="8" fill="none" 
+                                            stroke-dasharray="25 75" stroke-dashoffset="-125" stroke-linecap="round"/>
+                                    <defs>
+                                        <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+                                            <stop offset="0%" style="stop-color:#3b82f6"/>
+                                            <stop offset="100%" style="stop-color:#06b6d4"/>
+                                        </linearGradient>
+                                        <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+                                            <stop offset="0%" style="stop-color:#8b5cf6"/>
+                                            <stop offset="100%" style="stop-color:#ec4899"/>
+                                        </linearGradient>
+                                        <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="0%">
+                                            <stop offset="0%" style="stop-color:#10b981"/>
+                                            <stop offset="100%" style="stop-color:#34d399"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <div class="text-center">
+                                        <p class="text-2xl font-bold text-slate-800">850</p>
+                                        <p class="text-sm text-slate-500">Total</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full mr-3"></div>
+                                    <span class="text-slate-600">Maputo</span>
+                                </div>
+                                <span class="text-slate-800 font-semibold">425</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full mr-3"></div>
+                                    <span class="text-slate-600">Beira</span>
+                                </div>
+                                <span class="text-slate-800 font-semibold">285</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full mr-3"></div>
+                                    <span class="text-slate-600">Nampula</span>
+                                </div>
+                                <span class="text-slate-800 font-semibold">140</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Transactions Section -->
+                <section id="transactions" class="animate-fade-in">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-bold text-slate-800">Transações Recentes</h2>
+                        <button class="px-4 py-2 bg-blue-500 text-white rounded-xl hover:bg-blue-600 transition-colors duration-300">
+                            Ver Todas
+                        </button>
+                    </div>
+                    <div class="glass rounded-2xl overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead class="bg-slate-50/50 backdrop-blur-sm">
+                                    <tr>
+                                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">ID</th>
+                                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Cliente</th>
+                                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Valor</th>
+                                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Status</th>
+                                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Hora</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-200/50">
+                                    <tr class="hover:bg-white/50 transition-colors duration-200">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-slate-900">#12345</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mr-3">
+                                                    <span class="text-white text-xs font-semibold">JS</span>
+                                                </div>
+                                                <span class="text-sm font-medium text-slate-900">João Silva</span>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-slate-900">150 MZN</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="inline-flex px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+                                                Concluído
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">2min atrás</td>
+                                    </tr>
+                                    <tr class="hover:bg-white/50 transition-colors duration-200">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-slate-900">#12346</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="w-8 h-8 bg-gradient-to-r from-pink-500 to-red-500 rounded-full flex items-center justify-center mr-3">
+                                                    <span class="text-white text-xs font-semibold">MS</span>
+                                                </div>
+                                                <span class="text-sm font-medium text-slate-900">Maria Souza</span>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-slate-900">200 MZN</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="inline-flex px-3 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                                Pendente
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">5min atrás</td>
+                                    </tr>
+                                    <tr class="hover:bg-white/50 transition-colors duration-200">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-slate-900">#12347</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="w-8 h-8 bg-gradient-to-r from-green-500 to-teal-500 rounded-full flex items-center justify-center mr-3">
+                                                    <span class="text-white text-xs font-semibold">PC</span>
+                                                </div>
+                                                <span class="text-sm font-medium text-slate-900">Pedro Costa</span>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-slate-900">75 MZN</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="inline-flex px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+                                                Concluído
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">10min atrás</td>
+                                    </tr>
+                                    <tr class="hover:bg-white/50 transition-colors duration-200">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-slate-900">#12348</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="w-8 h-8 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-full flex items-center justify-center mr-3">
+                                                    <span class="text-white text-xs font-semibold">AL</span>
+                                                </div>
+                                                <span class="text-sm font-medium text-slate-900">Ana Lima</span>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-slate-900">320 MZN</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="inline-flex px-3 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800">
+                                                Falhou
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">15min atrás</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const sidebar = document.getElementById('sidebar');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full');
+        });
+
+        // Theme toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+        let isDark = false;
+
+        themeToggle.addEventListener('click', () => {
+            isDark = !isDark;
+            document.body.classList.toggle('dark');
+            
+            if (isDark) {
+                sunIcon.style.opacity = '0';
+                moonIcon.style.opacity = '1';
+                document.body.className = document.body.className.replace('from-slate-50 via-blue-50 to-indigo-100', 'from-slate-900 via-slate-800 to-slate-900');
+            } else {
+                sunIcon.style.opacity = '1';
+                moonIcon.style.opacity = '0';
+                document.body.className = document.body.className.replace('from-slate-900 via-slate-800 to-slate-900', 'from-slate-50 via-blue-50 to-indigo-100');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.animate-fade-in').forEach((el, index) => {
+                el.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+
+        // Interactive chart bars
+        document.querySelectorAll('.chart-bar').forEach(bar => {
+            bar.addEventListener('mouseenter', function() {
+                this.style.opacity = '0.8';
+            });
+            
+            bar.addEventListener('mouseleave', function() {
+                this.style.opacity = '1';
+            });
+        });
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth < 768) {
+                if (!sidebar.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                    sidebar.classList.add('-translate-x-full');
+                }
+            }
+        });
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Moderno Paymoz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'paymoz': {
+                            'primary': '#1e40af',
+                            'secondary': '#3b82f6',
+                            'accent': '#06b6d4',
+                            'success': '#10b981',
+                            'warning': '#f59e0b',
+                            'error': '#ef4444'
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-out',
+                        'slide-in': 'slideIn 0.4s ease-out',
+                        'bounce-gentle': 'bounceGentle 2s infinite',
+                        'pulse-slow': 'pulse 3s infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        slideIn: {
+                            '0%': { transform: 'translateX(-100%)' },
+                            '100%': { transform: 'translateX(0)' }
+                        },
+                        bounceGentle: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-5px)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 5px rgba(59, 130, 246, 0.5)' },
+                            '100%': { boxShadow: '0 0 20px rgba(59, 130, 246, 0.8)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .glass-dark {
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .gradient-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .gradient-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .chart-bar {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .chart-bar:hover {
+            transform: scaleY(1.1) scaleX(1.05);
+        }
+        .metric-card {
+            transition: all 0.3s ease;
+        }
+        .metric-card:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+        .sidebar-link {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .sidebar-link:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        .sidebar-link:hover:before {
+            left: 100%;
+        }
+        .dark {
+            color-scheme: dark;
+        }
+        .floating-element {
+            animation: float 3s ease-in-out infinite;
+        }
+        .stagger-animation > * {
+            animation-delay: calc(var(--stagger) * 100ms);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 min-h-screen transition-colors duration-300">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" class="md:hidden fixed top-4 left-4 z-50 p-3 rounded-xl glass text-slate-700 hover:bg-white/20 transition-all duration-300 shadow-lg">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" class="fixed top-4 right-4 z-50 p-3 rounded-xl glass text-slate-700 hover:bg-white/20 transition-all duration-300 shadow-lg">
+            <svg id="sun-icon" class="w-6 h-6 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+            <svg id="moon-icon" class="w-6 h-6 absolute top-3 left-3 opacity-0 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+            </svg>
+        </button>
+
+        <!-- Sidebar -->
+        <div id="sidebar" class="fixed inset-y-0 left-0 z-40 w-72 transform -translate-x-full transition-transform duration-300 md:translate-x-0 md:static md:inset-0">
+            <div class="flex flex-col h-full gradient-primary text-white shadow-2xl">
+                <!-- Logo -->
+                <div class="flex items-center justify-center h-20 border-b border-white/20 relative overflow-hidden">
+                    <div class="flex items-center space-x-3 floating-element">
+                        <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h1 class="text-2xl font-bold">Paymoz</h1>
+                            <p class="text-xs text-white/70">Admin Dashboard</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="flex-1 px-4 py-6 space-y-2">
+                    <a href="#overview" class="sidebar-link flex items-center px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-300 group">
+                        <svg class="h-6 w-6 mr-4 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                        </svg>
+                        <span class="font-medium">Visão Geral</span>
+                    </a>
+                    
+                    <a href="#transactions" class="sidebar-link flex items-center px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-300 group">
+                        <svg class="h-6 w-6 mr-4 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                        <span class="font-medium">Transações</span>
+                    </a>
+                    
+                    <a href="#customers" class="sidebar-link flex items-center px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-300 group">
+                        <svg class="h-6 w-6 mr-4 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"></path>
+                        </svg>
+                        <span class="font-medium">Clientes</span>
+                    </a>
+                    
+                    <a href="#analytics" class="sidebar-link flex items-center px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-300 group">
+                        <svg class="h-6 w-6 mr-4 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                        <span class="font-medium">Analytics</span>
+                    </a>
+                    
+                    <a href="#settings" class="sidebar-link flex items-center px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-300 group">
+                        <svg class="h-6 w-6 mr-4 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        <span class="font-medium">Configurações</span>
+                    </a>
+                </nav>
+
+                <!-- User Profile -->
+                <div class="p-4 border-t border-white/20">
+                    <div class="flex items-center space-x-3 p-3 rounded-xl bg-white/10 backdrop-blur-sm">
+                        <div class="w-10 h-10 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full flex items-center justify-center">
+                            <span class="text-white font-semibold">U</span>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-white font-medium">Usuário Admin</p>
+                            <p class="text-white/60 text-sm">admin@paymoz.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Top Bar -->
+            <header class="bg-white/60 backdrop-blur-md border-b border-white/20 shadow-sm">
+                <div class="flex justify-between items-center p-6">
+                    <div>
+                        <h1 class="text-3xl font-bold text-slate-800">Dashboard</h1>
+                        <p class="text-slate-600">Bem-vindo de volta! Aqui está o resumo do seu negócio.</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <!-- Search Bar -->
+                        <div class="relative">
+                            <input type="text" placeholder="Buscar..." class="pl-10 pr-4 py-2 bg-white/50 border border-white/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all duration-300">
+                            <svg class="absolute left-3 top-2.5 h-5 w-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                        </div>
+                        
+                        <!-- Notifications -->
+                        <button class="relative p-2 rounded-xl bg-white/50 hover:bg-white/70 transition-all duration-300">
+                            <svg class="h-6 w-6 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-3.5-3.5c-.38-.41-.6-.98-.6-1.58v-4.42c0-3.31-2.69-6-6-6s-6 2.69-6 6v4.42c0 .6-.22 1.17-.6 1.58l-3.5 3.5h5m6 0v1a3 3 0 11-6 0v-1m6 0h-6"></path>
+                            </svg>
+                            <span class="absolute -top-1 -right-1 h-4 w-4 bg-red-500 rounded-full text-xs text-white flex items-center justify-center">3</span>
+                        </button>
+                        
+                        <!-- Logout Button -->
+                        <button class="px-6 py-2 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-xl hover:from-red-600 hover:to-pink-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+                            Logout
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <main class="flex-1 overflow-x-hidden overflow-y-auto p-6 space-y-8">
+                <!-- Metrics Section -->
+                <section id="overview" class="stagger-animation">
+                    <h2 class="text-2xl font-bold text-slate-800 mb-6">Visão Geral</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- Metric Card 1 -->
+                        <div class="metric-card glass rounded-2xl p-6 animate-fade-in" style="--stagger: 0">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-slate-600 text-sm font-medium">Total de Vendas</p>
+                                    <p class="text-3xl font-bold text-slate-800 mt-1">12.345 MZN</p>
+                                    <div class="flex items-center mt-2">
+                                        <svg class="h-4 w-4 text-green-500 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17l9.2-9.2M17 8v9H8"></path>
+                                        </svg>
+                                        <span class="text-green-500 text-sm font-medium">+12.5%</span>
+                                    </div>
+                                </div>
+                                <div class="p-4 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl shadow-lg">
+                                    <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Metric Card 2 -->
+                        <div class="metric-card glass rounded-2xl p-6 animate-fade-in" style="--stagger: 1">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-slate-600 text-sm font-medium">Novos Clientes</p>
+                                    <p class="text-3xl font-bold text-slate-800 mt-1">250</p>
+                                    <div class="flex items-center mt-2">
+                                        <svg class="h-4 w-4 text-green-500 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17l9.2-9.2M17 8v9H8"></path>
+                                        </svg>
+                                        <span class="text-green-500 text-sm font-medium">+8.2%</span>
+                                    </div>
+                                </div>
+                                <div class="p-4 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl shadow-lg">
+                                    <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Metric Card 3 -->
+                        <div class="metric-card glass rounded-2xl p-6 animate-fade-in" style="--stagger: 2">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-slate-600 text-sm font-medium">Receita Média</p>
+                                    <p class="text-3xl font-bold text-slate-800 mt-1">500 MZN</p>
+                                    <div class="flex items-center mt-2">
+                                        <svg class="h-4 w-4 text-red-500 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 7l-9.2 9.2M8 8v9h9"></path>
+                                        </svg>
+                                        <span class="text-red-500 text-sm font-medium">-2.4%</span>
+                                    </div>
+                                </div>
+                                <div class="p-4 bg-gradient-to-br from-green-500 to-emerald-500 rounded-2xl shadow-lg">
+                                    <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Metric Card 4 -->
+                        <div class="metric-card glass rounded-2xl p-6 animate-fade-in" style="--stagger: 3">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-slate-600 text-sm font-medium">Taxa de Conversão</p>
+                                    <p class="text-3xl font-bold text-slate-800 mt-1">23.8%</p>
+                                    <div class="flex items-center mt-2">
+                                        <svg class="h-4 w-4 text-green-500 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17l9.2-9.2M17 8v9H8"></path>
+                                        </svg>
+                                        <span class="text-green-500 text-sm font-medium">+4.1%</span>
+                                    </div>
+                                </div>
+                                <div class="p-4 bg-gradient-to-br from-orange-500 to-red-500 rounded-2xl shadow-lg">
+                                    <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Charts Section -->
+                <section id="charts" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Sales Chart -->
+                    <div class="glass rounded-2xl p-6 animate-fade-in">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-xl font-bold text-slate-800">Vendas por Mês</h3>
+                            <div class="flex space-x-2">
+                                <button class="px-3 py-1 bg-blue-500 text-white rounded-lg text-sm">Mês</button>
+                                <button class="px-3 py-1 bg-slate-200 text-slate-600 rounded-lg text-sm">Ano</button>
+                            </div>
+                        </div>
+                        <div class="flex items-end justify-between h-64 space-x-2">
+                            <div class="chart-bar w-full bg-gradient-to-t from-blue-500 to-cyan-400 rounded-t-lg" style="height: 65%"></div>
+                            <div class="chart-bar w-full bg-gradient-to-t from-blue-500 to-cyan-400 rounded-t-lg" style="height: 78%"></div>
+                            <div class="chart-bar w-full bg-gradient-to-t from-blue-500 to-cyan-400 rounded-t-lg" style="height: 45%"></div>
+                            <div class="chart-bar w-full bg-gradient-to-t from-blue-500 to-cyan-400 rounded-t-lg" style="height: 88%"></div>
+                            <div class="chart-bar w-full bg-gradient-to-t from-blue-500 to-cyan-400 rounded-t-lg" style="height: 92%"></div>
+                            <div class="chart-bar w-full bg-gradient-to-t from-blue-500 to-cyan-400 rounded-t-lg" style="height: 67%"></div>
+                            <div class="chart-bar w-full bg-gradient-to-t from-blue-500 to-cyan-400 rounded-t-lg" style="height: 85%"></div>
+                        </div>
+                        <div class="flex justify-between text-xs text-slate-500 mt-4">
+                            <span>Jan</span>
+                            <span>Fev</span>
+                            <span>Mar</span>
+                            <span>Abr</span>
+                            <span>Mai</span>
+                            <span>Jun</span>
+                            <span>Jul</span>
+                        </div>
+                    </div>
+
+                    <!-- Donut Chart -->
+                    <div class="glass rounded-2xl p-6 animate-fade-in">
+                        <h3 class="text-xl font-bold text-slate-800 mb-6">Clientes por Região</h3>
+                        <div class="flex items-center justify-center">
+                            <div class="relative w-48 h-48">
+                                <svg class="w-48 h-48 transform -rotate-90" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="40" stroke="#e5e7eb" stroke-width="8" fill="none"/>
+                                    <circle cx="50" cy="50" r="40" stroke="url(#gradient1)" stroke-width="8" fill="none" 
+                                            stroke-dasharray="75 25" stroke-linecap="round"/>
+                                    <circle cx="50" cy="50" r="40" stroke="url(#gradient2)" stroke-width="8" fill="none" 
+                                            stroke-dasharray="50 50" stroke-dashoffset="-75" stroke-linecap="round"/>
+                                    <circle cx="50" cy="50" r="40" stroke="url(#gradient3)" stroke-width="8" fill="none" 
+                                            stroke-dasharray="25 75" stroke-dashoffset="-125" stroke-linecap="round"/>
+                                    <defs>
+                                        <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+                                            <stop offset="0%" style="stop-color:#3b82f6"/>
+                                            <stop offset="100%" style="stop-color:#06b6d4"/>
+                                        </linearGradient>
+                                        <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+                                            <stop offset="0%" style="stop-color:#8b5cf6"/>
+                                            <stop offset="100%" style="stop-color:#ec4899"/>
+                                        </linearGradient>
+                                        <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="0%">
+                                            <stop offset="0%" style="stop-color:#10b981"/>
+                                            <stop offset="100%" style="stop-color:#34d399"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <div class="text-center">
+                                        <p class="text-2xl font-bold text-slate-800">850</p>
+                                        <p class="text-sm text-slate-500">Total</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full mr-3"></div>
+                                    <span class="text-slate-600">Maputo</span>
+                                </div>
+                                <span class="text-slate-800 font-semibold">425</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full mr-3"></div>
+                                    <span class="text-slate-600">Beira</span>
+                                </div>
+                                <span class="text-slate-800 font-semibold">285</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full mr-3"></div>
+                                    <span class="text-slate-600">Nampula</span>
+                                </div>
+                                <span class="text-slate-800 font-semibold">140</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Transactions Section -->
+                <section id="transactions" class="animate-fade-in">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-bold text-slate-800">Transações Recentes</h2>
+                        <button class="px-4 py-2 bg-blue-500 text-white rounded-xl hover:bg-blue-600 transition-colors duration-300">
+                            Ver Todas
+                        </button>
+                    </div>
+                    <div class="glass rounded-2xl overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead class="bg-slate-50/50 backdrop-blur-sm">
+                                    <tr>
+                                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">ID</th>
+                                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Cliente</th>
+                                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Valor</th>
+                                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Status</th>
+                                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Hora</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-200/50">
+                                    <tr class="hover:bg-white/50 transition-colors duration-200">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-slate-900">#12345</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mr-3">
+                                                    <span class="text-white text-xs font-semibold">JS</span>
+                                                </div>
+                                                <span class="text-sm font-medium text-slate-900">João Silva</span>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-slate-900">150 MZN</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="inline-flex px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+                                                Concluído
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">2min atrás</td>
+                                    </tr>
+                                    <tr class="hover:bg-white/50 transition-colors duration-200">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-slate-900">#12346</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="w-8 h-8 bg-gradient-to-r from-pink-500 to-red-500 rounded-full flex items-center justify-center mr-3">
+                                                    <span class="text-white text-xs font-semibold">MS</span>
+                                                </div>
+                                                <span class="text-sm font-medium text-slate-900">Maria Souza</span>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-slate-900">200 MZN</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="inline-flex px-3 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                                Pendente
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">5min atrás</td>
+                                    </tr>
+                                    <tr class="hover:bg-white/50 transition-colors duration-200">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-slate-900">#12347</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="w-8 h-8 bg-gradient-to-r from-green-500 to-teal-500 rounded-full flex items-center justify-center mr-3">
+                                                    <span class="text-white text-xs font-semibold">PC</span>
+                                                </div>
+                                                <span class="text-sm font-medium text-slate-900">Pedro Costa</span>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-slate-900">75 MZN</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="inline-flex px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+                                                Concluído
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">10min atrás</td>
+                                    </tr>
+                                    <tr class="hover:bg-white/50 transition-colors duration-200">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-slate-900">#12348</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="w-8 h-8 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-full flex items-center justify-center mr-3">
+                                                    <span class="text-white text-xs font-semibold">AL</span>
+                                                </div>
+                                                <span class="text-sm font-medium text-slate-900">Ana Lima</span>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-slate-900">320 MZN</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="inline-flex px-3 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800">
+                                                Falhou
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">15min atrás</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const sidebar = document.getElementById('sidebar');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full');
+        });
+
+        // Theme toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+        let isDark = false;
+
+        themeToggle.addEventListener('click', () => {
+            isDark = !isDark;
+            document.body.classList.toggle('dark');
+            
+            if (isDark) {
+                sunIcon.style.opacity = '0';
+                moonIcon.style.opacity = '1';
+                document.body.className = document.body.className.replace('from-slate-50 via-blue-50 to-indigo-100', 'from-slate-900 via-slate-800 to-slate-900');
+            } else {
+                sunIcon.style.opacity = '1';
+                moonIcon.style.opacity = '0';
+                document.body.className = document.body.className.replace('from-slate-900 via-slate-800 to-slate-900', 'from-slate-50 via-blue-50 to-indigo-100');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.animate-fade-in').forEach((el, index) => {
+                el.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+
+        // Interactive chart bars
+        document.querySelectorAll('.chart-bar').forEach(bar => {
+            bar.addEventListener('mouseenter', function() {
+                this.style.opacity = '0.8';
+            });
+            
+            bar.addEventListener('mouseleave', function() {
+                this.style.opacity = '1';
+            });
+        });
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth < 768) {
+                if (!sidebar.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                    sidebar.classList.add('-translate-x-full');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

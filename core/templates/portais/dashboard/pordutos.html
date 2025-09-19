@@ -1,0 +1,122 @@
+{% load static %}
+
+<!-- Sales Section -->
+<section id="sales" class="section animate-fade-in">
+    <div class="max-w-7xl mx-auto">
+        <div class="flex justify-between items-center mb-8">
+            <div class="text-left">
+                <h2 class="text-3xl font-bold text-slate-800">Gestão de Produtos</h2>
+                <p class="text-slate-600 text-lg">Crie e gerencie seus produtos digitais.</p>
+            </div>
+            <a href="{% url 'produtos:criar_produto' %}" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                <span class="flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                    Criar Novo Produto
+                </span>
+            </a>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% if produtos %}
+                {% for produto in produtos %}
+                <div class="bg-white rounded-3xl p-6 shadow-lg hover:shadow-2xl hover:transform hover:-translate-y-2 transition-all duration-300 border border-slate-100 flex flex-col relative">
+                    <div class="absolute top-4 right-4" x-data="{ open: false }">
+                        <button @click="open = !open" class="text-slate-500 hover:text-slate-700 focus:outline-none">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path></svg>
+                        </button>
+                        <div x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
+                            <a href="{% url 'produtos:editar_produto' produto.id %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Editar</a>
+                            <form action="{% url 'produtos:deletar_produto' produto.id %}" method="post" onsubmit="return confirm('Tem certeza que deseja deletar este produto?');">
+                                {% csrf_token %}
+                                <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-100">Deletar</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="relative mb-4">
+                        {% if produto.imagem_destaque %}
+                            <img src="{{ produto.imagem_destaque.url }}" alt="{{ produto.nome }}" class="w-full h-48 object-cover rounded-xl">
+                        {% else %}
+                            <div class="w-full h-48 bg-gradient-to-br from-gray-200 to-gray-300 rounded-xl flex items-center justify-center">
+                                <svg class="w-16 h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l-1.586-1.586a2 2 0 00-2.828 0L6 14"></path></svg>
+                            </div>
+                        {% endif %}
+                        <div class="absolute top-3 left-3"> {# Adjusted position for status badge #}
+                            {% if produto.ativo %}
+                                <span class="px-3 py-1 bg-green-500 text-white text-xs rounded-full font-medium">Ativo</span>
+                            {% else %}
+                                <span class="px-3 py-1 bg-yellow-500 text-white text-xs rounded-full font-medium">Rascunho</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="space-y-3 flex-grow">
+                        <h3 class="text-xl font-bold text-slate-800 truncate" title="{{ produto.nome }}">{{ produto.nome }}</h3>
+                        <p class="text-slate-600 text-sm h-10 overflow-hidden">{{ produto.descricao|truncatewords:12 }}</p>
+                        
+                        <div class="flex items-center space-x-1 text-yellow-400">
+                            {% with avg_rating=produto.avg_rating|default:0 %}
+                                {% for i in "12345" %}
+                                    <svg class="w-5 h-5 {% if forloop.counter <= avg_rating %}text-yellow-400{% else %}text-gray-300{% endif %}" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.538 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.783.57-1.838-.197-1.538-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.92 8.72c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z"></path></svg>
+                                {% endfor %}
+                            {% endwith %}
+                            <span class="text-xs text-slate-500 ml-2">({{ produto.count_rating }} avaliações)</span>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-2">
+                            <div class="text-2xl font-bold text-blue-600">{{ produto.preco }} MZN</div>
+                            <div class="text-right">
+                                <p class="text-sm text-slate-600">Vendas</p>
+                                <p class="text-lg font-bold text-slate-800">{{ produto.vendidos }}</p>
+                            </div>
+                        </div>
+
+                        {# Product Link and Copy Button #}
+                        <div class="mt-4">
+                            <label for="product-link-{{ produto.id }}" class="block text-sm font-medium text-gray-700 mb-1">Link do Produto:</label>
+                            <div class="flex rounded-md shadow-sm">
+                                <input type="text" id="product-link-{{ produto.id }}" class="flex-1 block w-full rounded-l-md border-gray-300 focus:ring-blue-500 focus:border-blue-500 sm:text-sm p-2 bg-gray-50 text-gray-600" value="https://paymoz.tech{% url 'produtos:pagina_venda' produto.slug %}" readonly>
+                                <button type="button" onclick="copyToClipboard('product-link-{{ produto.id }}')" class="-ml-px relative inline-flex items-center space-x-2 px-4 py-2 border border-gray-300 text-sm font-medium rounded-r-md text-gray-700 bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                                    <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                                        <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2H6zM5 9a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z" />
+                                    </svg>
+                                    <span>Copiar</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex space-x-2 pt-4 mt-auto">
+                        <a href="{% url 'produtos:pagina_venda' produto.slug %}" class="flex-1 text-center bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg text-sm font-medium transition-colors duration-300" target="_blank">
+                            Ver Página
+                        </a>
+                        {# Removed direct delete button, now in dropdown #}
+                    </div>
+                </div>
+                {% endfor %}
+<script>
+    function copyToClipboard(elementId) {
+        const copyText = document.getElementById(elementId);
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); // For mobile devices
+        navigator.clipboard.writeText(copyText.value).then(() => {
+            // Optional: Provide visual feedback to the user
+            alert("Link copiado!");
+        }).catch(err => {
+            console.error('Failed to copy: ', err);
+        });
+    }
+</script>
+            {% else %}
+                <div class="col-span-full text-center py-12 bg-white rounded-2xl shadow-md">
+                    <svg class="w-16 h-16 mx-auto text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4-8-4m16 0v10l-8 4-8-4V7"></path></svg>
+                    <h3 class="mt-4 text-xl font-semibold text-gray-700">Nenhum produto encontrado</h3>
+                    <p class="mt-2 text-gray-500">Comece a vender criando seu primeiro produto.</p>
+                    <a href="{% url 'produtos:criar_produto' %}" class="mt-6 inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300">
+                        Criar Meu Primeiro Produto
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>

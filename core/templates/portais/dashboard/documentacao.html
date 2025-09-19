@@ -1,0 +1,261 @@
+<section id="documentation" class="section animate-fade-in">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-8">
+            <h2 class="text-3xl font-bold text-slate-800 mb-4">Documentação da API</h2>
+            <p class="text-slate-600 text-lg">Guia completo para integração com a API Paymoz</p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-xl p-8 space-y-12">
+
+          <!-- Seção de Introdução -->
+          <div class="border-b border-slate-200 pb-8">
+            <h2 class="text-3xl font-bold text-slate-800 mb-4">Introdução</h2>
+            <p class="text-slate-600 mb-4">Nossa API foi projetada para ser RESTful e previsível. Ela retorna respostas em formato JSON e usa códigos de status HTTP padrão para indicar sucessos e erros.</p>
+            
+            <h3 class="text-xl font-bold text-slate-800 mt-6 mb-2">URL Base</h3>
+            <p class="text-slate-600 mb-4">Todas as URLs da API referenciadas nesta documentação têm a seguinte base:</p>
+            <code class="block bg-slate-800 text-green-400 rounded-lg p-4 font-mono text-sm">{{ api_base_url }}</code>
+
+            <h3 class="text-xl font-bold text-slate-800 mt-6 mb-2">Autenticação</h3>
+            <p class="text-slate-600 mb-4">A autenticação é feita através de uma chave de API. Você pode encontrar sua chave de API no seu <a href="#" data-section="overview" class="text-indigo-600 hover:underline nav-link">Dashboard</a>. Todas as requisições à API devem incluir sua chave no cabeçalho HTTP <code class="font-mono text-sm">X-API-Key</code>.</p>
+            <code class="block bg-slate-800 text-green-400 rounded-lg p-4 font-mono text-sm">X-API-Key: <span class="text-orange-400">SUA_CHAVE_DE_API_SECRETA</span></code>
+          </div>
+
+          <!-- Seção C2B -->
+          <div class="border-b border-slate-200 pb-8">
+            <h2 class="text-3xl font-bold text-slate-800 mb-2">API C2B (Customer-to-Business)</h2>
+            <p class="text-slate-600 mb-6">Receba pagamentos dos seus clientes. Oferecemos duas opções de integração:</p>
+
+            <!-- Opção 1: Checkout Hospedado -->
+            <div class="border border-slate-200 rounded-xl p-6 mb-8">
+              <h3 class="text-2xl font-bold text-slate-800 mb-4">Opção 1: Checkout Hospedado</h3>
+              <p class="text-slate-600 mb-4">A forma mais simples de integrar. Crie uma sessão de pagamento e redirecione seu cliente para uma página de checkout segura hospedada pela Paymoz.</p>
+              <p class="text-lg font-semibold text-slate-700 mt-6 mb-2">Endpoint:</p>
+              <code class="block bg-slate-800 text-green-400 rounded-lg p-4 mb-4 font-mono text-sm"><span class="text-purple-400">POST</span> {{ api_base_url }}/checkout/session/</code>
+
+              <p class="text-lg font-semibold text-slate-700 mt-6 mb-2">Exemplos de Requisição:</p>
+              <!-- Tabs for code examples -->
+              <div x-data="{ tab: 'curl' }">
+                 <div class="mb-4 border-b border-gray-200">
+                  <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+                    <button @click="tab = 'curl'" :class="{ 'border-indigo-500 text-indigo-600': tab === 'curl', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': tab !== 'curl' }" class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">cURL</button>
+                    <button @click="tab = 'python'" :class="{ 'border-indigo-500 text-indigo-600': tab === 'python', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': tab !== 'python' }" class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">Python</button>
+                    <button @click="tab = 'js'" :class="{ 'border-indigo-500 text-indigo-600': tab === 'js', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': tab !== 'js' }" class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">JavaScript</button>
+                    <button @click="tab = 'php'" :class="{ 'border-indigo-500 text-indigo-600': tab === 'php', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': tab !== 'php' }" class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">PHP</button>
+                  </nav>
+                </div>
+
+                <div x-show="tab === 'curl'">
+                  <pre><code class="language-bash block bg-slate-800 text-white rounded-lg p-4 mb-4 overflow-x-auto text-sm">curl -X POST \
+  {{ api_base_url }}/checkout/session/ \
+  -H 'Content-Type: application/json' \
+  -H 'X-API-Key: SUA_CHAVE_DE_API_SECRETA' \
+  -d '{
+    "valor": "500.00",
+    "callback_url": "https://www.seusite.com/confirmacao_pagamento",
+    "nome_produto": "Assinatura Premium"
+  }'</code></pre>
+                </div>
+                <div x-show="tab === 'python'">
+                  <pre><code class="language-python block bg-slate-800 text-white rounded-lg p-4 mb-4 overflow-x-auto text-sm">import requests
+import json
+
+api_key = 'SUA_CHAVE_DE_API_SECRETA'
+url = '{{ api_base_url }}/checkout/session/'
+
+headers = {
+    'Content-Type': 'application/json',
+    'X-API-Key': api_key
+}
+
+data = {
+    'valor': '500.00',
+    'callback_url': 'https://www.seusite.com/confirmacao_pagamento',
+    'nome_produto': 'Assinatura Premium'
+}
+
+response = requests.post(url, headers=headers, data=json.dumps(data))
+print(response.json())</code></pre>
+                </div>
+                <div x-show="tab === 'js'">
+                  <pre><code class="language-javascript block bg-slate-800 text-white rounded-lg p-4 mb-4 overflow-x-auto text-sm">const apiKey = 'SUA_CHAVE_DE_API_SECRETA';
+const url = '{{ api_base_url }}/checkout/session/';
+
+const data = {
+    valor: '500.00',
+    callback_url: 'https://www.seusite.com/confirmacao_pagamento',
+    nome_produto: 'Assinatura Premium'
+};
+
+fetch(url, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'X-API-Key': apiKey
+    },
+    body: JSON.stringify(data)
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error('Error:', error));</code></pre>
+                </div>
+                <div x-show="tab === 'php'">
+                  <pre><code class="language-php block bg-slate-800 text-white rounded-lg p-4 mb-4 overflow-x-auto text-sm">&lt;?php
+$apiKey = 'SUA_CHAVE_DE_API_SECRETA';
+$apiUrl = '{{ api_base_url }}/checkout/session/';
+
+$data = [
+    'valor' => '500.00',
+    'callback_url' => 'https://www.seusite.com/confirmacao_pagamento',
+    'nome_produto' => 'Assinatura Premium'
+];
+
+$ch = curl_init($apiUrl);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    'Content-Type: application/json',
+    'X-API-Key: ' . $apiKey
+]);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+$responseData = json_decode($response, true);
+header('Content-Type: application/json');
+echo json_encode($responseData);
+?&gt;</code></pre>
+                </div>
+              </div>
+
+              <h3 class="text-xl font-bold text-slate-800 mt-6 mb-2">Resposta de Sucesso</h3>
+              <pre><code class="language-json block bg-slate-800 text-white rounded-lg p-4 mb-4 overflow-x-auto text-sm">{
+  "status": "success",
+  "checkout_url": "{{ api_base_url }}/checkout/pay/a1b2c3d4-e5f6-7890-1234-567890abcdef/",
+  "session_id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+  "expires_at": "2025-07-31T12:30:00Z"
+}</code></pre>
+            </div>
+
+            <!-- Opção 2: API de Pagamento Direto -->
+            <div class="border border-slate-200 rounded-xl p-6">
+              <h3 class="text-2xl font-bold text-slate-800 mb-4">Opção 2: API de Pagamento Direto</h3>
+              <p class="text-slate-600 mb-4">Use este endpoint para processar pagamentos diretamente do seu servidor. Ideal para quando você já tem o número de celular do cliente e deseja uma integração mais profunda sem redirecionamento.</p>
+              <p class="text-lg font-semibold text-slate-700 mt-6 mb-2">Endpoints:</p>
+              <code class="block bg-slate-800 text-green-400 rounded-lg p-4 mb-4 font-mono text-sm"><span class="text-purple-400">POST</span> {{ api_base_url }}/payment/mpesa/ <br><span class="text-purple-400">POST</span> {{ api_base_url }}/payment/emola/</code>
+              <p class="text-lg font-semibold text-slate-700 mt-6 mb-2">Exemplos de Requisição (M-Pesa):</p>
+              <!-- Tabs for code examples -->
+              <div x-data="{ tab: 'curl' }">
+                 <div class="mb-4 border-b border-gray-200">
+                  <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+                    <button @click="tab = 'curl'" :class="{ 'border-indigo-500 text-indigo-600': tab === 'curl', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': tab !== 'curl' }" class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">cURL</button>
+                    <button @click="tab = 'python'" :class="{ 'border-indigo-500 text-indigo-600': tab === 'python', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': tab !== 'python' }" class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">Python</button>
+                    <button @click="tab = 'js'" :class="{ 'border-indigo-500 text-indigo-600': tab === 'js', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': tab !== 'js' }" class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">JavaScript</button>
+                    <button @click="tab = 'php'" :class="{ 'border-indigo-500 text-indigo-600': tab === 'php', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': tab !== 'php' }" class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">PHP</button>
+                  </nav>
+                </div>
+
+                <div x-show="tab === 'curl'">
+                  <pre><code class="language-bash block bg-slate-800 text-white rounded-lg p-4 mb-4 overflow-x-auto text-sm">curl -X POST \
+  {{ api_base_url }}/payment/mpesa/ \
+  -H 'Content-Type: application/json' \
+  -H 'X-API-Key: SUA_CHAVE_DE_API_SECRETA' \
+  -d '{
+    "numero_celular": "841234567",
+    "valor": "150.00"
+  }'</code></pre>
+                </div>
+                <div x-show="tab === 'python'">
+                  <pre><code class="language-python block bg-slate-800 text-white rounded-lg p-4 mb-4 overflow-x-auto text-sm">import requests
+import json
+
+api_key = 'SUA_CHAVE_DE_API_SECRETA'
+url = '{{ api_base_url }}/payment/mpesa/'
+
+headers = {
+    'Content-Type': 'application/json',
+    'X-API-Key': api_key
+}
+
+data = {
+    'numero_celular': '841234567',
+    'valor': '150.00'
+}
+
+response = requests.post(url, headers=headers, data=json.dumps(data))
+print(response.json())</code></pre>
+                </div>
+                <div x-show="tab === 'js'">
+                  <pre><code class="language-javascript block bg-slate-800 text-white rounded-lg p-4 mb-4 overflow-x-auto text-sm">const apiKey = 'SUA_CHAVE_DE_API_SECRETA';
+const url = '{{ api_base_url }}/payment/mpesa/';
+
+const data = {
+    numero_celular: '841234567',
+    valor: '150.00'
+};
+
+fetch(url, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'X-API-Key': apiKey
+    },
+    body: JSON.stringify(data)
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error('Error:', error));</code></pre>
+                </div>
+                <div x-show="tab === 'php'">
+                  <pre><code class="language-php block bg-slate-800 text-white rounded-lg p-4 mb-4 overflow-x-auto text-sm">&lt;?php
+$apiKey = 'SUA_CHAVE_DE_API_SECRETA';
+$apiUrl = '{{ api_base_url }}/payment/mpesa/';
+
+$data = [
+    'numero_celular' => '841234567',
+    'valor' => '150.00'
+];
+
+$ch = curl_init($apiUrl);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    'Content-Type: application/json',
+    'X-API-Key: ' . $apiKey
+]);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+$responseData = json_decode($response, true);
+header('Content-Type: application/json');
+echo json_encode($responseData);
+?&gt;</code></pre>
+                </div>
+              </div>
+              <h3 class="text-xl font-bold text-slate-800 mt-6 mb-2">Resposta de Sucesso</h3>
+              <pre><code class="language-json block bg-slate-800 text-white rounded-lg p-4 mb-4 overflow-x-auto text-sm">{
+  "status": "success",
+  "message": "Pagamento via Mpesa processado com sucesso.",
+  "transaction_id": "...",
+  "valor_recebido": "150.00",
+  "taxa_aplicada": "15.00",
+  "valor_liquido_creditado": "135.00"
+}</code></pre>
+            </div>
+          </div>
+
+          <!-- Seção B2C -->
+          <div class="pb-8">
+            <h2 class="text-3xl font-bold text-slate-800 mb-2">API B2C (Business-to-Customer)</h2>
+            <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 rounded-md" role="alert">
+              <p class="font-bold">Em Desenvolvimento</p>
+              <p>A funcionalidade de pagamentos de empresa para cliente (B2C), como pagamentos em massa e transferências, está atualmente em desenvolvimento e será disponibilizada em breve.</p>
+            </div>
+          </div>
+
+        </div>
+    </div>
+</section>

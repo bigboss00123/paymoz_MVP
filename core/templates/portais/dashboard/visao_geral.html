@@ -1,0 +1,145 @@
+<!-- Overview Section -->
+                <section id="overview" class="section active stagger-animation">
+                    <h2 class="text-2xl font-bold text-slate-800 mb-6">Visão Geral</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                        <!-- Metric Card: Saldo do Usuário -->
+                        <div class="metric-card bg-white rounded-lg p-4 animate-fade-in shadow-lg border border-slate-100" style="--stagger: 4">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-slate-600 text-xs font-medium">Seu Saldo</p>
+                                    <p class="text-xl font-bold text-green-600 mt-1">{{ formatted_balance }} MZN</p>
+                                </div>
+                                <div class="p-4 bg-gradient-to-br from-green-500 to-emerald-500 rounded-2xl shadow-lg">
+                                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Metric Card 1 -->
+                        <div class="metric-card bg-white rounded-lg p-4 animate-fade-in shadow-lg border border-slate-100" style="--stagger: 0">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-slate-600 text-xs font-medium">Total de Vendas</p>
+                                    <p class="text-xl font-bold text-blue-600 mt-1">{{ formatted_current_sales }} MZN</p>
+                                    
+                                </div>
+                                <div class="p-4 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl shadow-lg">
+                                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                    
+                        
+                        <!-- Metric Card 4 -->
+                        <div class="metric-card bg-white rounded-lg p-4 animate-fade-in shadow-lg border border-slate-100" style="--stagger: 3">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-slate-600 text-xs font-medium">Taxa de Conversão</p>
+                                    <p class="text-xl font-bold text-slate-800 mt-1">{{ conversion_rate_change|floatformat:0 }}%</p>
+                                    
+                                </div>
+                                <div class="p-4 bg-gradient-to-br from-orange-500 to-red-500 rounded-2xl shadow-lg">
+                                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                        <!-- Metric Card: API Key do Usuário -->
+                        <div class="metric-card bg-white rounded-lg p-4 animate-fade-in shadow-lg border border-slate-100" style="--stagger: 5">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-slate-600 text-xs font-medium">Sua API Key</p>
+                                    <p class="text-sm font-bold text-slate-800 mt-1 break-all">
+                                        <span id="api-key-display">********************************</span>
+                                        <span id="full-api-key" style="display:none;">{{ user_profile.api_key }}</span>
+                                        <button id="copy-api-key" class="ml-2 text-blue-500 hover:text-blue-700 focus:outline-none" style="display:none;" title="Copiar API Key">
+                                            <svg id="copy-icon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                                            </svg>
+                                            <svg id="check-icon" class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display:none;">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                        </button>
+                                    </p>
+                                    <button id="toggle-api-key" class="text-xs text-blue-500 hover:underline mt-1">Mostrar</button>
+                                </div>
+                                <div class="p-4 bg-gradient-to-br from-green-500 to-teal-500 rounded-2xl shadow-lg">
+                                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2v5a2 2 0 01-2 2h-5a2 2 0 01-2-2V9a2 2 0 012-2h5z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17L19 19M7 7L5 5"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts Section -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+                        <!-- Sales Chart -->
+                        <div class="bg-white rounded-2xl p-6 animate-fade-in">
+                            <div class="flex items-center justify-between mb-6">
+                                <h3 class="text-xl font-bold text-slate-800">Vendas</h3>
+                                <div class="flex space-x-2">
+                                    <button class="px-3 py-1 bg-blue-500 text-white rounded-lg text-sm chart-btn" data-period="daily">Diário</button>
+                                    <button class="px-3 py-1 bg-slate-200 text-slate-600 rounded-lg text-sm chart-btn" data-period="weekly">Semanal</button>
+                                    <button class="px-3 py-1 bg-slate-200 text-slate-600 rounded-lg text-sm chart-btn" data-period="monthly">Mensal</button>
+                                </div>
+                            </div>
+                            <div style="position: relative; height:300px; width:100%">
+                                <canvas id="mySalesChartCanvas"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- 5 Ultimas Transações -->
+                        <div class="bg-white rounded-2xl p-6 animate-fade-in">
+                            <h3 class="text-xl font-bold text-slate-800 mb-6">Últimas 5 Transações</h3>
+                            <div class="overflow-x-auto">
+                                <table class="w-full">
+                                    <thead class="bg-slate-50/50">
+                                        <tr>
+                                            <th class="px-4 py-2 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">ID</th>
+                                            <th class="px-4 py-2 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Cliente</th>
+                                            <th class="px-4 py-2 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Valor</th>
+                                            <th class="px-4 py-2 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-slate-200/50">
+                                        {% for transaction in transactions|slice:":5" %}
+                                        <tr class="hover:bg-slate-50/50">
+                                            <td class="px-4 py-2 whitespace-nowrap text-sm font-mono text-slate-700">#{{ transaction.transaction_id|stringformat:".8s" }}</td>
+                                            <td class="px-4 py-2 whitespace-nowrap text-sm text-slate-700">
+                                                {% if transaction.checkout_session and transaction.checkout_session.nome_cliente %}
+                                                    {{ transaction.checkout_session.nome_cliente }}
+                                                {% else %}
+                                                    {{ transaction.numero_celular|default:'N/A' }}
+                                                {% endif %}
+                                            </td>
+                                            <td class="px-4 py-2 whitespace-nowrap text-sm font-semibold text-slate-800">{{ transaction.valor|floatformat:2 }} MZN</td>
+                                            <td class="px-4 py-2 whitespace-nowrap">
+                                                {% if transaction.status == 'SUCCESS' %}
+                                                    <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Concluído</span>
+                                                {% else %}
+                                                    <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800">Falhou</span>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                        {% empty %}
+                                        <tr>
+                                            <td colspan="4" class="px-4 py-2 text-center text-sm text-slate-500">Nenhuma transação encontrada.</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>

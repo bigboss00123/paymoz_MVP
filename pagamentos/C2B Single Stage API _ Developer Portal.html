@@ -1,0 +1,1868 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<title>
+		
+C2B Single Stage API
+
+		 | Developer Portal
+		
+	</title>
+
+	<link rel="shortcut icon" href="https://developer.mpesa.vm.co.mz/static/favicon.png">
+
+
+	
+
+	
+		<link rel="stylesheet" href="C2B%20Single%20Stage%20API%20_%20Developer%20Portal_files/bootstrap.css">
+		<link rel="stylesheet" href="C2B%20Single%20Stage%20API%20_%20Developer%20Portal_files/bootstrap-theme.css">
+		<link rel="stylesheet" href="C2B%20Single%20Stage%20API%20_%20Developer%20Portal_files/bootstrap-datepicker.css">
+		<link rel="stylesheet" href="C2B%20Single%20Stage%20API%20_%20Developer%20Portal_files/insight.css">
+		
+		
+		
+			<link rel="stylesheet" href="C2B%20Single%20Stage%20API%20_%20Developer%20Portal_files/screen.css">
+			<link rel="stylesheet" href="C2B%20Single%20Stage%20API%20_%20Developer%20Portal_files/prism.css">
+			<link rel="stylesheet" href="C2B%20Single%20Stage%20API%20_%20Developer%20Portal_files/animation.css">
+			<link rel="stylesheet" href="C2B%20Single%20Stage%20API%20_%20Developer%20Portal_files/jquery.dataTables.min.css">
+			<link rel="stylesheet" href="C2B%20Single%20Stage%20API%20_%20Developer%20Portal_files/responsive.dataTables.min.css">
+		
+	
+
+	<!--<script src="/static/mezzanine/js/jquery-1.8.3.min.js"></script>-->
+    <!--<script nonce="2726c7f261" src="/static/js/jquery-1.9.1.js"></script>-->
+    <script nonce="" src="C2B%20Single%20Stage%20API%20_%20Developer%20Portal_files/jquery-3.3.1.min.js"></script>
+	<script nonce="" src="C2B%20Single%20Stage%20API%20_%20Developer%20Portal_files/moment.js"></script>
+	<script nonce="" src="C2B%20Single%20Stage%20API%20_%20Developer%20Portal_files/collapse.js"></script>
+	<script nonce="" src="C2B%20Single%20Stage%20API%20_%20Developer%20Portal_files/transition.js"></script>
+	<script src="C2B%20Single%20Stage%20API%20_%20Developer%20Portal_files/bootstrap.js"></script>
+	<script src="C2B%20Single%20Stage%20API%20_%20Developer%20Portal_files/bootstrap-datepicker.js"></script>
+	<script src="C2B%20Single%20Stage%20API%20_%20Developer%20Portal_files/bootstrap-extras.js"></script>
+	<script src="C2B%20Single%20Stage%20API%20_%20Developer%20Portal_files/jquery.dataTables.js"></script>
+	<script src="C2B%20Single%20Stage%20API%20_%20Developer%20Portal_files/datatables.bootstrap.js"></script>
+	
+		<script src="C2B%20Single%20Stage%20API%20_%20Developer%20Portal_files/particles.js"></script>
+		<script src="C2B%20Single%20Stage%20API%20_%20Developer%20Portal_files/prism.js"></script>
+	
+
+
+<!--[if lt IE 9]>
+<script src="/static/js/html5shiv.js"></script>
+<script src="/static/js/respond.min.js"></script>
+<![endif]-->
+
+
+</head>
+
+<body id="body">
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fuild">
+        <div class="nav-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="navbar-header">
+            
+                <img style="margin-top: 5px; margin-right: 0px; margin-left: 5px;" src="C2B%20Single%20Stage%20API%20_%20Developer%20Portal_files/banner_logo.svg" height="40" width="120">
+            
+        </div>
+        <div class="navbar-header">
+                
+					<p class="navbar-text visible-lg">
+						Developer Portal
+					</p>
+				
+        </div>
+        <div class="navbar-collapse collapse" id="myNavbar">
+            <div class="nav navbar-nav navbar-right">
+                
+                    
+                        <div class="navbar-header">
+                            
+<ul class="nav navbar-nav"><li id="dropdown-menu-home"><a href="https://developer.mpesa.vm.co.mz/">Home</a></li><li class="
+               " id="-documentation-"><a href="https://developer.mpesa.vm.co.mz/documentation/">
+            Getting Started
+            
+        </a></li><li class="
+               " id="-apis-"><a href="https://developer.mpesa.vm.co.mz/apis/">
+            APIs
+            
+        </a></li><li class="
+               " id="-reports-"><a href="https://developer.mpesa.vm.co.mz/reports/">
+            Reports
+            
+        </a></li><li class="dropdown
+               " id="#"><a href="https://developer.mpesa.vm.co.mz/" class="dropdown-toggle disabled" data-toggle="dropdown">
+            Account
+            <b class="caret"></b></a><ul class="dropdown-menu"><li class="
+               " id="-ipg-profile-"><a href="https://developer.mpesa.vm.co.mz/ipg/profile/">Profile</a></li><li class="
+               " id="-ipg-contactus"><a href="https://developer.mpesa.vm.co.mz/ipg/contactus">Contact Us</a></li><li class="
+               " id="-accounts-logout-"><a href="https://developer.mpesa.vm.co.mz/accounts/logout/">Sign Out</a></li></ul></li></ul>
+
+                        </div>
+                    
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+	
+
+			<div class="secondary_banner">
+
+
+
+                
+                    <p style="posistion: relative; float: right; color: #fff; font-size: 12px; margin-top: 4px;">
+                        Logged in as: 
+                        
+                        
+                            <i><a href="https://developer.mpesa.vm.co.mz/accounts/update/" style="color: #fff;  font-weight: bold;">
+                                josemussa00
+                            </a></i>
+                        
+                    </p>
+                
+			</div>
+	
+
+	<div class="container">
+		
+			
+		
+	</div>
+
+	
+    <div class="">
+        <script type="text/javascript">
+            function test(){
+                alert('test');
+            }
+        </script>
+        <script type="text/javascript">
+            
+                function doRequest(){
+
+                    $("#exampleResponse").removeClass("active");
+                    $("#exampleRequest").addClass('active');
+                    $("#tabRequest").trigger("click");
+
+                    $("#sendingRequest").removeClass('hidden');
+                    $.post('/apis/testapipost/', {
+                        'json': $('#requestData').val(),
+                        'type': 'POST',
+                        'url': '/ipg/v1x/c2bPayment/singleStage/ HTTP/1.1',
+                        'headers': 'Host: api.sandbox.vm.co.mz\|Content-Type: application/json\|Authorization: Bearer ThYUpzfAfiMbEb3jJCuIFaVQSNerDNEuVgus07Po9/6TXE+gvDWSf+vReZPlInPOubDT262i/LrkXGK1vdWinrcmnfVP6TujW3nqSMYfj1VQ/nO3vo2V/2BILku/KSZL0s/AzNZejSozZCTd4AjnYG5COZPgetyUHkgmI5ZRVFVTbBB+i0K+EL8tTIpn2Sxvc4hqldsmJDFfw1ztTQzlJxR1hur6yZtCTnm6xQ/o6NbDQDvBTF62Ui4Xwq7cf1TGLMLhXUrUJlRkpBBxx8NXqY8zeLNshg8C5kbp/FNyPVCDiUR4p5VEyFOeblqmXQ91YiCflMR54Gb/t5pWmXJlo5CHHgip3VXjDVfMhtA+n1KroY6EInSpaS7gryrXuLzOlLP29W8xW4ePIkauxRuyVsPIJ5mWvCnSc4GQbKR2ZrNxak4D5QL0gRkWZI3PLg6nM6UECDjnNmLvRYwO02zDM1DSiZo7Yi0LsgFqvkoah7jm1u2DTTj4/F5P6qRoQn8OEAG0AYwG4RZo71ZGFptm2euz72NFPxzkGjKq7UDtMbEwacSjnZBIu8HgYMeNCffuTlnDwp1rN7zNO1wiDdsV5wsxiYgqj43p2Fje19zAy1eYCfLMr85GkrDYegQJh0fERXARZ/jTTm3MKpo1WiWy0lbRHjgv3MnbMPo417hJB84=\|Origin: developer.mpesa.vm.co.mz\|\|',
+                        'csrfmiddlewaretoken': 'RbV3eHgEMWYryOVf67gQQhtPFC7sSQtL8lngSStpdQZ2u0lyWIhoAlufblqzDimk'
+                    },function(data, status){
+                        setTimeout(function () {
+                            $("#sendingRequest").addClass('hidden');
+
+                            if(data === 'HTTP 403'){
+                                window.location = "/";
+                                $("#sendingRequest").addClass('hidden');
+                            }
+
+                            var response_json = document.getElementById("responseJSON");
+                            response_json.textContent = data;
+
+                            request_json = JSON.parse($('#requestData').val());
+
+                            if(request_json.hasOwnProperty('input_ThirdPartyReference')){
+                                request_json.input_ThirdPartyReference = randomString(6, '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+                                $('#requestData').val(JSON.stringify(request_json, null, 2));
+                            }
+
+                            if(request_json.hasOwnProperty('input_ThirdPartyConversationID')){
+                                request_json.input_ThirdPartyConversationID = randomString(6, '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+                                $('#requestData').val(JSON.stringify(request_json, null, 2));
+                            }
+
+                            $("#exampleRequest").removeClass("active");
+                            $("#exampleResponse").trigger("click");
+                            $("#tabResponse").trigger("click");
+                        }, 2000);
+                    }).fail(function() {
+                        alert("something went wrong");
+                    })
+                }
+
+                function randomString(length, chars) {
+                    var result = '';
+                    for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+                    return result;
+                }
+
+                function guid() {
+                    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+                }
+
+                function s4() {
+                    return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+                }
+
+            
+        </script>
+        <script type="application/javascript">
+            function decodeEntities(encodedString) {
+                var textArea = document.createElement('textarea');
+                textArea.innerHTML = encodedString;
+
+                return textArea.value;
+            }
+
+            function resetPacket(){
+                
+                var json = {
+	"input_TransactionReference": "T12344C",
+	"input_CustomerMSISDN": "258843330333",
+	"input_Amount": "10",
+	"input_ThirdPartyReference": "4LP4AT",
+	"input_ServiceProviderCode": "171717"
+}
+                $('#requestData').val(JSON.stringify(json, null, 2));
+
+                $('#requestUrl').val('POST /ipg/v1x/c2bPayment/singleStage/ HTTP/1.1');
+
+                var er = document.getElementById('responseJSON');
+                er.innerHTML = '';
+
+                $("#exampleResponse").removeClass("active");
+                $("#exampleRequest").addClass('active');
+                $("#tabRequest").trigger("click");
+            }
+        </script>
+        <div class="row">
+            <div class="col-sm-2 affix col-sm-offset-0">
+				<div class="card-layout">
+                    <div class="tree">
+                        <h4 class="card-layout-header">Index</h4>
+                        <ul class="nav nav-list">
+                            <li><a href="#description">Description</a></li>
+                            <li><a href="#header">Header Parameters</a></li>
+                            <li><a href="#request">Request Parameters</a></li>
+                            <li><a href="#response">Response Parameters</a></li>
+                            <li><a href="#requestbody">Request</a></li>
+                        </ul>
+                    </div>
+				</div>
+            </div>
+            <div class=" col-sm-6 col-md-offset-2">
+                <div id="description" class="card-layout">
+                    <h4 class="card-layout-header">Description</h4>
+                    <div class="card-layout-body">The C2B API Call is 
+used as a standard customer-to-business transaction. Funds from the 
+customer’s mobile money wallet will be deducted and be transferred to 
+the mobile money wallet of the business. To authenticate and authorize 
+this transaction, M-Pesa Payments Gateway will initiate a USSD Push 
+message to the customer to gather and verify the mobile money PIN 
+number. This number is not stored and is used only to authorize the 
+transaction.</div>
+                </div>
+				<div class="card-layout">
+					<h4 id="header" class="card-layout-header">Resource URL</h4>
+					<div class="card-layout-body">
+						
+
+
+<div class="table-container">
+
+<table class="paleblue" width="100%">
+    
+    
+    <thead>
+        <tr>
+        
+            
+            <th class="orderable url"><a href="https://developer.mpesa.vm.co.mz/apis/3/1/?sort=url">Address</a></th>
+            
+        
+            
+            <th class="orderable port"><a href="https://developer.mpesa.vm.co.mz/apis/3/1/?sort=port">Port</a></th>
+            
+        
+            
+            <th class="orderable path"><a href="https://developer.mpesa.vm.co.mz/apis/3/1/?sort=path">Path</a></th>
+            
+        
+            
+            <th class="orderable ssl"><a href="https://developer.mpesa.vm.co.mz/apis/3/1/?sort=ssl">Ssl</a></th>
+            
+        
+        </tr>
+    </thead>
+    
+    
+    
+    <tbody>
+         
+        
+        <tr class="even">
+            
+                <td class="url">api.sandbox.vm.co.mz</td>
+            
+                <td class="port">18352</td>
+            
+                <td class="path">/ipg/v1x/c2bPayment/singleStage/</td>
+            
+                <td class="ssl"><span class="true">✔</span></td>
+            
+        </tr>
+        
+        
+    </tbody>
+    
+    
+    
+    
+</table>
+
+
+
+</div>
+
+                        
+					</div>
+				</div>
+				<div class="card-layout">
+                    <h4 id="header" class="card-layout-header">Header Parameters</h4>
+                    <div class="card-layout-body">
+
+
+<div class="table-container">
+
+<table class="paleblue" width="90%">
+    
+    
+    <thead>
+        <tr>
+        
+            
+            <th class="name orderable"><a href="https://developer.mpesa.vm.co.mz/apis/3/1/?sort=name">Name</a></th>
+            
+        
+            
+            <th class="description orderable"><a href="https://developer.mpesa.vm.co.mz/apis/3/1/?sort=description">Description</a></th>
+            
+        
+            
+            <th class="orderable possible_values"><a href="https://developer.mpesa.vm.co.mz/apis/3/1/?sort=possible_values">Possible Values</a></th>
+            
+        
+        </tr>
+    </thead>
+    
+    
+    
+    <tbody>
+         
+        
+        <tr class="even">
+            
+                <td class="name">Content-Type</td>
+            
+                <td class="description">Application/JSON header</td>
+            
+                <td class="possible_values">application/json</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="odd">
+            
+                <td class="name">Authorization</td>
+            
+                <td class="description">Authorization Token</td>
+            
+                <td class="possible_values">Authorization: “Bearer” keyword followed by a space and generated Access Token from Auth API.Like “Bearer xxxxxxx”</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="even">
+            
+                <td class="name">Origin</td>
+            
+                <td class="description">Cross-Origin Resource Sharing (CORS)</td>
+            
+                <td class="possible_values">developer.mpesa.vm.co.mz</td>
+            
+        </tr>
+        
+        
+    </tbody>
+    
+    
+    
+    
+</table>
+
+
+
+</div>
+</div>
+                </div>
+				<div class="card-layout">
+                    <h4 id="request" class="card-layout-header">Request Parameters</h4>
+                    <div class="card-layout-body">
+
+
+<div class="table-container">
+
+<table class="paleblue" width="90%">
+    
+    
+    <thead>
+        <tr>
+        
+            
+            <th class="name orderable"><a href="https://developer.mpesa.vm.co.mz/apis/3/1/?sort=name">Name</a></th>
+            
+        
+            
+            <th class="description orderable"><a href="https://developer.mpesa.vm.co.mz/apis/3/1/?sort=description">Description</a></th>
+            
+        
+            
+            <th class="orderable type"><a href="https://developer.mpesa.vm.co.mz/apis/3/1/?sort=type">Type</a></th>
+            
+        
+            
+            <th class="orderable required"><a href="https://developer.mpesa.vm.co.mz/apis/3/1/?sort=required">Required</a></th>
+            
+        
+            
+            <th class="orderable possible_values"><a href="https://developer.mpesa.vm.co.mz/apis/3/1/?sort=possible_values">Possible Values</a></th>
+            
+        
+        </tr>
+    </thead>
+    
+    
+    
+    <tbody>
+         
+        
+        <tr class="even">
+            
+                <td class="name">input_TransactionReference</td>
+            
+                <td class="description">This is the reference of the 
+transaction for the customer or business making the transaction. This 
+can be a smartcard number for a TV subscription or a reference number of
+ a utility bill.</td>
+            
+                <td class="type">String</td>
+            
+                <td class="required"><span class="true">✔</span></td>
+            
+                <td class="possible_values">T12344C</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="odd">
+            
+                <td class="name">input_CustomerMSISDN</td>
+            
+                <td class="description">MSISDN of the customer for the transaction</td>
+            
+                <td class="type">String</td>
+            
+                <td class="required"><span class="true">✔</span></td>
+            
+                <td class="possible_values">258843330333</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="even">
+            
+                <td class="name">input_Amount</td>
+            
+                <td class="description">The amount for the transaction.</td>
+            
+                <td class="type">String</td>
+            
+                <td class="required"><span class="true">✔</span></td>
+            
+                <td class="possible_values">10</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="odd">
+            
+                <td class="name">input_ThirdPartyReference</td>
+            
+                <td class="description">This is the unique reference of 
+the third party system. When there are queries about transactions, this 
+will usually be used to track a transaction.</td>
+            
+                <td class="type">String</td>
+            
+                <td class="required"><span class="true">✔</span></td>
+            
+                <td class="possible_values">11114</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="even">
+            
+                <td class="name">input_ServiceProviderCode</td>
+            
+                <td class="description">Shortcode of the business where funds will be credited to.</td>
+            
+                <td class="type">String</td>
+            
+                <td class="required"><span class="true">✔</span></td>
+            
+                <td class="possible_values">171717</td>
+            
+        </tr>
+        
+        
+    </tbody>
+    
+    
+    
+    
+</table>
+
+
+
+</div>
+</div>
+                </div>
+                <div class="card-layout">
+                    <h4 id="response" class="card-layout-header">Response Parameters</h4>
+                    <div class="wrapper">
+                        <ul class="nav nav-tabs list" id="myTab">
+                            <li class="active"><a data-toggle="tab" href="#sync">Synchronous</a></li>
+                            <li><a data-toggle="tab" href="#async">Asynchronous</a></li>
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                        <div id="sync" class="tab-pane fade in active">
+                            <div class="card-layout-body">
+
+
+<div class="table-container">
+
+<table class="paleblue" width="100%">
+    
+    
+    <thead>
+        <tr>
+        
+            
+            <th class="name orderable"><a href="https://developer.mpesa.vm.co.mz/apis/3/1/?sort=name">Name</a></th>
+            
+        
+            
+            <th class="description orderable"><a href="https://developer.mpesa.vm.co.mz/apis/3/1/?sort=description">Description</a></th>
+            
+        
+            
+            <th class="orderable type"><a href="https://developer.mpesa.vm.co.mz/apis/3/1/?sort=type">Type</a></th>
+            
+        
+            
+            <th class="orderable possible_values"><a href="https://developer.mpesa.vm.co.mz/apis/3/1/?sort=possible_values">Possible Values</a></th>
+            
+        
+        </tr>
+    </thead>
+    
+    
+    
+    <tbody>
+         
+        
+        <tr class="even">
+            
+                <td class="name">output_ConversationID</td>
+            
+                <td class="description">This gets generated by the Mobile Money platform. This is used to query transactions on the Mobile Money Platform.</td>
+            
+                <td class="type">String</td>
+            
+                <td class="possible_values">AG_20180206_00005e7dccc6da08efa8</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="odd">
+            
+                <td class="name">output_TransactionID</td>
+            
+                <td class="description">This gets generated by the Mobile Money platform. This is used to query transactions on the Mobile Money Platform.</td>
+            
+                <td class="type">String</td>
+            
+                <td class="possible_values">4XDF12345</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="even">
+            
+                <td class="name">output_ResponseDesc</td>
+            
+                <td class="description">This gets generated by the iPG platform to indicate the status of the transaction</td>
+            
+                <td class="type">String</td>
+            
+                <td class="possible_values">See response table below</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="odd">
+            
+                <td class="name">output_ResponseCode</td>
+            
+                <td class="description">This gets generated by the iPG platform to indicate the status of the transaction</td>
+            
+                <td class="type">String</td>
+            
+                <td class="possible_values">See response table below</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="even">
+            
+                <td class="name">output_ThirdPartyReference</td>
+            
+                <td class="description">This is the reference of the 
+third party system. When there are queries about transactions, this will
+ usually be used to track a transaction.</td>
+            
+                <td class="type">String</td>
+            
+                <td class="possible_values">11114</td>
+            
+        </tr>
+        
+        
+    </tbody>
+    
+    
+    
+    
+</table>
+
+
+
+</div>
+</div>
+                        </div>
+                        <div id="async" class="tab-pane fade in">
+                            <div class="card-layout-body">
+                                <br><label>API Async Response</label><br>
+                                <p>Once the transaction is initiated, an
+ immediate response with the following fields will be provided before 
+the session is closed. The Conversation ID can be used in a Query 
+Transaction Status call to determine the current status of the process 
+flow.</p>
+                                <div>
+
+
+<div class="table-container">
+
+<table class="paleblue" width="100%">
+    
+    
+    <thead>
+        <tr>
+        
+            
+            <th class="name orderable"><a href="https://developer.mpesa.vm.co.mz/apis/3/1/?sort=name">Name</a></th>
+            
+        
+            
+            <th class="description orderable"><a href="https://developer.mpesa.vm.co.mz/apis/3/1/?sort=description">Description</a></th>
+            
+        
+            
+            <th class="orderable type"><a href="https://developer.mpesa.vm.co.mz/apis/3/1/?sort=type">Type</a></th>
+            
+        
+            
+            <th class="orderable possible_values"><a href="https://developer.mpesa.vm.co.mz/apis/3/1/?sort=possible_values">Possible Values</a></th>
+            
+        
+        </tr>
+    </thead>
+    
+    
+    
+    <tbody>
+         
+        
+        <tr class="even">
+            
+                <td class="name">output_ThirdPartyReference</td>
+            
+                <td class="description">This is the reference of the 
+third party system. When there are queries about transactions, this will
+ usually be used to track a transaction.</td>
+            
+                <td class="type">String</td>
+            
+                <td class="possible_values">11114</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="odd">
+            
+                <td class="name">output_ConversationID</td>
+            
+                <td class="description">This gets generated by the Mobile Money platform. This is used to query transactions on the Mobile Money Platform.</td>
+            
+                <td class="type">String</td>
+            
+                <td class="possible_values">18ffa4ccf93343379421d2eac15a3e8c</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="even">
+            
+                <td class="name">output_ResponseCode</td>
+            
+                <td class="description">This gets generated by the iPG platform to indicate the status of the transaction</td>
+            
+                <td class="type">String</td>
+            
+                <td class="possible_values">See response table below</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="odd">
+            
+                <td class="name">output_ResponseDesc</td>
+            
+                <td class="description">This gets generated by the iPG platform to indicate the status of the transaction</td>
+            
+                <td class="type">String</td>
+            
+                <td class="possible_values">See response table below</td>
+            
+        </tr>
+        
+        
+    </tbody>
+    
+    
+    
+    
+</table>
+
+
+
+</div>
+</div>
+                                <br><label>API Async Result Request</label><br>
+                                <p>Once the transaction is completed on 
+the Mobile Money platform, the below response will be sent back to your 
+developed listener in the Response URL provided on My Account’s page.</p>
+                                <div>
+
+
+<div class="table-container">
+
+<table class="paleblue" width="100%">
+    
+    
+    <thead>
+        <tr>
+        
+            
+            <th class="name orderable"><a href="https://developer.mpesa.vm.co.mz/apis/3/1/?sort=name">Name</a></th>
+            
+        
+            
+            <th class="description orderable"><a href="https://developer.mpesa.vm.co.mz/apis/3/1/?sort=description">Description</a></th>
+            
+        
+            
+            <th class="orderable type"><a href="https://developer.mpesa.vm.co.mz/apis/3/1/?sort=type">Type</a></th>
+            
+        
+            
+            <th class="orderable possible_values"><a href="https://developer.mpesa.vm.co.mz/apis/3/1/?sort=possible_values">Possible Values</a></th>
+            
+        
+        </tr>
+    </thead>
+    
+    
+    
+    <tbody>
+         
+        
+        <tr class="even">
+            
+                <td class="name">input_OriginalConversationID</td>
+            
+                <td class="description">This gets generated by the iPG 
+platform. This is used to query the status of transactions as well as 
+link up asynchronous transactions.</td>
+            
+                <td class="type">String</td>
+            
+                <td class="possible_values">241fasif1f1n92fn129nfasnf91nf1</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="odd">
+            
+                <td class="name">input_ThirdPartyReference</td>
+            
+                <td class="description">This is the reference of the 
+third party system. When there are queries about transactions, this will
+ usually be used to track a transaction.</td>
+            
+                <td class="type">String</td>
+            
+                <td class="possible_values">11114</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="even">
+            
+                <td class="name">input_TransactionID</td>
+            
+                <td class="description">This gets generated by the Mobile Money platform. This is used to query transactions as well as reverse transactions.</td>
+            
+                <td class="type">String</td>
+            
+                <td class="possible_values">4XDF12345</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="odd">
+            
+                <td class="name">input_ResultCode</td>
+            
+                <td class="description">This gets generated by the Mobile Money platform. This will indicate if the transaction was processed successfully or not.</td>
+            
+                <td class="type">String</td>
+            
+                <td class="possible_values">0</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="even">
+            
+                <td class="name">input_ResultDesc</td>
+            
+                <td class="description">This gets generated by the Mobile Money platform. This will indicate if the transaction was processed successfully or not.</td>
+            
+                <td class="type">String</td>
+            
+                <td class="possible_values">Request Processed Successfully</td>
+            
+        </tr>
+        
+        
+    </tbody>
+    
+    
+    
+    
+</table>
+
+
+
+</div>
+</div>
+                                <br><label>API Async Result Response</label><br>
+                                <p>Once your developed listener have received the asynchronous request, it will need to reply the following response back.</p>
+                                <div>
+
+
+<div class="table-container">
+
+<table class="paleblue" width="100%">
+    
+    
+    <thead>
+        <tr>
+        
+            
+            <th class="name orderable"><a href="https://developer.mpesa.vm.co.mz/apis/3/1/?sort=name">Name</a></th>
+            
+        
+            
+            <th class="description orderable"><a href="https://developer.mpesa.vm.co.mz/apis/3/1/?sort=description">Description</a></th>
+            
+        
+            
+            <th class="orderable type"><a href="https://developer.mpesa.vm.co.mz/apis/3/1/?sort=type">Type</a></th>
+            
+        
+            
+            <th class="orderable possible_values"><a href="https://developer.mpesa.vm.co.mz/apis/3/1/?sort=possible_values">Possible Values</a></th>
+            
+        
+        </tr>
+    </thead>
+    
+    
+    
+    <tbody>
+         
+        
+        <tr class="even">
+            
+                <td class="name">output_OriginalConversationID</td>
+            
+                <td class="description">This gets generated by the iPG 
+platform. This is used to query the status of transactions as well as 
+link up asynchronous transactions. This is the same ID that is sent in 
+the async request.</td>
+            
+                <td class="type">String</td>
+            
+                <td class="possible_values">241fasif1f1n92fn129nfasnf91nf1</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="odd">
+            
+                <td class="name">output_ResponseDesc</td>
+            
+                <td class="description">This gets generated by the ThirdParty platform to indicate the status of the receipt of the transaction.</td>
+            
+                <td class="type">String</td>
+            
+                <td class="possible_values">Successfully Accepted Result</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="even">
+            
+                <td class="name">output_ResponseCode</td>
+            
+                <td class="description">This gets generated by the ThirdParty platform to indicate the status of the receipt of the transaction.</td>
+            
+                <td class="type">String</td>
+            
+                <td class="possible_values">0</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="odd">
+            
+                <td class="name">output_ThirdPartyConversationID</td>
+            
+                <td class="description">This is the reference of the 
+third party system. When there are queries about transactions, this will
+ usually be used to track a transaction.</td>
+            
+                <td class="type">String</td>
+            
+                <td class="possible_values">11114</td>
+            
+        </tr>
+        
+        
+    </tbody>
+    
+    
+    
+    
+</table>
+
+
+
+</div>
+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-layout">
+                    <h4 id="response_codes" class="card-layout-header">Response Codes &amp; Descriptions</h4>
+                    <div class="card-layout-body">
+
+
+<div class="table-container">
+
+<table class="paleblue" width="100%">
+    
+    
+    <thead>
+        <tr>
+        
+            
+            <th class="http_status_code orderable"><a href="https://developer.mpesa.vm.co.mz/apis/3/1/?sort=http_status_code">Http Status Code</a></th>
+            
+        
+            
+            <th class="code orderable"><a href="https://developer.mpesa.vm.co.mz/apis/3/1/?sort=code">Code</a></th>
+            
+        
+            
+            <th class="description orderable"><a href="https://developer.mpesa.vm.co.mz/apis/3/1/?sort=description">Description</a></th>
+            
+        
+        </tr>
+    </thead>
+    
+    
+    
+    <tbody>
+         
+        
+        <tr class="even">
+            
+                <td class="http_status_code">200 / 201</td>
+            
+                <td class="code">INS-0</td>
+            
+                <td class="description">Request processed successfully</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="odd">
+            
+                <td class="http_status_code">500</td>
+            
+                <td class="code">INS-1</td>
+            
+                <td class="description">Internal Error</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="even">
+            
+                <td class="http_status_code">401</td>
+            
+                <td class="code">INS-2</td>
+            
+                <td class="description">Invalid API Key</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="odd">
+            
+                <td class="http_status_code">401</td>
+            
+                <td class="code">INS-4</td>
+            
+                <td class="description">User is not active</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="even">
+            
+                <td class="http_status_code">401</td>
+            
+                <td class="code">INS-5</td>
+            
+                <td class="description">Transaction cancelled by customer</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="odd">
+            
+                <td class="http_status_code">401</td>
+            
+                <td class="code">INS-6</td>
+            
+                <td class="description">Transaction Failed</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="even">
+            
+                <td class="http_status_code">408</td>
+            
+                <td class="code">INS-9</td>
+            
+                <td class="description">Request timeout</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="odd">
+            
+                <td class="http_status_code">409</td>
+            
+                <td class="code">INS-10</td>
+            
+                <td class="description">Duplicate Transaction</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="even">
+            
+                <td class="http_status_code">400</td>
+            
+                <td class="code">INS-13</td>
+            
+                <td class="description">Invalid Shortcode Used</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="odd">
+            
+                <td class="http_status_code">400</td>
+            
+                <td class="code">INS-14</td>
+            
+                <td class="description">Invalid Reference Used</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="even">
+            
+                <td class="http_status_code">400</td>
+            
+                <td class="code">INS-15</td>
+            
+                <td class="description">Invalid Amount Used</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="odd">
+            
+                <td class="http_status_code">503</td>
+            
+                <td class="code">INS-16</td>
+            
+                <td class="description">Unable to handle the request due to a temporary overloading</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="even">
+            
+                <td class="http_status_code">400</td>
+            
+                <td class="code">INS-17</td>
+            
+                <td class="description">Invalid Transaction Reference. Length Should Be Between 1 and 20.</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="odd">
+            
+                <td class="http_status_code">400</td>
+            
+                <td class="code">INS-18</td>
+            
+                <td class="description">Invalid TransactionID Used</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="even">
+            
+                <td class="http_status_code">400</td>
+            
+                <td class="code">INS-19</td>
+            
+                <td class="description">Invalid ThirdPartyReference Used</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="odd">
+            
+                <td class="http_status_code">400</td>
+            
+                <td class="code">INS-20</td>
+            
+                <td class="description">Not All Parameters Provided. Please try again.</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="even">
+            
+                <td class="http_status_code">400</td>
+            
+                <td class="code">INS-21</td>
+            
+                <td class="description">Parameter validations failed. Please try again.</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="odd">
+            
+                <td class="http_status_code">400</td>
+            
+                <td class="code">INS-22</td>
+            
+                <td class="description">Invalid Operation Type</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="even">
+            
+                <td class="http_status_code">400</td>
+            
+                <td class="code">INS-23</td>
+            
+                <td class="description">Unknown Status. Contact M-Pesa Support</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="odd">
+            
+                <td class="http_status_code">400</td>
+            
+                <td class="code">INS-24</td>
+            
+                <td class="description">Invalid InitiatorIdentifier Used</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="even">
+            
+                <td class="http_status_code">400</td>
+            
+                <td class="code">INS-25</td>
+            
+                <td class="description">Invalid SecurityCredential Used</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="odd">
+            
+                <td class="http_status_code">400</td>
+            
+                <td class="code">INS-26</td>
+            
+                <td class="description">Not authorized</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="even">
+            
+                <td class="http_status_code">400</td>
+            
+                <td class="code">INS-993</td>
+            
+                <td class="description">Direct Debit Missing</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="odd">
+            
+                <td class="http_status_code">400</td>
+            
+                <td class="code">INS-994</td>
+            
+                <td class="description">Direct Debit Already Exists</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="even">
+            
+                <td class="http_status_code">400</td>
+            
+                <td class="code">INS-995</td>
+            
+                <td class="description">Customer's Profile Has Problems</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="odd">
+            
+                <td class="http_status_code">400</td>
+            
+                <td class="code">INS-996</td>
+            
+                <td class="description">Customer Account Status Not Active</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="even">
+            
+                <td class="http_status_code">400</td>
+            
+                <td class="code">INS-997</td>
+            
+                <td class="description">Linking Transaction Not Found</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="odd">
+            
+                <td class="http_status_code">400</td>
+            
+                <td class="code">INS-998</td>
+            
+                <td class="description">Invalid Market</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="even">
+            
+                <td class="http_status_code">400</td>
+            
+                <td class="code">INS-2001</td>
+            
+                <td class="description">Initiator authentication error.</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="odd">
+            
+                <td class="http_status_code">400</td>
+            
+                <td class="code">INS-2002</td>
+            
+                <td class="description">Receiver invalid.</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="even">
+            
+                <td class="http_status_code">422</td>
+            
+                <td class="code">INS-2006</td>
+            
+                <td class="description">Insufficient balance</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="odd">
+            
+                <td class="http_status_code">400</td>
+            
+                <td class="code">INS-2051</td>
+            
+                <td class="description">MSISDN invalid.</td>
+            
+        </tr>
+        
+         
+        
+        <tr class="even">
+            
+                <td class="http_status_code">400</td>
+            
+                <td class="code">INS-2057</td>
+            
+                <td class="description">Language code invalid.</td>
+            
+        </tr>
+        
+        
+    </tbody>
+    
+    
+    
+    
+</table>
+
+
+
+</div>
+</div>
+                </div>
+				<div class="card-layout">
+					<h4 id="requestbody" class="card-layout-header">Request</h4>
+					<div class="card-layout-body">
+
+                        <pre><code style="display: block; white-space: pre-wrap ">POST /ipg/v1x/c2bPayment/singleStage/ HTTP/1.1
+Host: api.sandbox.vm.co.mz
+Content-Type: application/json
+Authorization: Bearer cBC1S5QviC2gKzto0FcTLG1xOUwchmSHHEHPtRhqpYpkbn2EkjYHSzoQrjPWNUwGq8TXm3yTr/+qC/Xy6EUASjpyQpK/hjski0P8dU2PG2USmLPRkb/0/iKr24Dx5Brn6rOG55S/4nVZCB4HWpIQPML0DRvziDquNf6zRhHTlP6nJEv0Gr98uCu/MtsSOCZrcjLoNKj1gjcmlnOtL5Z9Fe18O6BLerEsYP3eQKOAmsH43CHNSEZWtuqmhYP8nfNoGQzfIvJJfq6pl1c2btylbnhZD/QEsLQfSfiBAdg2FypZgMrQt+QhtW5zd9dmHSgno1x4H8LuV1T7HbJ8AfQMTa0tq16X7Bh03bYQhzsRD1hcWkJB0Jyb3qsjUtBKvdMbZ0yMT5q0NDoNM6ByZsJ7xyWyZWiinF7Fv2rhCltjAJ0ds6/BJrEj4flxux0ZCRI08/29oGwbk10M7v7XZXWsgci69dl/phyCnzECesmSOAg4DtgCFhHf83JT+yC7HRTrrvTiEntx7dJb8QpfAmLQvmvZWr5Ep+m1vCY+93Ua7NaTZxX3E16M+7LkRpqpC1EL4xCSn3R6rP3GkBPKpxSWEs61yD3pwPzOMAo95P9ANKvataTqSAc8tlE1emYQ8ijGBPj7pYkpzFWA1hDx6dsaTczV5ZfSonAkrvxXiK8dt0A=
+Origin: developer.mpesa.vm.co.mz
+
+
+{
+	"input_TransactionReference": "T12344C",
+	"input_CustomerMSISDN": "258843330333",
+	"input_Amount": "10",
+	"input_ThirdPartyReference": "4LP4AT",
+	"input_ServiceProviderCode": "171717"
+}</code></pre>
+					</div>
+					<div style="" class="form-actions">
+						<a href="#" class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#sendRequestModal">Send Request</a>
+					</div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card-layout">
+                    <h4 class="card-layout-header">Examples</h4>
+                    <div class="wrapper">
+                        <ul class="nav nav-tabs list" id="myTab">
+                            <li class="active"><a data-toggle="tab" href="#java">Java</a></li>
+                            <li><a data-toggle="tab" href="#python">Python</a></li>
+                            <!--<li><a data-toggle="tab" href="#ruby">Ruby</a></li>-->
+                            <!--<li><a data-toggle="tab" href="#nodejs">Node.js</a></li>-->
+                            <!--<li><a data-toggle="tab" href="#php">PHP</a></li>-->
+                            <!--<li><a data-toggle="tab" href="#swift">Swift</a></li>-->
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+						<div id="java" class="tab-pane fade in active">
+							<div class="card-layout-body">
+								<pre class=" language-java"><code class=" language-java"><span class="token keyword">import</span> com<span class="token punctuation">.</span>fc<span class="token punctuation">.</span>sdk<span class="token punctuation">.</span>APIContext<span class="token punctuation">;</span>
+<span class="token keyword">import</span> com<span class="token punctuation">.</span>fc<span class="token punctuation">.</span>sdk<span class="token punctuation">.</span>APIRequest<span class="token punctuation">;</span>
+<span class="token keyword">import</span> com<span class="token punctuation">.</span>fc<span class="token punctuation">.</span>sdk<span class="token punctuation">.</span>APIResponse<span class="token punctuation">;</span>
+<span class="token keyword">import</span> com<span class="token punctuation">.</span>fc<span class="token punctuation">.</span>sdk<span class="token punctuation">.</span>APIMethodType<span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Main</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// Create API Context</span>
+        APIContext context <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">APIContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// Set API key that can be found in the user profile section</span>
+        context<span class="token punctuation">.</span><span class="token function">setApiKey</span><span class="token punctuation">(</span><span class="token string">"b3ale6z5jkgehcpasbv1leuv4cqczmsq"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// Set Public key that can be found in the user profile section</span>
+        context<span class="token punctuation">.</span><span class="token function">setPublicKey</span><span class="token punctuation">(</span><span class="token string">"MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAmptSWqV7cGUUJJhUBxsMLonux24u+FoTlrb+4Kgc6092JIszmI1QUoMohaDDXSVueXx6IXwYGsjjWY32HGXj1iQhkALXfObJ4DqXn5h6E8y5/xQYNAyd5bpN5Z8r892B6toGzZQVB7qtebH4apDjmvTi5FGZVjVYxalyyQkj4uQbbRQjgCkubSi45Xl4CGtLqZztsKssWz3mcKncgTnq3DHGYYEYiKq0xIj100LGbnvNz20Sgqmw/cH+Bua4GJsWYLEqf/h/yiMgiBbxFxsnwZl0im5vXDlwKPw+QnO2fscDhxZFAwV06bgG0oEoWm9FnjMsfvwm0rUNYFlZ+TOtCEhmhtFp+Tsx9jPCuOd5h2emGdSKD8A6jtwhNa7oQ8RtLEEqwAn44orENa1ibOkxMiiiFpmmJkwgZPOG/zMCjXIrrhDWTDUOZaPx/lEQoInJoE2i43VN/HTGCCw8dKQAwg0jsEXau5ixD0GUothqvuX3B9taoeoFAIvUPEq35YulprMM7ThdKodSHvhnwKG82dCsodRwY428kg2xM/UjiTENog4B6zzZfPhMxFlOSFX4MnrqkAS+8Jamhy1GgoHkEMrsT5+/ofjCx0HjKbT5NuA2V/lmzgJLl3jIERadLzuTYnKGWxVJcGLkWXlEPYLbiaKzbJb2sYxt+Kt5OxQqC1MCAwEAAQ=="</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// Set SSL true or false</span>
+        context<span class="token punctuation">.</span><span class="token function">setSsl</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// Set the method type of the HTTP Request (GET, POST, PUT)</span>
+		context<span class="token punctuation">.</span><span class="token function">setMethodType</span><span class="token punctuation">(</span>APIMethodType<span class="token punctuation">.</span>POST<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token comment">// Set the address of the API Server</span>
+        context<span class="token punctuation">.</span><span class="token function">setAddress</span><span class="token punctuation">(</span><span class="token string">"api.sandbox.vm.co.mz"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// Set the TCP port of the API Server</span>
+        context<span class="token punctuation">.</span><span class="token function">setPort</span><span class="token punctuation">(</span><span class="token number">18352</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// Set path for the API</span>
+        context<span class="token punctuation">.</span><span class="token function">setPath</span><span class="token punctuation">(</span><span class="token string">"/ipg/v1x/c2bPayment/singleStage/"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// Add Header</span>
+        context<span class="token punctuation">.</span><span class="token function">addHeader</span><span class="token punctuation">(</span><span class="token string">"Origin"</span><span class="token punctuation">,</span> <span class="token string">"*"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// Set parameters used for the API</span>
+		context<span class="token punctuation">.</span><span class="token function">addParameter</span><span class="token punctuation">(</span><span class="token string">"input_TransactionReference"</span><span class="token punctuation">,</span><span class="token string">"T12344C"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		context<span class="token punctuation">.</span><span class="token function">addParameter</span><span class="token punctuation">(</span><span class="token string">"input_CustomerMSISDN"</span><span class="token punctuation">,</span><span class="token string">"258843330333"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		context<span class="token punctuation">.</span><span class="token function">addParameter</span><span class="token punctuation">(</span><span class="token string">"input_Amount"</span><span class="token punctuation">,</span><span class="token string">"10"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		context<span class="token punctuation">.</span><span class="token function">addParameter</span><span class="token punctuation">(</span><span class="token string">"input_ThirdPartyReference"</span><span class="token punctuation">,</span><span class="token string">"111PA2D"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		context<span class="token punctuation">.</span><span class="token function">addParameter</span><span class="token punctuation">(</span><span class="token string">"input_ServiceProviderCode"</span><span class="token punctuation">,</span><span class="token string">"171717"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+        <span class="token comment">// Create API request and execute it.</span>
+        APIRequest request <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">APIRequest</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        APIResponse response <span class="token operator">=</span> request<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        <span class="token comment">// Print results to the console</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>response <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span><span class="token function">getStatusCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">" - "</span> <span class="token operator">+</span> response<span class="token punctuation">.</span><span class="token function">getReason</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span><span class="token function">getResult</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">for</span><span class="token punctuation">(</span>Map<span class="token punctuation">.</span>Entry<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> String<span class="token operator">&gt;</span> entry<span class="token operator">:</span> response<span class="token punctuation">.</span><span class="token function">getParameters</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">entrySet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>entry<span class="token punctuation">.</span><span class="token function">getKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">":"</span> <span class="token operator">+</span> response<span class="token punctuation">.</span><span class="token function">getParameter</span><span class="token punctuation">(</span>entry<span class="token punctuation">.</span><span class="token function">getKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+							</div>
+						</div>
+						<div id="python" class="tab-pane fade in">
+							<div class="card-layout-body">
+								<pre class=" language-python"><code class=" language-python"><span class="token keyword">from</span> pprint <span class="token keyword">import</span> pprint
+
+<span class="token keyword">from</span> portalsdk <span class="token keyword">import</span> APIContext<span class="token punctuation">,</span> APIMethodType<span class="token punctuation">,</span> APIRequest
+
+
+<span class="token keyword">def</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    api_context <span class="token operator">=</span> APIContext<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    api_context<span class="token punctuation">.</span>api_key <span class="token operator">=</span> <span class="token string">'b3ale6z5jkgehcpasbv1leuv4cqczmsq'</span>
+    api_context<span class="token punctuation">.</span>public_key <span class="token operator">=</span> <span class="token string">'MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAmptSWqV7cGUUJJhUBxsMLonux24u+FoTlrb+4Kgc6092JIszmI1QUoMohaDDXSVueXx6IXwYGsjjWY32HGXj1iQhkALXfObJ4DqXn5h6E8y5/xQYNAyd5bpN5Z8r892B6toGzZQVB7qtebH4apDjmvTi5FGZVjVYxalyyQkj4uQbbRQjgCkubSi45Xl4CGtLqZztsKssWz3mcKncgTnq3DHGYYEYiKq0xIj100LGbnvNz20Sgqmw/cH+Bua4GJsWYLEqf/h/yiMgiBbxFxsnwZl0im5vXDlwKPw+QnO2fscDhxZFAwV06bgG0oEoWm9FnjMsfvwm0rUNYFlZ+TOtCEhmhtFp+Tsx9jPCuOd5h2emGdSKD8A6jtwhNa7oQ8RtLEEqwAn44orENa1ibOkxMiiiFpmmJkwgZPOG/zMCjXIrrhDWTDUOZaPx/lEQoInJoE2i43VN/HTGCCw8dKQAwg0jsEXau5ixD0GUothqvuX3B9taoeoFAIvUPEq35YulprMM7ThdKodSHvhnwKG82dCsodRwY428kg2xM/UjiTENog4B6zzZfPhMxFlOSFX4MnrqkAS+8Jamhy1GgoHkEMrsT5+/ofjCx0HjKbT5NuA2V/lmzgJLl3jIERadLzuTYnKGWxVJcGLkWXlEPYLbiaKzbJb2sYxt+Kt5OxQqC1MCAwEAAQ=='</span>
+    api_context<span class="token punctuation">.</span>ssl <span class="token operator">=</span> <span class="token boolean">True</span>
+    api_context<span class="token punctuation">.</span>method_type <span class="token operator">=</span> APIMethodType<span class="token punctuation">.</span>POST
+    api_context<span class="token punctuation">.</span>address <span class="token operator">=</span> <span class="token string">'api.sandbox.vm.co.mz'</span>
+    api_context<span class="token punctuation">.</span>port <span class="token operator">=</span> <span class="token number">18352</span>
+    api_context<span class="token punctuation">.</span>path <span class="token operator">=</span> <span class="token string">'/ipg/v1x/c2bPayment/singleStage/'</span>
+    
+    api_context<span class="token punctuation">.</span>add_header<span class="token punctuation">(</span><span class="token string">'Origin'</span><span class="token punctuation">,</span> <span class="token string">'*'</span><span class="token punctuation">)</span>
+
+    api_context<span class="token punctuation">.</span>add_parameter<span class="token punctuation">(</span><span class="token string">'input_TransactionReference'</span><span class="token punctuation">,</span><span class="token string">'T12344C'</span><span class="token punctuation">)</span>
+    api_context<span class="token punctuation">.</span>add_parameter<span class="token punctuation">(</span><span class="token string">'input_CustomerMSISDN'</span><span class="token punctuation">,</span><span class="token string">'258843330333'</span><span class="token punctuation">)</span>
+    api_context<span class="token punctuation">.</span>add_parameter<span class="token punctuation">(</span><span class="token string">'input_Amount'</span><span class="token punctuation">,</span><span class="token string">'10'</span><span class="token punctuation">)</span>
+    api_context<span class="token punctuation">.</span>add_parameter<span class="token punctuation">(</span><span class="token string">'input_ThirdPartyReference'</span><span class="token punctuation">,</span><span class="token string">'111PA2D'</span><span class="token punctuation">)</span>
+    api_context<span class="token punctuation">.</span>add_parameter<span class="token punctuation">(</span><span class="token string">'input_ServiceProviderCode'</span><span class="token punctuation">,</span><span class="token string">'171717'</span><span class="token punctuation">)</span>
+
+
+    api_request <span class="token operator">=</span> APIRequest<span class="token punctuation">(</span>api_context<span class="token punctuation">)</span>
+    result <span class="token operator">=</span> api_request<span class="token punctuation">.</span>execute<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    pprint<span class="token punctuation">(</span>result<span class="token punctuation">.</span>status_code<span class="token punctuation">)</span>
+    pprint<span class="token punctuation">(</span>result<span class="token punctuation">.</span>headers<span class="token punctuation">)</span>
+    pprint<span class="token punctuation">(</span>result<span class="token punctuation">.</span>body<span class="token punctuation">)</span>
+
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    main<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+							</div>
+						</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card-layout">
+                    <h4 class="card-layout-header">Library</h4>
+                    <div class="card-layout-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scrop="col">Language</th>
+                                    <th scope="col">Filename</th>
+                                    <th scope="col">Size</th>
+                                    <th scope="col">Version</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Java</td>
+                                    <th scope="row"><a href="https://developer.mpesa.vm.co.mz/static/portal-sdk.jar" download="portal-sdk.jar" target="_blank">portal-sdk.jar</a></th>
+                                    <td>1.4mb</td>
+                                    <td>0.3</td>
+                                </tr>
+                                <tr>
+                                    <td>Python</td>
+                                    <th scope="row"><a href="https://developer.mpesa.vm.co.mz/static/portal-sdk.tar.gz" download="portal-sdk.tar.gz" target="_blank">portal-sdk.tar.gz</a></th>
+                                    <td>0.1mb</td>
+                                    <td>0.1</td>
+                                 </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                
+                <div class="card-layout center">
+                    <h4 class="card-layout-header">Flow Diagram</h4>
+                    <div class="card-layout-body">
+                        <!--<img data-toggle="modal" data-target="#diagramModal" src="/static/media/static/media/flow_diagrams/swim_lane_c2b_openapi_updated.png" width="100%">-->
+                        <img id="myImg" src="C2B%20Single%20Stage%20API%20_%20Developer%20Portal_files/swim_lane_c2b_openapi_updated.png" width="100%">
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+		<div style="padding-top: 100px;" class="modal fade" id="sendRequestModal" role="dialog">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="">
+						<ul class="nav nav-tabs  nav-justified" role="tablist">
+							<li class="active">
+								<a id="tabRequest" data-toggle="tab" role="tab" href="#exampleRequest">Request</a>
+							</li>
+							<li>
+								<a id="tabResponse" data-toggle="tab" role="tab" href="#exampleResponse">Response</a>
+							</li>
+						</ul>
+						<div class="tab-content">
+							<div id="exampleRequest" class="tab-pane fade in active">
+								<div class="card-layout-body">
+                                    
+                                        <label>Headers:</label>
+                                        <pre><code class="">POST /ipg/v1x/c2bPayment/singleStage/ HTTP/1.1Host: api.sandbox.vm.co.mz
+Content-Type: application/json
+Authorization: Bearer cBC1S5QviC2gKzto0FcTLG1xOUwchmSHHEHPtRhqpYpkbn2EkjYHSzoQrjPWNUwGq8TXm3yTr/+qC/Xy6EUASjpyQpK/hjski0P8dU2PG2USmLPRkb/0/iKr24Dx5Brn6rOG55S/4nVZCB4HWpIQPML0DRvziDquNf6zRhHTlP6nJEv0Gr98uCu/MtsSOCZrcjLoNKj1gjcmlnOtL5Z9Fe18O6BLerEsYP3eQKOAmsH43CHNSEZWtuqmhYP8nfNoGQzfIvJJfq6pl1c2btylbnhZD/QEsLQfSfiBAdg2FypZgMrQt+QhtW5zd9dmHSgno1x4H8LuV1T7HbJ8AfQMTa0tq16X7Bh03bYQhzsRD1hcWkJB0Jyb3qsjUtBKvdMbZ0yMT5q0NDoNM6ByZsJ7xyWyZWiinF7Fv2rhCltjAJ0ds6/BJrEj4flxux0ZCRI08/29oGwbk10M7v7XZXWsgci69dl/phyCnzECesmSOAg4DtgCFhHf83JT+yC7HRTrrvTiEntx7dJb8QpfAmLQvmvZWr5Ep+m1vCY+93Ua7NaTZxX3E16M+7LkRpqpC1EL4xCSn3R6rP3GkBPKpxSWEs61yD3pwPzOMAo95P9ANKvataTqSAc8tlE1emYQ8ijGBPj7pYkpzFWA1hDx6dsaTczV5ZfSonAkrvxXiK8dt0A=
+Origin: developer.mpesa.vm.co.mz
+
+</code></pre>
+                                        <div id="sendingRequest" class="progress hidden">
+                                            <div class="progress-bar progress-bar-success progress-bar-striped bg-primary progress-bar-animated active" role="progressbar" aria-valuenow="100" style="width: 100%" aria-valuemin="0" ariavaluemax="100"></div>
+                                        </div>
+                                        <label>Body:</label> <span class="glyphicon glyphicon-pencil"></span>
+                                        <textarea id="requestData" class="form-control" style="resize: none;" rows="8">{
+	"input_TransactionReference": "T12344C",
+	"input_CustomerMSISDN": "258843330333",
+	"input_Amount": "10",
+	"input_ThirdPartyReference": "4LP4AT",
+	"input_ServiceProviderCode": "171717"
+}</textarea>
+                                    
+								</div>
+							</div>
+							<div id="exampleResponse" class="tab-pane fade in">
+								<div class="card-layout-body">
+									<pre class=" language-ruby"><code class=" language-ruby" id="responseJSON"></code></pre>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+                        <button type="button" class="btn btn-success btn-sm pull-left" data-dismiss="modal">Close</button>
+                        <button type="button" onclick="resetPacket()" class="btn btn-success btn-sm">Reset</button>
+						<button type="button" onclick="doRequest()" class="btn btn-success btn-sm">Send</button>
+					</div>
+				</div>
+			</div>
+
+         </div>
+    </div>
+        <style>
+            #myImg {
+                border-radius: 5px;
+                cursor: pointer;
+                transition: 0.3s;
+            }
+
+            #myImg:hover {opacity: 0.7;}
+
+            /* The Modal (background) */
+            .modalblack {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                padding-top: 100px; /* Location of the box */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0,0,0); /* Fallback color */
+                background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+            }
+
+            /* Modal Content (image) */
+            .modal-content {
+                margin: auto;
+                display: block;
+                width: 80%;
+                max-width: 700px;
+            }
+
+            /* Caption of Modal Image */
+            #caption {
+                margin: auto;
+                display: block;
+                width: 80%;
+                max-width: 700px;
+                text-align: center;
+                color: #ccc;
+                padding: 10px 0;
+                height: 150px;
+            }
+
+            /* Add Animation */
+            .modal-content, #caption {
+                -webkit-animation-name: zoom;
+                -webkit-animation-duration: 0.6s;
+                animation-name: zoom;
+                animation-duration: 0.6s;
+            }
+
+            @-webkit-keyframes zoom {
+                from {-webkit-transform:scale(0)}
+                to {-webkit-transform:scale(1)}
+            }
+
+            @keyframes zoom {
+                from {transform:scale(0)}
+                to {transform:scale(1)}
+            }
+
+            /* The Close Button */
+            .close {
+                position: absolute;
+                top: 15px;
+                right: 35px;
+                color: white;
+                font-size: 40px;
+                font-weight: bold;
+                transition: 0.3s;
+            }
+
+            .close:hover,
+            .close:focus {
+                color: #bbb;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+            /* 100% Image Width on Smaller Screens */
+            @media only screen and (max-width: 700px){
+                .modal-content {
+                    width: 100%;
+                }
+            }
+        </style>
+        <!-- The Modal -->
+        <div id="blackModal" class="modalblack">
+            <span style="padding-top: 50px; color:white" class="glyphicon glyphicon-remove close"></span>
+            <img class="modal-content" id="img01">
+            <div id="caption"></div>
+        </div>
+        <script>
+            // Get the modal
+            var modal = document.getElementById('blackModal');
+
+            // Get the image and insert it inside the modal - use its "alt" text as a caption
+            var img = document.getElementById('myImg');
+            var modalImg = document.getElementById("img01");
+            var captionText = document.getElementById("caption");
+            img.onclick = function() {
+                modal.style.display = "block";
+                modalImg.src = this.src;
+                captionText.innerHTML = this.alt;
+            }
+
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
+
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+        </script>
+        <div style="padding-top: 200px;" class="modal fade" id="diagramModal" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                        <h4 class="modal-title">Flow Diagram</h4>
+                    </div>
+                    <div class="modal-bodys">
+                        <img style="display: block; margin: auto;" src="C2B%20Single%20Stage%20API%20_%20Developer%20Portal_files/Untitled.html">
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+<footer>
+	<div class="container">
+	
+
+
+
+
+		<div class="row">
+			<p class="site-info text-center">
+				Powered by  <a target="_blank" href="https://www.vm.co.mz/en/m-pesa"><i>Vodafone M-Pesa</i></a>
+				
+			</p>
+		</div>
+	</div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+	<script>
+		window.setTimeout(function(){
+		    $(".alert").each(function(index){
+				$(this).delay(200*index).fadeTo(1500,0).slideUp(500,function(){
+					$(this).remove();
+				});
+			});
+		}, 2000);
+	</script>
+
+
+</body></html>
